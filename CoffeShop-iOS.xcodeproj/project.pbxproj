@@ -9,19 +9,25 @@
 /* Begin PBXBuildFile section */
 		3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302714266AE83B00C465CE /* AppDelegate.swift */; };
 		3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302716266AE83B00C465CE /* SceneDelegate.swift */; };
-		3A302719266AE83B00C465CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302718266AE83B00C465CE /* ViewController.swift */; };
 		3A30271E266AE83C00C465CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271D266AE83C00C465CE /* Assets.xcassets */; };
 		3A302721266AE83C00C465CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */; };
+		3A9ADBE7266CA62B009B74AE /* CSButtonPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9ADBE6266CA62B009B74AE /* CSButtonPlain.swift */; };
+		3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */; };
+		3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA04266C3FB000832381 /* OnboardingVC.swift */; };
+		3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3A302711266AE83B00C465CE /* CoffeShop-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeShop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A302714266AE83B00C465CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A302716266AE83B00C465CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3A302718266AE83B00C465CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3A30271D266AE83C00C465CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A302720266AE83C00C465CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A302722266AE83C00C465CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A9ADBE6266CA62B009B74AE /* CSButtonPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonPlain.swift; sourceTree = "<group>"; };
+		3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		3AFFBA04266C3FB000832381 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOutline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +62,13 @@
 			children = (
 				3A302714266AE83B00C465CE /* AppDelegate.swift */,
 				3A302716266AE83B00C465CE /* SceneDelegate.swift */,
-				3A302718266AE83B00C465CE /* ViewController.swift */,
 				3A30271D266AE83C00C465CE /* Assets.xcassets */,
 				3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */,
 				3A302722266AE83C00C465CE /* Info.plist */,
+				3AFFBA04266C3FB000832381 /* OnboardingVC.swift */,
+				3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */,
+				3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */,
+				3A9ADBE6266CA62B009B74AE /* CSButtonPlain.swift */,
 			);
 			path = "CoffeShop-iOS";
 			sourceTree = "<group>";
@@ -133,9 +142,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A302719266AE83B00C465CE /* ViewController.swift in Sources */,
 				3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */,
+				3A9ADBE7266CA62B009B74AE /* CSButtonPlain.swift in Sources */,
 				3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */,
+				3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */,
+				3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */,
+				3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

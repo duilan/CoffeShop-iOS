@@ -15,14 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = createOnBoardingVC()
+        window?.rootViewController = createOnboardingVC()
         window?.makeKeyAndVisible()
     }
     
-    func createOnBoardingVC() -> UINavigationController {
-        let onBoardingVC = UIViewController()
-        onBoardingVC.title = "OnBoarding"
-        onBoardingVC.view.backgroundColor = .brown
-        return UINavigationController(rootViewController: onBoardingVC)
+    func createOnboardingVC() -> UINavigationController {
+        let onboardingVC = OnboardingVC()
+        onboardingVC.title = "Onboarding"
+        return UINavigationController(rootViewController: onboardingVC)
     }
 }
