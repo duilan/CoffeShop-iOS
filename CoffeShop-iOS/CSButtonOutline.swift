@@ -17,16 +17,24 @@ final class CSButtonOutline: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, color: UIColor = CustomColors.primaryColor) {
+    init(_ title: String, color: UIColor = CustomColors.primaryColor) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
+        adjustsImageWhenHighlighted = false
+        clipsToBounds = true
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+        backgroundColor = .white
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
         layer.borderColor = color.cgColor
-        backgroundColor = .white
-        clipsToBounds = true
+        tintColor = color
+        setBackgroundColor(color.withAlphaComponent(0.2), for: .highlighted)
         adjustsBorderInDarkmode()
+    }
+    
+    func setIcon(name: String ) {
+        setImage(UIImage(named: name), for: .normal)
+        titleEdgeInsets.left = 20
     }
     
     private func adjustsBorderInDarkmode() {

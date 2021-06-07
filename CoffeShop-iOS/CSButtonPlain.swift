@@ -17,13 +17,14 @@ final class CSButtonPlain: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, color: UIColor = CustomColors.primaryColor) {
+    init(_ title: String, color: UIColor = CustomColors.primaryColor) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         setTitle(title, for: .normal)
         backgroundColor = color
         clipsToBounds = true
+        setBackgroundColor(UIColor.white.withAlphaComponent(0.2), for: .highlighted)
     }
     
     override func layoutSublayers(of layer: CALayer) {
