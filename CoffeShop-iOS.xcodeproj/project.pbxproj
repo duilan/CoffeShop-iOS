@@ -12,6 +12,7 @@
 		3A30271E266AE83C00C465CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271D266AE83C00C465CE /* Assets.xcassets */; };
 		3A302721266AE83C00C465CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */; };
 		3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7700A426706C73006F4838 /* CSTitleLabel.swift */; };
+		3A7700A826709BEE006F4838 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7700A726709BEE006F4838 /* UIView+Ext.swift */; };
 		3A9ADBE7266CA62B009B74AE /* CSButtonPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9ADBE6266CA62B009B74AE /* CSButtonPlain.swift */; };
 		3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */; };
 		3AB05BAE266DFC70006FD017 /* UIButton+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB05BAD266DFC70006FD017 /* UIButton+Ext.swift */; };
@@ -27,6 +28,7 @@
 		3A302720266AE83C00C465CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A302722266AE83C00C465CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A7700A426706C73006F4838 /* CSTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTitleLabel.swift; sourceTree = "<group>"; };
+		3A7700A726709BEE006F4838 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		3A9ADBE6266CA62B009B74AE /* CSButtonPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonPlain.swift; sourceTree = "<group>"; };
 		3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		3AB05BAD266DFC70006FD017 /* UIButton+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ext.swift"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */,
 				3A302722266AE83C00C465CE /* Info.plist */,
 				3AFFBA04266C3FB000832381 /* OnboardingVC.swift */,
+				3A7700A726709BEE006F4838 /* UIView+Ext.swift */,
 				3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */,
 				3A7700A426706C73006F4838 /* CSTitleLabel.swift */,
 				3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */,
@@ -153,6 +156,7 @@
 				3AB05BAE266DFC70006FD017 /* UIButton+Ext.swift in Sources */,
 				3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */,
 				3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */,
+				3A7700A826709BEE006F4838 /* UIView+Ext.swift in Sources */,
 				3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */,
 				3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */,
 				3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */,
