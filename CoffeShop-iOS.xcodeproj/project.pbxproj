@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */; };
+		3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */; };
+		3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F8C267467020074E5C4 /* UIHelper.swift */; };
 		3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302714266AE83B00C465CE /* AppDelegate.swift */; };
 		3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302716266AE83B00C465CE /* SceneDelegate.swift */; };
 		3A30271E266AE83C00C465CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271D266AE83C00C465CE /* Assets.xcassets */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
+		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
+		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		3A302711266AE83B00C465CE /* CoffeShop-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeShop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A302714266AE83B00C465CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A302716266AE83B00C465CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,8 +78,11 @@
 				3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */,
 				3A302722266AE83C00C465CE /* Info.plist */,
 				3AFFBA04266C3FB000832381 /* OnboardingVC.swift */,
+				3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */,
 				3A7700A726709BEE006F4838 /* UIView+Ext.swift */,
+				3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */,
 				3A9ADBE9266CAFDD009B74AE /* CustomColors.swift */,
+				3A1A5F8C267467020074E5C4 /* UIHelper.swift */,
 				3A7700A426706C73006F4838 /* CSTitleLabel.swift */,
 				3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */,
 				3AB05BAD266DFC70006FD017 /* UIButton+Ext.swift */,
@@ -152,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */,
+				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonPlain.swift in Sources */,
 				3AB05BAE266DFC70006FD017 /* UIButton+Ext.swift in Sources */,
 				3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */,
@@ -160,6 +170,8 @@
 				3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */,
 				3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */,
 				3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */,
+				3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */,
+				3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

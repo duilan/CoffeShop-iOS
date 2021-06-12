@@ -3,6 +3,16 @@
     {
       "filename" : "background-shape.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "background-shape-black.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

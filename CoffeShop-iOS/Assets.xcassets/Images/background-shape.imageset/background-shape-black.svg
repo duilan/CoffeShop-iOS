@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="332px" viewBox="0 0 375 332" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bg</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.342745536">
+        <g id="02_Onboarding" transform="translate(0.000000, -58.000000)" fill="#FFFFFF">
+            <g id="artwork" transform="translate(-1.043988, 32.378000)">
+                <path d="M0,91.8766362 C34.1668813,64.5828028 86.3836888,43.9514956 156.650423,29.9827147 C242.919702,14.165157 316.323358,46.4822334 376.861392,126.933944 L376.861392,321.306586 C278.44509,354.354255 152.824626,364.778245 0,352.578555 C0,292.369032 0,205.468393 0,91.8766362 Z" id="bg"></path>
+            </g>
+        </g>
+    </g>
+</svg>
