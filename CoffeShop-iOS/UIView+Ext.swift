@@ -27,8 +27,7 @@ extension UIView {
             self.bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
         }
         // width constraint
-        if width != 0 {
-            print(width)
+        if width != 0 {            
             widthAnchor.constraint(equalToConstant: width).isActive = true
         }
         // height constraint

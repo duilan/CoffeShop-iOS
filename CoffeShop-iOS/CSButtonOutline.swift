@@ -42,7 +42,7 @@ final class CSButtonOutline: UIButton {
         if self.traitCollection.userInterfaceStyle == .dark {
             layer.borderWidth = 0
         } else {
-            layer.borderWidth = 2
+            layer.borderWidth = 1
         }
     }
     
