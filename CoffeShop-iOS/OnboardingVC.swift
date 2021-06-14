@@ -48,10 +48,13 @@ class OnboardingVC: UIViewController {
         view.addSubview(pageControl)
         
         //Image slider
+        imagenSlider.delegate = self
         imagenSlider.configure(with: [UIImage(named: "cart"),UIImage(named: "cart"),UIImage(named: "cart")])
+        pageControl.addTarget(self, action: #selector(changeImage(_:)), for: .valueChanged)
         pageControl.pageIndicatorTintColor = CustomColors.primaryColor.withAlphaComponent(0.2)
         pageControl.currentPageIndicatorTintColor = CustomColors.primaryColor
         pageControl.numberOfPages = 3
+        
         //Title
         titleOnboarding.text = "Get the best coffee\nin town!"
         titleOnboarding.numberOfLines = 2
@@ -60,7 +63,10 @@ class OnboardingVC: UIViewController {
         stackButtonsView.addArrangedSubview(registerButton)
         stackButtonsView.addArrangedSubview(loginButton)
         facebookButton.setIcon(name: "facebook-icon")
-        
+    }
+    
+    @objc private func changeImage(_ sender: UIPageControl) {
+        self.imagenSlider.changeImage(itemIndex: sender.currentPage)
     }
     
     private func setupLayout() {
@@ -85,3 +91,9 @@ class OnboardingVC: UIViewController {
     
 }
 
+// MARK: -  ImagenSliderDelegate
+extension OnboardingVC: ImagenSliderDelegate {
+    func imagenSliderDidChangeImage(index currentImagenIndex: Int) {
+        pageControl.currentPage = currentImagenIndex
+    }
+}

@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol ImagenSliderDelegate {
+    func imagenSliderDidChangeImage(index currentImagenIndex:Int )
+}
+
 class CSImageSlider: UIView {
     
     // MARK: -  Properties
     private var images = [UIImage?]()
+    private var currentPage = 0
+    
+    var delegate: ImagenSliderDelegate?
     
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -44,6 +51,10 @@ class CSImageSlider: UIView {
         self.images = images
     }
     
+    func changeImage(itemIndex: Int)  {
+        collectionView.scrollToItem(at: IndexPath(item: itemIndex , section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
     // MARK: -  Private Methods
     
     private func setupCollectionView()  {
@@ -75,5 +86,14 @@ extension CSImageSlider: UICollectionViewDataSource, UICollectionViewDelegate {
         return cell
     }
     
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSet = scrollView.contentOffset.x
+        let width = scrollView.frame.width
+        let currentPage = Int(offSet / width)
+        if currentPage != self.currentPage {
+            print(currentPage)
+            self.currentPage = currentPage
+            delegate?.imagenSliderDidChangeImage(index: currentPage)
+        }
+    }
 }
