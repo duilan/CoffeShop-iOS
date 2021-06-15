@@ -10,13 +10,17 @@ import UIKit
 class OnboardingVC: UIViewController {
     
     // MARK: -  Properties
-    private let backgroundShape = UIImageView( image: UIImage(named: "background-shape"))
+    private let backgroundShape = UIImageView( image: UIImage(named: AssetManager.sliderBackground))
     private let imagenSlider = CSImageSlider()
     private let pageControl = UIPageControl()
     private let registerButton = CSButtonPlain("Register")
     private let loginButton = CSButtonOutline("Log In")
     private let facebookButton = CSButtonOutline("Connect with Facebook", color: .systemBlue)
     private let titleOnboarding = CSTitleLabel(fontSize: 36, fontWeight: .regular, textAlignment: .center)
+    
+    private let imagesForSlider = [UIImage(named: AssetManager.cart),
+                                   UIImage(named: AssetManager.store),
+                                   UIImage(named: AssetManager.drinks)]
     
     private lazy var stackButtonsView: UIStackView = {
         let stack = UIStackView()
@@ -48,12 +52,14 @@ class OnboardingVC: UIViewController {
         view.addSubview(pageControl)
         
         //Image slider
+        imagenSlider.configure(with: imagesForSlider)
         imagenSlider.delegate = self
-        imagenSlider.configure(with: [UIImage(named: "cart"),UIImage(named: "store"),UIImage(named: "drinks")])
+        
+        //PageControl
         pageControl.addTarget(self, action: #selector(changeImage(_:)), for: .valueChanged)
         pageControl.pageIndicatorTintColor = CustomColors.primaryColor.withAlphaComponent(0.2)
         pageControl.currentPageIndicatorTintColor = CustomColors.primaryColor
-        pageControl.numberOfPages = 3
+        pageControl.numberOfPages = imagesForSlider.count
         
         //Title
         titleOnboarding.text = "Get the best coffee\nin town!"
@@ -62,7 +68,7 @@ class OnboardingVC: UIViewController {
         //Buttons
         stackButtonsView.addArrangedSubview(registerButton)
         stackButtonsView.addArrangedSubview(loginButton)
-        facebookButton.setIcon(name: "facebook-icon")
+        facebookButton.setIcon(name: AssetManager.facebookIcon)
     }
     
     @objc private func changeImage(_ sender: UIPageControl) {
