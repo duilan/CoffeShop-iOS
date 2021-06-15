@@ -49,7 +49,7 @@ class OnboardingVC: UIViewController {
         
         //Image slider
         imagenSlider.delegate = self
-        imagenSlider.configure(with: [UIImage(named: "cart"),UIImage(named: "cart"),UIImage(named: "cart")])
+        imagenSlider.configure(with: [UIImage(named: "cart"),UIImage(named: "store"),UIImage(named: "drinks")])
         pageControl.addTarget(self, action: #selector(changeImage(_:)), for: .valueChanged)
         pageControl.pageIndicatorTintColor = CustomColors.primaryColor.withAlphaComponent(0.2)
         pageControl.currentPageIndicatorTintColor = CustomColors.primaryColor
