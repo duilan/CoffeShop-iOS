@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func createOnboardingVC() -> UINavigationController {
         let onboardingVC = OnboardingVC()
-        onboardingVC.title = "Onboarding"
+        onboardingVC.title = ""
         return UINavigationController(rootViewController: onboardingVC)
     }
 }

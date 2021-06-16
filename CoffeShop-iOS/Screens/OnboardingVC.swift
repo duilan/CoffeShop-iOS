@@ -39,11 +39,14 @@ class OnboardingVC: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     // MARK: -  Private Methods
-    private func setup() {
-        view.backgroundColor =  CustomColors.backgroundColor
-        navigationController?.isNavigationBarHidden = true
-        
+    private func setup() {        
+        view.backgroundColor =  CustomColors.backgroundColor        
         view.addSubview(backgroundShape)
         view.addSubview(imagenSlider)
         view.addSubview(titleOnboarding)
@@ -68,11 +71,17 @@ class OnboardingVC: UIViewController {
         //Buttons
         stackButtonsView.addArrangedSubview(registerButton)
         stackButtonsView.addArrangedSubview(loginButton)
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         facebookButton.setIcon(name: AssetManager.facebookIcon)
     }
     
     @objc private func changeImage(_ sender: UIPageControl) {
         self.imagenSlider.changeImage(itemIndex: sender.currentPage)
+    }
+    
+    @objc private func registerButtonTapped() {
+        let registerVC = RegisterVC()
+        navigationController?.pushViewController(registerVC, animated: true)
     }
     
     private func setupLayout() {
