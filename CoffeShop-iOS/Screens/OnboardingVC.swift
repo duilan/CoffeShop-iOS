@@ -16,7 +16,7 @@ class OnboardingVC: UIViewController {
     private let registerButton = CSButtonPlain("Register")
     private let loginButton = CSButtonOutline("Log In")
     private let facebookButton = CSButtonOutline("Connect with Facebook", color: .systemBlue)
-    private let titleOnboarding = CSTitleLabel(fontSize: 36, fontWeight: .regular, textAlignment: .center)
+    private let titleOnboarding = CSTitleLabel(fontSize: 36, fontWeight: .medium, textAlignment: .center)
     
     private let imagesForSlider = [UIImage(named: AssetManager.cart),
                                    UIImage(named: AssetManager.store),
@@ -67,7 +67,7 @@ class OnboardingVC: UIViewController {
         //Title
         titleOnboarding.text = "Get the best coffee\nin town!"
         titleOnboarding.numberOfLines = 2
-        titleOnboarding.textColor = CustomColors.primaryColor
+        titleOnboarding.textColor = CustomColors.titleColor
         //Buttons
         stackButtonsView.addArrangedSubview(registerButton)
         stackButtonsView.addArrangedSubview(loginButton)
