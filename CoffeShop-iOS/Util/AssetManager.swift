@@ -12,4 +12,5 @@ enum AssetManager {
     static let drinks = "drinks"
     static let facebookIcon = "facebook-icon"
     static let sliderBackground = "background-shape"
+    static let backIndicator = "backIndicator"
 }
