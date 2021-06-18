@@ -109,7 +109,7 @@
 				3A4B6D0F2679642F005C921E /* ImageSlider */,
 				3A4B6D0C267963A3005C921E /* Buttons */,
 				3A4B6D102679645B005C921E /* Labels */,
-				3A45F4BA267AEA8200A7940A /* CSTextField.swift */,
+				3A50ADC9267C829A00C25D7A /* TextFields */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -157,6 +157,14 @@
 				3A4B6D1326796C72005C921E /* RegisterVC.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		3A50ADC9267C829A00C25D7A /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				3A45F4BA267AEA8200A7940A /* CSTextField.swift */,
+			);
+			path = TextFields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

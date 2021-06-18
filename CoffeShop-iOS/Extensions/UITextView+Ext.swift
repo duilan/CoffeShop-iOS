@@ -9,32 +9,6 @@ import UIKit
 
 extension UITextView {
     
-    func addLinkAtEndOfText(_ originalText: String, link: String, linkColor: UIColor) {
-        let regularText = NSMutableAttributedString(string: originalText + " ", attributes: [.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.gray])
-        
-        let style = NSMutableParagraphStyle()
-        style.alignment = .center
-        
-        let tappableText = NSMutableAttributedString(string: link)
-        tappableText.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSMakeRange(0, tappableText.length))
-        tappableText.addAttribute(.link, value: link, range: NSMakeRange(0, tappableText.length))
-        tappableText.addAttribute(.link, value: link, range: NSMakeRange(0, tappableText.length))
-        
-        regularText.append(tappableText)
-        self.linkTextAttributes = [.foregroundColor: linkColor, .paragraphStyle: style]
-        
-        self.attributedText = regularText
-        removeGesturesExceptTap()
-    }
-    
-    func removeGesturesExceptTap() {
-        for recognizer in self.gestureRecognizers ?? [] {
-            if !recognizer.isKind(of: UITapGestureRecognizer.self) {
-                self.removeGestureRecognizer(recognizer)
-            }
-        }
-    }
-    
     func addMultipleLinksToText(_ originalText: String, links: [String], linkColor: UIColor) {
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment
@@ -51,14 +25,21 @@ extension UITextView {
         }
         
         self.linkTextAttributes = [
-            .foregroundColor: linkColor,
-            //.underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: linkColor
         ]
         self.attributedText = attributedOriginalText
         self.isEditable = false
         self.isScrollEnabled = false
         self.textDragInteraction?.isEnabled = false
         removeGesturesExceptTap()
+    }
+    
+    func removeGesturesExceptTap() {
+        for recognizer in self.gestureRecognizers ?? [] {
+            if !recognizer.isKind(of: UITapGestureRecognizer.self) {
+                self.removeGestureRecognizer(recognizer)
+            }
+        }
     }
 }
 
