@@ -14,6 +14,7 @@ class RegisterVC: UIViewController {
     private let userNameTextField = CSTextField()
     private let emailTextField = CSTextField()
     private let passwordTextField = CSTextField()
+    private let createButton = CSButtonPlain("Create")
     
     private lazy var formStack: UIStackView =  {
         let stack = UIStackView()
@@ -22,6 +23,15 @@ class RegisterVC: UIViewController {
         stack.alignment = .fill
         stack.spacing =  20
         return stack
+    }()
+    
+    private lazy var  alreadyHaveAccountText: UITextView = {
+        let t = UITextView()
+        t.delegate = self
+        t.textAlignment = .center
+        t.backgroundColor = .none
+        t.textColor = .tertiaryLabel
+        return t
     }()
     
     // MARK: -  Lifecycle
@@ -56,6 +66,9 @@ class RegisterVC: UIViewController {
         formStack.addArrangedSubview(userNameTextField)
         formStack.addArrangedSubview(emailTextField)
         formStack.addArrangedSubview(passwordTextField)
+        formStack.addArrangedSubview(createButton)
+        view.addSubview(alreadyHaveAccountText)
+        
         //User Name
         userNameTextField.placeholder = "Name"
         userNameTextField.autocapitalizationType = .words
@@ -66,6 +79,8 @@ class RegisterVC: UIViewController {
         //Password
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
+        //already have account textview
+        alreadyHaveAccountText.addMultipleLinksToText("Already have an account? Login", links: ["Login"], linkColor: CustomColors.primaryColor)
         // Constrains
         formStack.anchor(top: titleLabel.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: nil, paddingTop: 30, paddingLeft: 30 , paddingRight: 30, paddingBottom: 0, width: 0, height: 0)
         
@@ -73,6 +88,20 @@ class RegisterVC: UIViewController {
         emailTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        alreadyHaveAccountText.anchor(top: formStack.bottomAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: nil, paddingTop: 10, paddingLeft: 30, paddingRight: 30, paddingBottom: 0, width: 0, height: 0)
+        
     }
-    
 }
+
+// MARK: -  UITextViewDelegate
+extension RegisterVC: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.absoluteString == "Login" {            
+            #warning("TODO: CHANGE ViewControler destination")
+            navigationController?.pushViewController(OnboardingVC(), animated: true)
+            return false
+        }
+        return true
+    }
+}
+
