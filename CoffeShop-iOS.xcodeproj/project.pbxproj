@@ -25,9 +25,11 @@
 		3ABC193A267C624600796029 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC1939267C624600796029 /* UITextView+Ext.swift */; };
 		3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA04266C3FB000832381 /* OnboardingVC.swift */; };
 		3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */; };
+		55160487507BDAD75AE8C8C5 /* Pods_CoffeShop_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.release.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
 		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
 		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -48,6 +50,8 @@
 		3ABC1939267C624600796029 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		3AFFBA04266C3FB000832381 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOutline.swift; sourceTree = "<group>"; };
+		539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeShop_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4EC69D18FC6B54C62EE0CC4 /* Pods-CoffeShop-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.debug.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55160487507BDAD75AE8C8C5 /* Pods_CoffeShop_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,8 @@
 			children = (
 				3A302713266AE83B00C465CE /* CoffeShop-iOS */,
 				3A302712266AE83B00C465CE /* Products */,
+				8AE7EE3E6FA7AD907E00FA00 /* Pods */,
+				DE2D5CE89BFD8891DB2A0A96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +174,24 @@
 			path = TextFields;
 			sourceTree = "<group>";
 		};
+		8AE7EE3E6FA7AD907E00FA00 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4EC69D18FC6B54C62EE0CC4 /* Pods-CoffeShop-iOS.debug.xcconfig */,
+				097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DE2D5CE89BFD8891DB2A0A96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +199,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A302725266AE83C00C465CE /* Build configuration list for PBXNativeTarget "CoffeShop-iOS" */;
 			buildPhases = (
+				B82B619672BCBAC847E79B49 /* [CP] Check Pods Manifest.lock */,
 				3A30270D266AE83B00C465CE /* Sources */,
 				3A30270E266AE83B00C465CE /* Frameworks */,
 				3A30270F266AE83B00C465CE /* Resources */,
@@ -230,6 +256,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B82B619672BCBAC847E79B49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CoffeShop-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A30270D266AE83B00C465CE /* Sources */ = {
@@ -387,6 +438,7 @@
 		};
 		3A302726266AE83C00C465CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4EC69D18FC6B54C62EE0CC4 /* Pods-CoffeShop-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -407,6 +459,7 @@
 		};
 		3A302727266AE83C00C465CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
