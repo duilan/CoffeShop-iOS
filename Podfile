@@ -5,5 +5,7 @@ target 'CoffeShop-iOS' do
   use_frameworks!
 
   # Pods for CoffeShop-iOS
+  # Firebase
+  pod 'Firebase/Auth'
 
 end
