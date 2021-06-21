@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterVC: UIViewController {
     
@@ -40,6 +41,7 @@ class RegisterVC: UIViewController {
         setup()
         setupTitle()
         setupForm()
+        setupActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +57,39 @@ class RegisterVC: UIViewController {
     private func setup() {
         title = "Register"
         view.backgroundColor = CustomColors.backgroundColor
+    }
+    
+    private func setupActions() {
+        createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func createButtonTapped() {
+        
+        guard let name = userNameTextField.text, name.count >= 3 else {
+            print("Ingresa tu nombre de usuario")
+            return
+        }
+        
+        guard let email = emailTextField.text, email.count >= 6 else {
+            print("Introduce tu email")
+            return
+        }
+        
+        guard let password = passwordTextField.text, password.count >= 6 else {
+            print("Introduce tu contraseña")
+            return
+        }
+        
+        // Firebase crear usuario
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let user = authResult?.user, error == nil else {
+                print("Error:\(error!.localizedDescription)")
+                return
+            }
+            print("Se registro email: \(user.email!) correctamente")
+            #warning("TODO: CHANGE ViewControler destination")
+            self?.navigationController?.pushViewController(OnboardingVC(), animated: true)
+        }
     }
     
     private func setupTitle() {
@@ -100,7 +135,7 @@ class RegisterVC: UIViewController {
 // MARK: -  UITextViewDelegate
 extension RegisterVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        if URL.absoluteString == "Login" {            
+        if URL.absoluteString == "Login" {
             #warning("TODO: CHANGE ViewControler destination")
             navigationController?.pushViewController(OnboardingVC(), animated: true)
             return false
