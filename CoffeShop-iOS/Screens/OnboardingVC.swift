@@ -72,6 +72,7 @@ class OnboardingVC: UIViewController {
         stackButtonsView.addArrangedSubview(registerButton)
         stackButtonsView.addArrangedSubview(loginButton)
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         facebookButton.setIcon(name: AssetManager.facebookIcon)
     }
     
@@ -82,6 +83,11 @@ class OnboardingVC: UIViewController {
     @objc private func registerButtonTapped() {
         let registerVC = RegisterVC()
         navigationController?.pushViewController(registerVC, animated: true)
+    }
+    
+    @objc private func loginButtonTapped() {
+        let loginVC = LoginVC()
+        navigationController?.pushViewController(loginVC, animated: true)
     }
     
     private func setupLayout() {

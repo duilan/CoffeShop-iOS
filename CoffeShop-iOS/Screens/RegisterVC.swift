@@ -135,12 +135,15 @@ class RegisterVC: UIViewController {
 // MARK: -  UITextViewDelegate
 extension RegisterVC: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        // ir al login viewcontroller
         if URL.absoluteString == "Login" {
-            #warning("TODO: CHANGE ViewControler destination")
-            navigationController?.pushViewController(OnboardingVC(), animated: true)
+            if let nav = navigationController {
+                nav.popToRootViewController(animated: false)
+                nav.pushViewController(LoginVC(), animated: true)
+                return false
+            }
             return false
         }
         return true
     }
 }
-
