@@ -21,6 +21,9 @@ class OnboardingVC: UIViewController {
     private let imagesForSlider = [UIImage(named: AssetManager.cart),
                                    UIImage(named: AssetManager.store),
                                    UIImage(named: AssetManager.drinks)]
+    private let titlesForImages = ["Get the best coffee\nin town!",
+                                   "Discover the shop\nnear to you",
+                                   "Get your favorite.\nBe Coffe!"]
     
     private lazy var stackButtonsView: UIStackView = {
         let stack = UIStackView()
@@ -116,5 +119,11 @@ class OnboardingVC: UIViewController {
 extension OnboardingVC: ImagenSliderDelegate {
     func imagenSliderDidChangeImage(index currentImagenIndex: Int) {
         pageControl.currentPage = currentImagenIndex
+        titleOnboarding.text = titlesForImages[currentImagenIndex]
+        titleOnboarding.alpha = 0.1
+        
+        UIView.animate(withDuration: 1.5) { [ weak self] in
+            self?.titleOnboarding.alpha = 1.0
+        }
     }
 }
