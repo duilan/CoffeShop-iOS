@@ -39,10 +39,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func createTabBarController() -> UITabBarController {
         let tabbar = UITabBarController()
-        tabbar.viewControllers = [UIViewController()]
+        tabbar.viewControllers = [createUserProfileNC()]
         return tabbar
     }
-        
+    
+    private func createUserProfileNC() -> UINavigationController {
+        let profileVC = UIViewController()
+        profileVC.title = "Profile"
+        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 3)
+        return UINavigationController(rootViewController: profileVC)
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // delete observer of firebaseAuth
         guard let handle = handleAuthStateListener else { return  }
