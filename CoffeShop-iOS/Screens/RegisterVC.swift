@@ -90,7 +90,12 @@ class RegisterVC: UIViewController {
             }
             print("Se registro email: \(user.email!) correctamente")
             // Guardar nombre de usuario en firestore database
-            self?.db.collection("users").document(email).setData(["name":name])
+            self?.db.collection("users").document(email).setData(["name":name,"createdAt": Date()])
+            
+            //crea perfil
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = name
+            changeRequest.commitChanges(completion: nil)
         }
     }
     
