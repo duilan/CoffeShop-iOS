@@ -53,14 +53,13 @@ class LoginVC: UIViewController {
             return
         }
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             guard let user = authResult?.user, error == nil else {
                 print("Error:\(error!.localizedDescription)")
                 return
             }
             print("se ingreso con: \(user.email!) correctamente")
-            #warning("TODO: CHANGE ViewControler destination")
-            self?.navigationController?.pushViewController(UIViewController(), animated: true)
+            
         }
         
         
