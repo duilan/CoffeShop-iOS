@@ -7,5 +7,6 @@ target 'CoffeShop-iOS' do
   # Pods for CoffeShop-iOS
   # Firebase
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 
 end
