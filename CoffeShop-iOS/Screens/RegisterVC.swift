@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class RegisterVC: UIViewController {
     
@@ -16,6 +17,7 @@ class RegisterVC: UIViewController {
     private let emailTextField = CSTextField()
     private let passwordTextField = CSTextField()
     private let createButton = CSButtonPlain("Create")
+    private let db = Firestore.firestore()
     
     private lazy var formStack: UIStackView =  {
         let stack = UIStackView()
@@ -87,8 +89,8 @@ class RegisterVC: UIViewController {
                 return
             }
             print("Se registro email: \(user.email!) correctamente")
-            #warning("TODO: CHANGE ViewControler destination")
-            self?.navigationController?.pushViewController(OnboardingVC(), animated: true)
+            // Guardar nombre de usuario en firestore database
+            self?.db.collection("users").document(email).setData(["name":name])
         }
     }
     
