@@ -39,8 +39,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func createTabBarController() -> UITabBarController {
         let tabbar = UITabBarController()
-        tabbar.viewControllers = [createUserProfileNC()]
+        tabbar.viewControllers = [createHomeNC(),createUserProfileNC()]
         return tabbar
+    }
+    
+    private func createHomeNC() -> UINavigationController {
+        let homeVC = HomeVC()
+        homeVC.title = "Home"
+        homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        return UINavigationController(rootViewController: homeVC)
     }
     
     private func createUserProfileNC() -> UINavigationController {
