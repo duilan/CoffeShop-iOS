@@ -48,7 +48,8 @@ final class CSButtonOutline: UIButton {
     
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
-        layer.cornerRadius = self.bounds.height / 2
+        layer.cornerRadius = (self.bounds.height * 0.8) / 2
+        layer.cornerCurve = .continuous
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
