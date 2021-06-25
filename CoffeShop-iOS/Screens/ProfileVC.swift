@@ -13,7 +13,7 @@ class ProfileVC: UIViewController {
     // MARK: -  Properties
     private let nameLabel = CSTitleLabel(fontSize: 26, fontWeight: .medium, textAlignment: .center)
     private let emailLabel = CSTitleLabel(fontSize: 22, fontWeight: .regular, textAlignment: .center)
-    private let logoutButton = CSButtonPlain("Logout")
+    private let logoutButton = CSButtonFilled("Logout")
     private let userInfoStackView = UIStackView()
     private let firebaseAuth = Auth.auth()
     

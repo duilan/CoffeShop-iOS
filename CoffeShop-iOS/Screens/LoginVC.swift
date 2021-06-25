@@ -15,7 +15,7 @@ class LoginVC: UIViewController {
     private let emailTextField = CSTextField()
     private let passwordTextField = CSTextField()
     private let loginStack = UIStackView()
-    private let loginButton = CSButtonPlain("Log In")
+    private let loginButton = CSButtonFilled("Log In")
     private let dontHaveAccountText = UITextView()
     
     // MARK: -  Lifecycle

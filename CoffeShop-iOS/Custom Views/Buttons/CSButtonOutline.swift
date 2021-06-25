@@ -23,12 +23,12 @@ final class CSButtonOutline: UIButton {
         adjustsImageWhenHighlighted = false
         clipsToBounds = true
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        backgroundColor = .white
+        backgroundColor = .none
         setTitle(title, for: .normal)
         setTitleColor(color, for: .normal)
         layer.borderColor = color.cgColor
         tintColor = color
-        setBackgroundColor(color.withAlphaComponent(0.2), for: .highlighted)
+        setBackgroundColor(color.withAlphaComponent(0.3), for: .highlighted)
         adjustsBorderInDarkmode()
     }
     

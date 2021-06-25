@@ -13,9 +13,9 @@ class OnboardingVC: UIViewController {
     private let backgroundShape = UIImageView( image: UIImage(named: AssetManager.sliderBackground))
     private let imagenSlider = CSImageSlider()
     private let pageControl = UIPageControl()
-    private let registerButton = CSButtonPlain("Register")
-    private let loginButton = CSButtonOutline("Log In")
-    private let facebookButton = CSButtonOutline("Connect with Facebook", color: .systemBlue)
+    private let registerButton = CSButtonFilled("Register")
+    private let loginButton = CSButtonPlain("Log In")
+    private let facebookButton = CSButtonPlain("Connect with Facebook", color: .systemBlue)
     private let titleOnboarding = CSTitleLabel(fontSize: 36, fontWeight: .medium, textAlignment: .center)
     
     private let imagesForSlider = [UIImage(named: AssetManager.cart),

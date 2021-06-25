@@ -16,7 +16,7 @@ class RegisterVC: UIViewController {
     private let userNameTextField = CSTextField()
     private let emailTextField = CSTextField()
     private let passwordTextField = CSTextField()
-    private let createButton = CSButtonPlain("Create")
+    private let createButton = CSButtonFilled("Create")
     private let db = Firestore.firestore()
     
     private lazy var formStack: UIStackView =  {

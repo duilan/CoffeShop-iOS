@@ -13,7 +13,7 @@ class CSAlertVC: UIViewController {
     private let containerView = UIView()
     private let titleLabel = CSTitleLabel(fontSize: 20, fontWeight: .bold, textAlignment: .center)
     private let messageLabel = CSTitleLabel(fontSize: 16, fontWeight: .regular, textAlignment: .center)
-    private let actionButton = CSButtonPlain("Text Button")
+    private let actionButton = CSButtonFilled("Text Button")
     
     private var alertTitle: String
     private var alertMessage: String

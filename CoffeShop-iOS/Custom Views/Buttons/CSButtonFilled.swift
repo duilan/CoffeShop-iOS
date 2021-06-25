@@ -2,12 +2,12 @@
 //  CSButtonPlain.swift
 //  CoffeShop-iOS
 //
-//  Created by Duilan on 24/06/21.
+//  Created by Duilan on 06/06/21.
 //
 
 import UIKit
 
-final class CSButtonPlain: UIButton {
+final class CSButtonFilled: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,11 +23,12 @@ final class CSButtonPlain: UIButton {
         adjustsImageWhenHighlighted = false
         clipsToBounds = true
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-        backgroundColor = .white
         setTitle(title, for: .normal)
-        setTitleColor(color, for: .normal)
-        tintColor = color
-        setBackgroundColor(color.withAlphaComponent(0.3), for: .highlighted)
+        backgroundColor = color
+        tintColor = .white
+        setTitleColor(.white, for: .normal)
+        clipsToBounds = true
+        setBackgroundColor(UIColor.white.withAlphaComponent(0.3), for: .highlighted)
     }
     
     func setIcon(name: String ) {
