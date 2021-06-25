@@ -37,15 +37,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backIndicatorImage = image
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = image
         
+        // Color NavigationBar
+        UINavigationBar.appearance().backgroundColor = CustomColors.navbarBackgroundColor
+        UINavigationBar.appearance().barTintColor = CustomColors.navbarTextColor
+        UINavigationBar.appearance().tintColor = CustomColors.navbarTextColor
+        
         // Setup Text NavigationBar
         UINavigationBar.appearance().setTitleVerticalPositionAdjustment(CGFloat(3), for: .default)
         UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor : CustomColors.textNavBarColor,
+            .foregroundColor : CustomColors.navbarTextColor,
             .font: UIFont.systemFont(ofSize: 22, weight: .medium)
         ]
         
-        // Color NavigationBar
-        UINavigationBar.appearance().barTintColor = CustomColors.textNavBarColor
-        UINavigationBar.appearance().tintColor = CustomColors.textNavBarColor
+        // Color Tab Bar
+        UITabBar.appearance().backgroundColor = CustomColors.tabbarBackgroundColor
+        UITabBar.appearance().barTintColor = CustomColors.tabbarBackgroundColor
+        UITabBar.appearance().tintColor = CustomColors.tabbarTextColor
     }
 }
