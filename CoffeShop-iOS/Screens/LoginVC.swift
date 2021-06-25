@@ -43,25 +43,24 @@ class LoginVC: UIViewController {
     }
     
     @objc private func loginButtonTapped() {
-        guard let email = emailTextField.text else {
-            print("Introduce tu email")
+        guard let email = emailTextField.text, email.count >= 6 else {
+            presetCSAlertVC(title: "Login Info", message: "Enter your email", buttonTitle: "OK")
             return
         }
         
-        guard let password = passwordTextField.text else {
-            print("Introduce tu contraseña")
+        guard let password = passwordTextField.text, password.count >= 6 else {
+            presetCSAlertVC(title: "Login Info", message: "The password must be at least 6 characters long", buttonTitle: "OK")
+            
             return
         }
         
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
             guard let user = authResult?.user, error == nil else {
                 print("Error:\(error!.localizedDescription)")
+                self?.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
                 return
-            }
-            print("se ingreso con: \(user.email!) correctamente")
-            
+            }            
         }
-        
         
     }
     

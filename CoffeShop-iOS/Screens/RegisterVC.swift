@@ -68,17 +68,17 @@ class RegisterVC: UIViewController {
     @objc private func createButtonTapped() {
         
         guard let name = userNameTextField.text, name.count >= 3 else {
-            print("Ingresa tu nombre de usuario")
+            presetCSAlertVC(title: "Info", message: "Enter your username", buttonTitle: "OK")
             return
         }
         
         guard let email = emailTextField.text, email.count >= 6 else {
-            print("Introduce tu email")
+            presetCSAlertVC(title: "Info", message: "Enter your email", buttonTitle: "OK")
             return
         }
         
         guard let password = passwordTextField.text, password.count >= 6 else {
-            print("Introduce tu contraseña")
+            presetCSAlertVC(title: "Info", message: "The password must be at least 6 characters long", buttonTitle: "OK")
             return
         }
         
@@ -86,9 +86,9 @@ class RegisterVC: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
             guard let user = authResult?.user, error == nil else {
                 print("Error:\(error!.localizedDescription)")
+                self?.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
                 return
-            }
-            print("Se registro email: \(user.email!) correctamente")
+            }            
             // Guardar nombre de usuario en firestore database
             self?.db.collection("users").document(email).setData(["name":name,"createdAt": Date()])
             
