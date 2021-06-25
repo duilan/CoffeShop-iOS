@@ -20,6 +20,8 @@
 		3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45F4BA267AEA8200A7940A /* CSTextField.swift */; };
 		3A4B6D052679618A005C921E /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B6D042679618A005C921E /* AssetManager.swift */; };
 		3A4B6D1426796C72005C921E /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B6D1326796C72005C921E /* RegisterVC.swift */; };
+		3A72691026852C6700C8F3C7 /* CSAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */; };
+		3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7269122685569700C8F3C7 /* UIViewController+Ext.swift */; };
 		3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7700A426706C73006F4838 /* CSTitleLabel.swift */; };
 		3A7700A826709BEE006F4838 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7700A726709BEE006F4838 /* UIView+Ext.swift */; };
 		3A80ABA62683058400E379EA /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A80ABA52683058400E379EA /* ProfileVC.swift */; };
@@ -49,6 +51,8 @@
 		3A45F4BA267AEA8200A7940A /* CSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTextField.swift; sourceTree = "<group>"; };
 		3A4B6D042679618A005C921E /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		3A4B6D1326796C72005C921E /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAlertVC.swift; sourceTree = "<group>"; };
+		3A7269122685569700C8F3C7 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		3A7700A426706C73006F4838 /* CSTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTitleLabel.swift; sourceTree = "<group>"; };
 		3A7700A726709BEE006F4838 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		3A80ABA52683058400E379EA /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 				3A4B6D0C267963A3005C921E /* Buttons */,
 				3A4B6D102679645B005C921E /* Labels */,
 				3A50ADC9267C829A00C25D7A /* TextFields */,
+				3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				3ABC1939267C624600796029 /* UITextView+Ext.swift */,
+				3A7269122685569700C8F3C7 /* UIViewController+Ext.swift */,
 				3A7700A726709BEE006F4838 /* UIView+Ext.swift */,
 				3AB05BAD266DFC70006FD017 /* UIButton+Ext.swift */,
 			);
@@ -319,6 +325,7 @@
 			files = (
 				3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */,
 				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
+				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonPlain.swift in Sources */,
 				3A1D33F026806313007D3BF6 /* LoginVC.swift in Sources */,
@@ -330,6 +337,7 @@
 				3ABC193A267C624600796029 /* UITextView+Ext.swift in Sources */,
 				3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */,
 				3A80ABA62683058400E379EA /* ProfileVC.swift in Sources */,
+				3A72691026852C6700C8F3C7 /* CSAlertVC.swift in Sources */,
 				3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */,
 				3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */,
 				3A4B6D1426796C72005C921E /* RegisterVC.swift in Sources */,
