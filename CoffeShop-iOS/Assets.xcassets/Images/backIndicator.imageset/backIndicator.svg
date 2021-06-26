@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="30px" height="13px" viewBox="0 0 30 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group 2</title>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="03_Login" transform="translate(-7.000000, -60.000000)">
-            <g id="nav-bar" transform="translate(7.000000, 55.000000)">
-                <g id="Group-2" transform="translate(0.000000, 5.000000)">
-                    <polygon id="back" fill="#8C746A" transform="translate(26.000000, 6.500000) scale(-1, 1) translate(-26.000000, -6.500000) " points="22 1.5 23.5 0 30 6.5 23.5 13 22 11.5 27 6.5"></polygon>
-                    <rect id="Rectangle" x="0" y="0" width="30" height="13"></rect>
-                </g>
-            </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 30 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="backIndicator">
+        <g id="curva" transform="matrix(-1,0,0,1,52,3.5)">
+            <path d="M22,1.5L23.5,0L30,6.5L23.5,13L22,11.5L27,6.5L22,1.5Z" style="fill:rgb(140,116,106);"/>
+        </g>
+        <g id="container" transform="matrix(1,0,0,1.53846,0,0)">
+            <rect x="0" y="0" width="30" height="13" style="fill:none;"/>
         </g>
     </g>
 </svg>
