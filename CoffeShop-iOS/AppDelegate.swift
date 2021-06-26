@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configureFirebase()
         configureNavigationBarAppearance()
+        configureTabbarAppearance()
         slowLaunchScreen()
         return true
     }
@@ -28,27 +29,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func configureNavigationBarAppearance() {
-        // Remove border bottom NavigationBar
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().shadowImage = UIImage()
         
-        // Setup BackIndicatorImage NavigationBar
-        let image = UIImage(named: AssetManager.backIndicator)
-        UINavigationBar.appearance().backIndicatorImage = image
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = image
+        let appearance = UINavigationBarAppearance()
         
-        // Color NavigationBar
-        UINavigationBar.appearance().backgroundColor = CustomColors.navbarBackgroundColor
-        UINavigationBar.appearance().barTintColor = CustomColors.navbarTextColor
+        // Remove border and shadow bottom
+        appearance.shadowImage = UIImage()
+        appearance.shadowColor = .none
+        
+        // Back Indicator Image
+        let backIndicatorImage = UIImage(named: AssetManager.backIndicator)
+        appearance.setBackIndicatorImage(backIndicatorImage, transitionMaskImage: backIndicatorImage)
+        
+        // Background Color
+        appearance.backgroundColor = CustomColors.navbarBackgroundColor
+        
+        // Button Items Color
         UINavigationBar.appearance().tintColor = CustomColors.navbarTextColor
         
-        // Setup Text NavigationBar
-        UINavigationBar.appearance().setTitleVerticalPositionAdjustment(CGFloat(3), for: .default)
-        UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor : CustomColors.navbarTextColor,
-            .font: UIFont.systemFont(ofSize: 22, weight: .medium)
+        // Text & Color for titles
+        appearance.titleTextAttributes = [
+            .foregroundColor: CustomColors.navbarTextColor,
+            .font: UIFont.systemFont(ofSize: 18, weight: .bold)
         ]
         
+        // Text & Color for LargeTitles
+        let marginLeftLargeTitle = NSMutableParagraphStyle()
+        marginLeftLargeTitle.firstLineHeadIndent = 15 // This is added to the default margin LargeTitles
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: CustomColors.navbarTextColor,
+            .paragraphStyle : marginLeftLargeTitle
+        ]
+        
+        // Adjust title position
+        //appearance.titlePositionAdjustment.vertical = 1
+        //appearance.titlePositionAdjustment.horizontal = 0
+        
+        // Apply the appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
+    private func configureTabbarAppearance() {
         // Color Tab Bar
         UITabBar.appearance().backgroundColor = CustomColors.tabbarBackgroundColor
         UITabBar.appearance().barTintColor = CustomColors.tabbarBackgroundColor
