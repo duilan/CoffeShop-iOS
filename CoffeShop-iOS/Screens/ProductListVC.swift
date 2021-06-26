@@ -16,6 +16,7 @@ class ProductListVC: UIViewController {
     }
     
     private func setup() {
+        title = "Menu"
         view.backgroundColor = CustomColors.backgroundColor
     }
     

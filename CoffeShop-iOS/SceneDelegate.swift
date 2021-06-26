@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func createTabBarController() -> UITabBarController {
         let tabbar = UITabBarController()
-        tabbar.viewControllers = [createHomeNC(),createUserProfileNC()]
+        tabbar.viewControllers = [createHomeNC(),createShopsNC(),createUserProfileNC()]
         return tabbar
     }
     
@@ -48,6 +48,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         homeVC.title = "Home"
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         return UINavigationController(rootViewController: homeVC)
+    }
+    
+    private func createShopsNC() -> UINavigationController {
+        let shopsVC = ShopsVC()
+        shopsVC.title = "Shops"
+        shopsVC.tabBarItem = UITabBarItem(title: "Shops", image: UIImage(systemName: "map"), tag: 1)
+        return UINavigationController(rootViewController: shopsVC)
     }
     
     private func createUserProfileNC() -> UINavigationController {
