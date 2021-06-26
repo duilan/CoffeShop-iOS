@@ -1,13 +1,13 @@
 //
-//  HomeVC.swift
+//  MenuVC.swift
 //  CoffeShop-iOS
 //
-//  Created by Duilan on 23/06/21.
+//  Created by Duilan on 25/06/21.
 //
 
 import UIKit
 
-class HomeVC: UIViewController {
+class ProductListVC: UIViewController {        
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
