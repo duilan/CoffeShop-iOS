@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ImagenSliderDelegate {
+protocol ImagenSliderDelegate: class {
     func imagenSliderDidChangeImage(index currentImagenIndex:Int )
 }
 
@@ -17,7 +17,7 @@ class CSImageSlider: UIView {
     private var images = [UIImage?]()
     private var currentPage = 0
     
-    var delegate: ImagenSliderDelegate?
+    weak var delegate: ImagenSliderDelegate?
     
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -91,7 +91,6 @@ extension CSImageSlider: UICollectionViewDataSource, UICollectionViewDelegate {
         let width = scrollView.frame.width
         let currentPage = Int(offSet / width)
         if currentPage != self.currentPage {
-            print(currentPage)
             self.currentPage = currentPage
             delegate?.imagenSliderDidChangeImage(index: currentPage)
         }
