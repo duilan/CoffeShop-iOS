@@ -14,7 +14,7 @@ class ProductCell: UITableViewCell {
     static let cellID = "ProductCell"
     private let imageProductView = UIImageView(frame: .zero)
     private let nameProductLabel = CSTitleLabel(fontSize: 17, fontWeight: .bold, textAlignment: .left)
-    private let descProductLabel = CSTitleLabel(fontSize: 13, fontWeight: .regular, textAlignment: .left)
+    private let descProductLabel = CSBodyLabel(fontSize: 13, textAlignment: .left)
     private let priceProductLabel = CSTitleLabel(fontSize: 12, fontWeight: .bold, textAlignment: .left)
     private let infoStack = UIStackView()
     
@@ -86,9 +86,7 @@ class ProductCell: UITableViewCell {
     
     private func setupDescProduct() {
         infoStack.addArrangedSubview(descProductLabel)
-        descProductLabel.textColor = .secondaryLabel
-        descProductLabel.minimumScaleFactor = 1
-        descProductLabel.numberOfLines = 0
+        descProductLabel.numberOfLines = 2
     }
     private func setupPriceProduct() {
         infoStack.addArrangedSubview(priceProductLabel)
