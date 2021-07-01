@@ -10,6 +10,7 @@
 		3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */; };
 		3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */; };
 		3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F8C267467020074E5C4 /* UIHelper.swift */; };
+		3A1B0BA3268E765200C937E2 /* CSBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1B0BA2268E765200C937E2 /* CSBodyLabel.swift */; };
 		3A1D33F026806313007D3BF6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D33EF26806313007D3BF6 /* LoginVC.swift */; };
 		3A299E552686E281002EA597 /* ShopsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A299E542686E281002EA597 /* ShopsVC.swift */; };
 		3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302714266AE83B00C465CE /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
 		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
 		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		3A1B0BA2268E765200C937E2 /* CSBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSBodyLabel.swift; sourceTree = "<group>"; };
 		3A1D33EF26806313007D3BF6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3A299E542686E281002EA597 /* ShopsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsVC.swift; sourceTree = "<group>"; };
 		3A302711266AE83B00C465CE /* CoffeShop-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeShop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				3A7700A426706C73006F4838 /* CSTitleLabel.swift */,
+				3A1B0BA2268E765200C937E2 /* CSBodyLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
 				3AA835BB2686D44E00046DFE /* ProductListVC.swift in Sources */,
+				3A1B0BA3268E765200C937E2 /* CSBodyLabel.swift in Sources */,
 				3A1D33F026806313007D3BF6 /* LoginVC.swift in Sources */,
 				3AB05BAE266DFC70006FD017 /* UIButton+Ext.swift in Sources */,
 				3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */,
