@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductCell: UITableViewCell {
     
@@ -40,9 +41,12 @@ class ProductCell: UITableViewCell {
     // MARK: -  Public Methods
     public func configure(with product: Product) {
         nameProductLabel.text = product.name
-        imageProductView.image = UIImage(named: product.image_url)
         descProductLabel.text = product.description
         priceProductLabel.text = String(format: "$%.02f", product.price)
+        //Image download using Kingfisher
+        let url = URL(string: product.image_url)
+        imageProductView.kf.indicatorType = .activity
+        imageProductView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
     }
     
     // MARK: -  Private Methods
@@ -53,7 +57,6 @@ class ProductCell: UITableViewCell {
     }
     
     private func setupImageProduct() {
-        #warning("CREATE CUSTOM VIEW FOR IMG WITH URL")            
         contentView.addSubview(imageProductView)
         imageProductView.translatesAutoresizingMaskIntoConstraints = false
         imageProductView.layer.cornerCurve = .continuous
