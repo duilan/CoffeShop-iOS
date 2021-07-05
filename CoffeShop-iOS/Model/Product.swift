@@ -9,6 +9,7 @@ struct Product {
     let name: String
     let price: Float
     let image_url: String
+    let image_detail_url: String
     let description: String    
     let isAvailable: Bool
 }
