@@ -18,6 +18,7 @@
 		3A30271E266AE83C00C465CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271D266AE83C00C465CE /* Assets.xcassets */; };
 		3A302721266AE83C00C465CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A30271F266AE83C00C465CE /* LaunchScreen.storyboard */; };
 		3A382D07267EF308009E779B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A382D06267EF308009E779B /* GoogleService-Info.plist */; };
+		3A3B70122697A28000493D94 /* ProductTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */; };
 		3A3C0F7826843182003B146A /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C0F7726843182003B146A /* HomeVC.swift */; };
 		3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45F4BA267AEA8200A7940A /* CSTextField.swift */; };
 		3A4B6D052679618A005C921E /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B6D042679618A005C921E /* AssetManager.swift */; };
@@ -56,6 +57,7 @@
 		3A302720266AE83C00C465CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A302722266AE83C00C465CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A382D06267EF308009E779B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableHeaderView.swift; sourceTree = "<group>"; };
 		3A3C0F7726843182003B146A /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		3A45F4BA267AEA8200A7940A /* CSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTextField.swift; sourceTree = "<group>"; };
 		3A4B6D042679618A005C921E /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				3A50ADC9267C829A00C25D7A /* TextFields */,
 				3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */,
 				3AC5877B268AD137007F339A /* ProductCell.swift */,
+				3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */,
 				3A80ABA62683058400E379EA /* ProfileVC.swift in Sources */,
 				3A299E552686E281002EA597 /* ShopsVC.swift in Sources */,
+				3A3B70122697A28000493D94 /* ProductTableHeaderView.swift in Sources */,
 				3A72691026852C6700C8F3C7 /* CSAlertVC.swift in Sources */,
 				3AC5877C268AD137007F339A /* ProductCell.swift in Sources */,
 				3A9ADBEA266CAFDD009B74AE /* CustomColors.swift in Sources */,
