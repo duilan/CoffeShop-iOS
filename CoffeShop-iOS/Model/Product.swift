@@ -12,4 +12,11 @@ struct Product {
     let image_detail_url: String
     let description: String    
     let isAvailable: Bool
+    let posibleCustomizations: [CustomizationType]
 }
+enum CustomizationType: String {
+    case size = "Size"
+    case sugar = "Sugar"
+    case cream = "Whipped cream"
+}
+
