@@ -84,7 +84,7 @@ class ProductTableHeaderView: UIView {
     
     private func setupDetailContentView() {
         addSubview(detailContentView)
-        detailContentView.anchor(top: ImageProductView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, bottom: self.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
+        detailContentView.anchor(top: ImageProductView.bottomAnchor, left: self.leadingAnchor, right: self.trailingAnchor, bottom: self.bottomAnchor, paddingTop: -60, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
         
         addSubview(topLine)
         topLine.anchor(top: ImageProductView.bottomAnchor, left: nil, right: nil, bottom: nil, paddingTop: 10, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 30, height: 4)
