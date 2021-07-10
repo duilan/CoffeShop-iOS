@@ -16,4 +16,5 @@ struct CustomColors {
     static let navbarTextColor = UIColor(named: "NavbarTextColor") ?? .gray
     static let tabbarBackgroundColor = backgroundColor
     static let tabbarTextColor = navbarTextColor
+    static let backgroundColorSecondary = UIColor(named: "backgroundColorSecondary") ?? .gray
 }
