@@ -24,9 +24,8 @@ class ProductDetailVC: UIViewController {
         table.backgroundColor = CustomColors.backgroundColor
         table.separatorInset = UIEdgeInsets.zero
         table.allowsSelection = false
-        table.register(CustomizeSizeCell.self, forCellReuseIdentifier: CustomizeSizeCell.cellID)
-        table.register(CustomizeSugarCell.self, forCellReuseIdentifier: CustomizeSugarCell.cellID)
-        table.register(CustomizeWhippedCreamCell.self, forCellReuseIdentifier: CustomizeWhippedCreamCell.cellID)
+        table.showsVerticalScrollIndicator = false
+        table.register(CustomizeProductCell.self, forCellReuseIdentifier: CustomizeProductCell.cellID)
         return table
     }()
     
@@ -97,7 +96,13 @@ class ProductDetailVC: UIViewController {
     
     private func setupAddToCartButton() {
         view.addSubview(addToCartButton)
+        addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
         addToCartButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 30, paddingRight: 30, paddingBottom: 30, width: 0, height: 50)
+    }
+    
+    @objc func addToCartButtonTapped() {
+        let selecciones = product.posibleCustomizations.getOptionsSelected()
+        print(selecciones)
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,63 +118,37 @@ extension ProductDetailVC: UITableViewDelegate {
         footer.layer.cornerRadius = 35
         footer.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         footer.clipsToBounds = true
-        footer.backgroundColor = UIColor.brown.withAlphaComponent(0.1)
+        footer.backgroundColor = CustomColors.backgroundColorSecondary
         return footer
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 70
     }
-    
-    @objc func optionTapped(_ sender:UISegmentedControl) {
-        #warning("remember! this need to save the selection of each custimization ")
-        var customType = ""
-        switch sender.tag {
-        case 0:
-            customType = "Size"
-        case 1:
-            customType = "Sugar"
-        case 2:
-            customType = "Whipped cream"
-        default:
-            customType = "sin customizations"
-        }
-        
-        presetCSAlertVC(title: "Selection", message: " \(customType): \(sender.selectedSegmentIndex) selected", buttonTitle: "OK")
-    }
 }
 
 extension ProductDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return product.posibleCustomizations.count
+        return product.posibleCustomizations.customizations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch product.posibleCustomizations[indexPath.row] {
-        case .size:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomizeSizeCell.cellID, for: indexPath)  as? CustomizeSizeCell else {
-                return CustomizeSizeCell(style: .default, reuseIdentifier: CustomizeSizeCell.cellID)
-            }
-            cell.segmentControl.tag = indexPath.row
-            cell.segmentControl.addTarget(self, action: #selector(optionTapped), for: .valueChanged)
-            return cell as UITableViewCell
-        case .sugar:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomizeSugarCell.cellID, for: indexPath)  as? CustomizeSugarCell else {
-                return CustomizeSugarCell(style: .default, reuseIdentifier: CustomizeSugarCell.cellID)
-            }
-            cell.segmentControl.tag = indexPath.row
-            cell.segmentControl.addTarget(self, action: #selector(optionTapped), for: .valueChanged)
-            return cell
-        case .cream:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomizeWhippedCreamCell.cellID, for: indexPath)  as? CustomizeWhippedCreamCell else {
-                return CustomizeWhippedCreamCell(style: .default, reuseIdentifier: CustomizeWhippedCreamCell.cellID)
-            }
-            cell.segmentControl.tag = indexPath.row
-            cell.segmentControl.addTarget(self, action: #selector(optionTapped), for: .valueChanged)
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomizeProductCell.cellID, for: indexPath)  as? CustomizeProductCell else {
+            return CustomizeProductCell(style: .default, reuseIdentifier: CustomizeProductCell.cellID)
         }
+        
+        let customization = product.posibleCustomizations.customizations[indexPath.row]
+        cell.configure(with: customization, identifier: indexPath.row)
+        cell.delegate = self
+        return cell as UITableViewCell
     }
     
+}
+
+extension ProductDetailVC: CustomizeProductCellProtocol {
+    func customizationSelected(type: CustomizationType, cellIndexPath: Int, IndexSelectection: Int) {
+        product.posibleCustomizations.customizations[cellIndexPath].optionSelected = IndexSelectection
+    }
 }
