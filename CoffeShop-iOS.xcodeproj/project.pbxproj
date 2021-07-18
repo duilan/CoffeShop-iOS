@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A0E510326A3D4EA0026077B /* CustomizeProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */; };
+		3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */; };
 		3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */; };
 		3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */; };
 		3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F8C267467020074E5C4 /* UIHelper.swift */; };
@@ -47,6 +48,7 @@
 /* Begin PBXFileReference section */
 		097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.release.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeProductCell.swift; sourceTree = "<group>"; };
+		3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomizations.swift; sourceTree = "<group>"; };
 		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
 		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
 		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -98,6 +100,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A0E510D26A3D9780026077B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3AC5877B268AD137007F339A /* ProductCell.swift */,
+				3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3A0E510E26A3D9E20026077B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A0E510F26A3D9F00026077B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A0E511026A3DA5F0026077B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3AFFBA04266C3FB000832381 /* OnboardingVC.swift */,
+				3A4B6D1326796C72005C921E /* RegisterVC.swift */,
+				3A1D33EF26806313007D3BF6 /* LoginVC.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3A0E511126A3DAAB0026077B /* Shops */ = {
+			isa = PBXGroup;
+			children = (
+				3AD047412690E5980086ED41 /* ProductDetailVC.swift */,
+				3AA835BA2686D44E00046DFE /* ProductListVC.swift */,
+				3A299E542686E281002EA597 /* ShopsVC.swift */,
+			);
+			path = Shops;
+			sourceTree = "<group>";
+		};
+		3A0E511326A3DAC20026077B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3A3C0F7726843182003B146A /* HomeVC.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3A0E511426A3DACA0026077B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3A80ABA52683058400E379EA /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		3A302708266AE83B00C465CE = {
 			isa = PBXGroup;
 			children = (
@@ -151,10 +214,9 @@
 				3A4B6D0C267963A3005C921E /* Buttons */,
 				3A4B6D102679645B005C921E /* Labels */,
 				3A50ADC9267C829A00C25D7A /* TextFields */,
-				3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */,
-				3AC5877B268AD137007F339A /* ProductCell.swift */,
-				3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */,
-				3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */,
+				3A0E510D26A3D9780026077B /* Cells */,
+				3A0E510E26A3D9E20026077B /* ViewControllers */,
+				3A0E510F26A3D9F00026077B /* Views */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -201,14 +263,10 @@
 		3A4B6D1126796541005C921E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				3AFFBA04266C3FB000832381 /* OnboardingVC.swift */,
-				3A4B6D1326796C72005C921E /* RegisterVC.swift */,
-				3AD047412690E5980086ED41 /* ProductDetailVC.swift */,
-				3A1D33EF26806313007D3BF6 /* LoginVC.swift */,
-				3A3C0F7726843182003B146A /* HomeVC.swift */,
-				3A80ABA52683058400E379EA /* ProfileVC.swift */,
-				3AA835BA2686D44E00046DFE /* ProductListVC.swift */,
-				3A299E542686E281002EA597 /* ShopsVC.swift */,
+				3A0E511026A3DA5F0026077B /* Onboarding */,
+				3A0E511126A3DAAB0026077B /* Shops */,
+				3A0E511326A3DAC20026077B /* Home */,
+				3A0E511426A3DACA0026077B /* Profile */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -226,6 +284,7 @@
 			children = (
 				3A96597B2686A68000F87FAA /* Product.swift */,
 				3A3B70142697AD6D00493D94 /* ProductModel.swift */,
+				3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,6 +423,7 @@
 				3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */,
 				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
 				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
+				3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
 				3AA835BB2686D44E00046DFE /* ProductListVC.swift in Sources */,
