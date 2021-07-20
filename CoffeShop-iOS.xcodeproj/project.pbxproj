@@ -26,6 +26,7 @@
 		3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A45F4BA267AEA8200A7940A /* CSTextField.swift */; };
 		3A4B6D052679618A005C921E /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B6D042679618A005C921E /* AssetManager.swift */; };
 		3A4B6D1426796C72005C921E /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B6D1326796C72005C921E /* RegisterVC.swift */; };
+		3A5D506726A60B6200751DB8 /* CSBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D506626A60B6200751DB8 /* CSBadgeView.swift */; };
 		3A72691026852C6700C8F3C7 /* CSAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */; };
 		3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7269122685569700C8F3C7 /* UIViewController+Ext.swift */; };
 		3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7700A426706C73006F4838 /* CSTitleLabel.swift */; };
@@ -68,6 +69,7 @@
 		3A45F4BA267AEA8200A7940A /* CSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTextField.swift; sourceTree = "<group>"; };
 		3A4B6D042679618A005C921E /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		3A4B6D1326796C72005C921E /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		3A5D506626A60B6200751DB8 /* CSBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSBadgeView.swift; sourceTree = "<group>"; };
 		3A72690F26852C6700C8F3C7 /* CSAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSAlertVC.swift; sourceTree = "<group>"; };
 		3A7269122685569700C8F3C7 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		3A7700A426706C73006F4838 /* CSTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSTitleLabel.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3B70112697A28000493D94 /* ProductTableHeaderView.swift */,
+				3A5D506626A60B6200751DB8 /* CSBadgeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */,
 				3A4B6D1426796C72005C921E /* RegisterVC.swift in Sources */,
 				3A813C8826856A3D005F552F /* CSButtonPlain.swift in Sources */,
+				3A5D506726A60B6200751DB8 /* CSBadgeView.swift in Sources */,
 				3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */,
 				3A96597C2686A68000F87FAA /* Product.swift in Sources */,
 				3A3C0F7826843182003B146A /* HomeVC.swift in Sources */,
