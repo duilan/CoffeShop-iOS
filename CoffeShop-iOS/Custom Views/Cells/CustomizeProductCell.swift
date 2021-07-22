@@ -52,7 +52,7 @@ class CustomizeProductCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         titleLabel.numberOfLines = 1
         titleLabel.textColor = CustomColors.textPrimaryColor
-        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         titleLabel.widthAnchor.constraint(equalToConstant: 130).isActive = true
@@ -80,7 +80,7 @@ class CustomizeProductCell: UITableViewCell {
         
         contentView.addSubview(segmentControl)
         segmentControl.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 0).isActive = true
-        segmentControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
+        segmentControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         segmentControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         segmentControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }

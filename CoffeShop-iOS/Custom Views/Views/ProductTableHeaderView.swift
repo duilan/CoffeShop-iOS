@@ -37,7 +37,7 @@ class ProductTableHeaderView: UIView {
     private lazy var detailContentView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = UIColor.brown.withAlphaComponent(0.1)
+        v.backgroundColor = CustomColors.backgroundColorSecondary
         v.layer.cornerRadius = 35
         v.layer.cornerCurve = .continuous
         v.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -48,6 +48,7 @@ class ProductTableHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = CustomColors.backgroundColor
         setupImageProductView()
         setupDetailContentView()
         setupStackInfo()
