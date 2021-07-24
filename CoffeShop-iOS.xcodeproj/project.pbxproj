@@ -42,6 +42,7 @@
 		3ABC193A267C624600796029 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC1939267C624600796029 /* UITextView+Ext.swift */; };
 		3AC5877C268AD137007F339A /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5877B268AD137007F339A /* ProductCell.swift */; };
 		3AD047422690E5980086ED41 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD047412690E5980086ED41 /* ProductDetailVC.swift */; };
+		3ADB705826AA202600ABD769 /* ProductQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */; };
 		3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA04266C3FB000832381 /* OnboardingVC.swift */; };
 		3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */; };
 		55160487507BDAD75AE8C8C5 /* Pods_CoffeShop_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */; };
@@ -86,6 +87,7 @@
 		3ABC1939267C624600796029 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		3AC5877B268AD137007F339A /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		3AD047412690E5980086ED41 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
+		3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductQuantityCell.swift; sourceTree = "<group>"; };
 		3AFFBA04266C3FB000832381 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOutline.swift; sourceTree = "<group>"; };
 		539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeShop_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +111,7 @@
 			children = (
 				3AC5877B268AD137007F339A /* ProductCell.swift */,
 				3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */,
+				3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */,
+				3ADB705826AA202600ABD769 /* ProductQuantityCell.swift in Sources */,
 				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
 				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
 				3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */,
