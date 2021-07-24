@@ -94,7 +94,7 @@ class ProductTableHeaderView: UIView {
     
     private func setupStackInfo() {
         addSubview(detailStack)
-        detailStack.anchor(top: topLine.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingLeft: 35, paddingRight: 35, paddingBottom: 20, width: 0, height: 0)
+        detailStack.anchor(top: topLine.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingLeft: 35, paddingRight: 35, paddingBottom: 10, width: 0, height: 0)
                 
         // name product
         detailStack.addArrangedSubview(nameProductLabel)
