@@ -15,8 +15,10 @@ class CustomizeProductCell: UITableViewCell {
     
     static let cellID = "CustomizeProductCell"
     private let titleLabel = CSTitleLabel(fontSize: 17, fontWeight: .semibold,textAlignment: .left)
-    var segmentControl = UISegmentedControl(frame: .zero)
-    private var contumization: Customization!
+    private let additionalPriceLabel = CSBodyLabel(fontSize: 12, fontWeight: .regular, textAlignment: .left)
+    private let segmentControl = UISegmentedControl(frame: .zero)
+    
+    private var customization: Customization!
     private var images: [UIImage] = []
     
     weak var delegate: CustomizeProductCellProtocol?
@@ -24,6 +26,7 @@ class CustomizeProductCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupTitleLabel()
+        setupAdditionalPriceLabel()
         setupSegmentControl()
     }
     
@@ -31,17 +34,18 @@ class CustomizeProductCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with custimization: Customization, identifier: Int ) {
-        contumization = custimization
-        titleLabel.text = custimization.type.rawValue
+    func configure(with customization: Customization, identifier: Int ) {
+        self.customization = customization
+        titleLabel.text = customization.type.rawValue
         segmentControl.tag = identifier
-        let  options = custimization.options
+        
+        let  options = customization.options
         segmentControl.removeAllSegments()
         for (i, option) in options.enumerated() {
             segmentControl.insertSegment(with: UIImage(named: option.id), at: i, animated: false)
         }
         
-        if let selected = custimization.optionSelected {
+        if let selected = customization.optionSelected {
             segmentControl.selectedSegmentIndex = selected
         }
         
@@ -58,10 +62,26 @@ class CustomizeProductCell: UITableViewCell {
         titleLabel.widthAnchor.constraint(equalToConstant: 130).isActive = true
     }
     
+    private func setupAdditionalPriceLabel() {
+        contentView.addSubview(additionalPriceLabel)
+        additionalPriceLabel.text = ""
+        additionalPriceLabel.numberOfLines = 1
+        additionalPriceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -5).isActive = true
+        additionalPriceLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 2).isActive = true
+        additionalPriceLabel.heightAnchor.constraint(equalToConstant: 14).isActive = true
+    }
+    
+    private func updateAdditionalPriceLabel() {
+        if let optionSelected = customization.optionSelected {
+            let option = customization.options[optionSelected]
+            additionalPriceLabel.text = option.price > 0 ? option.priceFormatted() : ""
+        }
+    }
+    
     @objc func tapped(_ sender: UISegmentedControl) {
-        contumization.optionSelected = sender.selectedSegmentIndex
-        
-        delegate?.customizationSelected(type: contumization.type, cellIndexPath: sender.tag, IndexSelectection: sender.selectedSegmentIndex)
+        customization.optionSelected = sender.selectedSegmentIndex
+        updateAdditionalPriceLabel()
+        delegate?.customizationSelected(type: customization.type, cellIndexPath: sender.tag, IndexSelectection: sender.selectedSegmentIndex)
     }
     
     private func setupSegmentControl()  {

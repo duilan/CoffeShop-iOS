@@ -29,6 +29,10 @@ struct CustomizationOption {
     let id: String
     let desc: String
     let price: Float
+    
+    func priceFormatted() -> String {
+        return String(format: "+$%.02f", price)
+    }
 }
 
 enum CustomizationType: String {
