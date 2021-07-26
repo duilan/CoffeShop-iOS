@@ -15,3 +15,13 @@ struct Product {
     var posibleCustomizations: ProductCustomizations
 }
 
+extension Product: Equatable {
+    static func == (lhs: Product, rhs: Product) -> Bool {
+        return lhs.name == rhs.name && lhs.price == rhs.price
+    }
+    
+    func priceFormatted() -> String {
+        return String(format: "$%.02f", price)
+    }
+}
+

@@ -68,7 +68,7 @@ class ProductTableHeaderView: UIView {
         // desc product
         descProductLabel.text = product.description
         //price product
-        priceProductLabel.text = String(format: "$%.02f", product.price)
+        priceProductLabel.text = product.priceFormatted()
     }
     
     private func setupImageProductView() {

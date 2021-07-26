@@ -42,7 +42,7 @@ class ProductCell: UITableViewCell {
     public func configure(with product: Product) {
         nameProductLabel.text = product.name
         descProductLabel.text = product.description
-        priceProductLabel.text = String(format: "$%.02f", product.price)
+        priceProductLabel.text = product.priceFormatted()
         //Image download using Kingfisher
         let url = URL(string: product.image_url)
         imageProductView.kf.indicatorType = .activity
