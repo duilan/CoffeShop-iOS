@@ -9,23 +9,34 @@ import UIKit
 
 class ProductDetailVC: UIViewController {
     
-    private let addToCartButton = CSButtonFilled("Add to cart", color: UIColor(red: 0.302, green: 0.624, blue: 0.533, alpha: 1))
+    private let addToCartButton = CSButtonAddToCart()
     private let headerForView = ProductTableHeaderView()
     
-    var product: Product
+    private var product: Product!
+    private var quantity: Int = 1
+    private var priceBaseProduct: Float = 0.0
+    private var subtotal: Float = 0.0
+    
+    private var total: Float = 0.0 {
+        didSet {
+            let textAmount = String(format: "$%.02f", total)
+            addToCartButton.setTitleAmount(textAmount)
+        }
+    }
     
     private lazy var  tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .plain)
         table.translatesAutoresizingMaskIntoConstraints = false
         table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 130, right: 0)
         table.delegate = self
         table.dataSource = self
         table.rowHeight = 80
-        table.backgroundColor = CustomColors.backgroundColor
+        table.backgroundColor = CustomColors.backgroundColorSecondary
         table.separatorInset = UIEdgeInsets.zero
         table.allowsSelection = false
         table.showsVerticalScrollIndicator = false
         table.register(CustomizeProductCell.self, forCellReuseIdentifier: CustomizeProductCell.cellID)
+        table.register(ProductQuantityCell.self, forCellReuseIdentifier: ProductQuantityCell.cellID)
         return table
     }()
     
@@ -38,20 +49,22 @@ class ProductDetailVC: UIViewController {
     }
     
     init(_ product: Product) {
-        self.product = product
         super.init(nibName: nil, bundle: nil)
+        self.product = product
+        self.priceBaseProduct = product.price
+        calculateTotalPrice()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         view.backgroundColor = CustomColors.backgroundColor
         title = "Detail"        
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         view.addSubview(tableView)
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
         
@@ -62,7 +75,7 @@ class ProductDetailVC: UIViewController {
         headerForView.topAnchor.constraint(equalTo: tableView.topAnchor).isActive = true
     }
     
-    func resizeTableHeaderView(){
+    private func resizeTableHeaderView(){
         guard let headerView = tableView.tableHeaderView else { return }
         //print("tamaño actual: \(headerView.frame.size.height)")
         let headerContentHeight = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
@@ -97,12 +110,13 @@ class ProductDetailVC: UIViewController {
     private func setupAddToCartButton() {
         view.addSubview(addToCartButton)
         addToCartButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
-        addToCartButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 30, paddingRight: 30, paddingBottom: 30, width: 0, height: 50)
+        addToCartButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 20, paddingRight: 20, paddingBottom: 30, width: 0, height: 50)
     }
     
-    @objc func addToCartButtonTapped() {
+    @objc private func addToCartButtonTapped() {
         let selecciones = product.posibleCustomizations.getOptionsSelected()
         print(selecciones)
+        print("subtotal\(subtotal),quantity\(quantity),total\(total)")
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,28 +126,51 @@ class ProductDetailVC: UIViewController {
 }
 
 extension ProductDetailVC: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView()
-        footer.layer.cornerRadius = 35
-        footer.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        footer.clipsToBounds = true
-        footer.backgroundColor = CustomColors.backgroundColorSecondary
-        return footer
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 0 {
+            return nil
+        } else {
+            let sectionHeaderView = SectionTitleTableView(title: "Customize")
+            return sectionHeaderView
+        }
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 70
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat.leastNormalMagnitude
+        }
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 50
+        }
+        return 80
     }
 }
 
 extension ProductDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return product.posibleCustomizations.customizations.count
+        if section == 0 {
+            return 1
+        }
+        return product.posibleCustomizations.customizations.count        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProductQuantityCell.cellID, for: indexPath) as! ProductQuantityCell
+            cell.delegate = self
+            return cell
+        }
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomizeProductCell.cellID, for: indexPath)  as? CustomizeProductCell else {
             return CustomizeProductCell(style: .default, reuseIdentifier: CustomizeProductCell.cellID)
@@ -145,10 +182,34 @@ extension ProductDetailVC: UITableViewDataSource {
         return cell as UITableViewCell
     }
     
+    func totalPriceCustomizationsSelected() -> Float {
+        var totalCustomizationsSelected: Float = 0
+        let customizations = product.posibleCustomizations.customizations
+        for customization in customizations {
+            if let Optionselected = customization.optionSelected {
+                let priceCustomizationSelected = customization.options[Optionselected].price
+                totalCustomizationsSelected += priceCustomizationSelected
+            }
+        }
+        return totalCustomizationsSelected
+    }
+    
+    func calculateTotalPrice() {
+        subtotal = priceBaseProduct + totalPriceCustomizationsSelected()
+        total = subtotal * Float(quantity)
+    }
 }
 
 extension ProductDetailVC: CustomizeProductCellProtocol {
     func customizationSelected(type: CustomizationType, cellIndexPath: Int, IndexSelectection: Int) {
         product.posibleCustomizations.customizations[cellIndexPath].optionSelected = IndexSelectection
+        calculateTotalPrice()
+    }
+}
+
+extension ProductDetailVC: ProductQuantityCellProtocol {
+    func quantityValueChanged(quantity: Int) {
+        self.quantity = quantity
+        calculateTotalPrice()
     }
 }
