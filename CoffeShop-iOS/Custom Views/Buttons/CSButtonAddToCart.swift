@@ -29,6 +29,7 @@ class CSButtonAddToCart: UIButton {
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         contentHorizontalAlignment = .right
+        clipsToBounds = true
         
         layoutMargins =  UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         contentEdgeInsets =  UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
@@ -50,7 +51,7 @@ class CSButtonAddToCart: UIButton {
         titleAmount.textColor = .white
         titleAmount.font = UIFont.preferredFont(forTextStyle: .headline)
         titleAmount.translatesAutoresizingMaskIntoConstraints = false
-        titleAmount.anchor(top: layoutMarginsGuide.topAnchor, left: layoutMarginsGuide.leadingAnchor, right: trailingAnchor, bottom: bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
+        titleAmount.anchor(top: layoutMarginsGuide.topAnchor, left: layoutMarginsGuide.leadingAnchor, right: layoutMarginsGuide.trailingAnchor, bottom: bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
     
     override func layoutSublayers(of layer: CALayer) {
