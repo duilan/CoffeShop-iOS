@@ -64,10 +64,12 @@ class ProductQuantityCell: UITableViewCell {
     
     @objc private func decreaseButtonTapped() {
         if quantity > 1 { quantity -= 1 }
+        decreaseButton.pulseAnimation()
     }
     
     @objc private func increaseButtonTapped() {
         quantity += 1
+        increaseButton.pulseAnimation()
     }
     
     private func setupUI() {
