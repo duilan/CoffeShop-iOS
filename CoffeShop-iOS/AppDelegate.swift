@@ -33,8 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appearance = UINavigationBarAppearance()
         
         // Remove border and shadow bottom
-        appearance.shadowImage = UIImage()
-        appearance.shadowColor = .none
+        //appearance.shadowImage = UIImage()
+        //appearance.shadowColor = .none
+        appearance.configureWithTransparentBackground()
         
         // Back Indicator Image
         let backIndicatorImage = UIImage(named: AssetManager.backIndicator)
