@@ -38,13 +38,9 @@ extension UIView {
     
     // MARK: -  Animations    
     func pulseAnimation() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        },
-        completion: { _ in
-            UIView.animate(withDuration: 0.2) {
-                self.transform = CGAffineTransform.identity
-            }
+        self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
+            self.transform = CGAffineTransform.identity
         })
     }
     
