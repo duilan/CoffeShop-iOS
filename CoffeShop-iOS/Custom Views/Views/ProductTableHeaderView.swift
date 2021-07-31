@@ -62,7 +62,16 @@ class ProductTableHeaderView: UIView {
         // Image product
         let urlImage = URL(string: product.image_detail_url)
         ImageProductView.kf.indicatorType = .activity
-        ImageProductView.kf.setImage(with: urlImage, options: [.transition(.fade(0.2))])
+        ImageProductView.kf.setImage(with: urlImage) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async { self.ImageProductView.popInCenterAnimation() }
+            case .failure(_):
+                print("Error product image animation")
+            }
+        }
+        
         // name product
         nameProductLabel.text = product.name
         // desc product
@@ -95,7 +104,7 @@ class ProductTableHeaderView: UIView {
     private func setupStackInfo() {
         addSubview(detailStack)
         detailStack.anchor(top: topLine.topAnchor, left: self.leadingAnchor, right: self.trailingAnchor, bottom: self.bottomAnchor, paddingTop: 10, paddingLeft: 35, paddingRight: 35, paddingBottom: 10, width: 0, height: 0)
-                
+        
         // name product
         detailStack.addArrangedSubview(nameProductLabel)
         nameProductLabel.textColor = CustomColors.textPrimaryColor
@@ -105,7 +114,5 @@ class ProductTableHeaderView: UIView {
         detailStack.addArrangedSubview(priceProductLabel)
         priceProductLabel.textColor = UIColor(red: 0.016, green: 0.455, blue: 0.29, alpha: 1)
     }
-    
-   
     
 }
