@@ -48,4 +48,13 @@ extension UIView {
         })
     }
     
+    func popInCenterAnimation() {
+        transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        layer.opacity = 0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.layer.opacity = 1
+            self.transform = CGAffineTransform.identity
+        })
+    }
+    
 }
