@@ -12,13 +12,11 @@ class ShopAnnotationView: MKAnnotationView {
     
     static let annotationID = "ShopAnnotationView"
     
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                image = UIImage(named: "shopPinSelected")
-            } else {
-                image = UIImage(named: "shopPinUnselected")
-            }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        if selected {
+            image = UIImage(named: "shopPinSelected")
+        } else {
+            image = UIImage(named: "shopPinUnselected")
         }
     }
     
