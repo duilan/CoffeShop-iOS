@@ -14,13 +14,15 @@ class ShopsVC: UIViewController {
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
+    let shopModel = ShopModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupMapView()
-        // simulateStoreTappedInmap()
+        simulateStoreTappedInmap()
         checkLocationServices()
+        showCoffeShopsOnMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,15 +81,14 @@ class ShopsVC: UIViewController {
     private func centerMapViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
             centerMapOn(location: location, zoom: regionInMeters)
-        }
-        fetchCoffeShops()
+        }        
     }
     
     private func simulateStoreTappedInmap() {
         #warning("THIS IS TEMPORAL just simulate a jump to ProductListVC of a store in map")
         let btn = CSButtonFilled("Store Tapped!")
         view.addSubview(btn)
-        btn.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        btn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         btn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
@@ -109,47 +110,29 @@ class ShopsVC: UIViewController {
         
     }
     
-    private func fetchCoffeShops() {
+    private func showCoffeShopsOnMap() {
         
-        struct Location {
-            let title: String
-            let latitude: Double
-            let longitude: Double
-        }
-        
-        let locations = [
-            Location(title: "Calle Santo Tomás, Cuauhtémoc, 06060 Ciudad de México, México",    latitude: 19.427271821196612, longitude: -99.12627266528202),
-            Location(title: "Viaducto Presidente Miguel Alemán, Piedad Narvarte, 03000 Ciudad de México, México", latitude: 19.4038828686858, longitude: -99.15681399541693),
-            Location(title: "Calle Sur 109, Aeronáutica militar, 15970 Ciudad de México, México",     latitude: 19.42111096383475, longitude: -99.11528777258876)
-        ]
-        
-        let annotations = locations.map { location -> MKAnnotation in
+        let coffeShops = shopModel.shops
+        let annotations = coffeShops.map { shop -> MKAnnotation in
             let annotation = MKPointAnnotation()
-            annotation.title = location.title            
-            annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-            
+            annotation.title = shop.name
+            annotation.coordinate = CLLocationCoordinate2D(latitude: shop.latitude, longitude: shop.longitude)
             return annotation
         }
-        
         mapView.addAnnotations(annotations)
     }
     
 }
 
 extension ShopsVC: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-    }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        view.isSelected = true
         if let annotation = view.annotation {
             centerMapOn(location: annotation.coordinate)
         }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         if annotation.isKind(of: MKUserLocation.self) { return nil }
         
         let shopView = mapView.dequeueReusableAnnotationView(withIdentifier: ShopAnnotationView.annotationID, for: annotation)
