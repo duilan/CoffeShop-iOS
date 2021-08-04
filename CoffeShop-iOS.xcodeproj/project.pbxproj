@@ -45,6 +45,8 @@
 		3AC5877C268AD137007F339A /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5877B268AD137007F339A /* ProductCell.swift */; };
 		3AD047422690E5980086ED41 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD047412690E5980086ED41 /* ProductDetailVC.swift */; };
 		3ADB705826AA202600ABD769 /* ProductQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */; };
+		3AF0B89326BA13D00095479E /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0B89226BA13D00095479E /* Shop.swift */; };
+		3AF0B89626BA15E80095479E /* ShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0B89526BA15E80095479E /* ShopModel.swift */; };
 		3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA04266C3FB000832381 /* OnboardingVC.swift */; };
 		3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */; };
 		55160487507BDAD75AE8C8C5 /* Pods_CoffeShop_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */; };
@@ -92,6 +94,8 @@
 		3AC5877B268AD137007F339A /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		3AD047412690E5980086ED41 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductQuantityCell.swift; sourceTree = "<group>"; };
+		3AF0B89226BA13D00095479E /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		3AF0B89526BA15E80095479E /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
 		3AFFBA04266C3FB000832381 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOutline.swift; sourceTree = "<group>"; };
 		539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeShop_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +311,8 @@
 			children = (
 				3A96597B2686A68000F87FAA /* Product.swift */,
 				3A3B70142697AD6D00493D94 /* ProductModel.swift */,
+				3AF0B89226BA13D00095479E /* Shop.swift */,
+				3AF0B89526BA15E80095479E /* ShopModel.swift */,
 				3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */,
 			);
 			path = Model;
@@ -448,6 +454,7 @@
 				3ADB705826AA202600ABD769 /* ProductQuantityCell.swift in Sources */,
 				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
 				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
+				3AF0B89626BA15E80095479E /* ShopModel.swift in Sources */,
 				3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
@@ -476,6 +483,7 @@
 				3A813C8826856A3D005F552F /* CSButtonPlain.swift in Sources */,
 				3A5D506726A60B6200751DB8 /* CSBadgeView.swift in Sources */,
 				3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */,
+				3AF0B89326BA13D00095479E /* Shop.swift in Sources */,
 				3A96597C2686A68000F87FAA /* Product.swift in Sources */,
 				3A3C0F7826843182003B146A /* HomeVC.swift in Sources */,
 				3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */,
