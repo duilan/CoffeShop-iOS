@@ -11,25 +11,35 @@ import CoreLocation
 
 class ShopsVC: UIViewController {
     
+    // MARK: -  Properties
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
     let shopModel = ShopModel()
+    let shopInfoView = CSShopInfoView()
     
+    // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupMapView()
-        simulateStoreTappedInmap()
         checkLocationServices()
         showCoffeShopsOnMap()
+        setupShopInfoView()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         checkLocationServices()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    // MARK: -  Private Methods
     private func setup() {
         title = "Shops"
         view.backgroundColor = CustomColors.backgroundColor
@@ -40,6 +50,8 @@ class ShopsVC: UIViewController {
     private func setupMapView(){
         view.addSubview(mapView)
         mapView.delegate = self
+        mapView.isRotateEnabled = false
+        mapView.showsCompass = false
         mapView.register(ShopAnnotationView.self, forAnnotationViewWithReuseIdentifier: ShopAnnotationView.annotationID)
         mapView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
@@ -84,17 +96,18 @@ class ShopsVC: UIViewController {
         }        
     }
     
-    private func simulateStoreTappedInmap() {
-        #warning("THIS IS TEMPORAL just simulate a jump to ProductListVC of a store in map")
-        let btn = CSButtonFilled("Store Tapped!")
-        view.addSubview(btn)
-        btn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        btn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        btn.addTarget(self, action: #selector(goToProductList), for: .touchUpInside)
+    private func setupShopInfoView() {
+        view.addSubview(shopInfoView)
+        shopInfoView.isHidden = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToProductList))
+        shopInfoView.addGestureRecognizer(tapGesture)
+        shopInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        shopInfoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        shopInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        shopInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }
-    
+       
     @objc private func goToProductList() {
         #warning("THIS IS TEMPORAL just simulate a jump to ProductListVC of a store in map")
         navigationController?.pushViewController(ProductListVC(), animated: true)
@@ -111,12 +124,10 @@ class ShopsVC: UIViewController {
     }
     
     private func showCoffeShopsOnMap() {
-        
         let coffeShops = shopModel.shops
-        let annotations = coffeShops.map { shop -> MKAnnotation in
-            let annotation = MKPointAnnotation()
-            annotation.title = shop.name
-            annotation.coordinate = CLLocationCoordinate2D(latitude: shop.latitude, longitude: shop.longitude)
+        let annotations = coffeShops.map { shop -> ShopAnnotationPoint in
+            let annotation = ShopAnnotationPoint()
+            annotation.configure(with: shop)
             return annotation
         }
         mapView.addAnnotations(annotations)
@@ -124,12 +135,23 @@ class ShopsVC: UIViewController {
     
 }
 
+// MARK: -  MKMapViewDelegate
 extension ShopsVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if let annotation = view.annotation {
+        guard let  annotation = view.annotation as? ShopAnnotationPoint else { return }
+        
+        if let shop = shopModel.getShopBy(id: annotation.identifier) {
+            shopInfoView.setInfo(shop: shop)
             centerMapOn(location: annotation.coordinate)
+            shopInfoView.pulseAnimation()
+            shopInfoView.isHidden = false
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        shopInfoView.pulseAnimation()
+        shopInfoView.isHidden = true
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -140,6 +162,7 @@ extension ShopsVC: MKMapViewDelegate {
     }
 }
 
+// MARK: -  CLLocationManagerDelegate
 extension ShopsVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
