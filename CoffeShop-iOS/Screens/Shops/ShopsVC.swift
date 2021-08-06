@@ -25,7 +25,7 @@ class ShopsVC: UIViewController {
         setupMapView()
         checkLocationServices()
         showCoffeShopsOnMap()
-        setupShopInfoView()        
+        setupShopInfoView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +98,7 @@ class ShopsVC: UIViewController {
     
     private func setupShopInfoView() {
         view.addSubview(shopInfoView)
-        shopInfoView.isHidden = true
+        shopInfoView.layer.opacity = 0
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToProductList))
         shopInfoView.addGestureRecognizer(tapGesture)
@@ -144,14 +144,12 @@ extension ShopsVC: MKMapViewDelegate {
         if let shop = shopModel.getShopBy(id: annotation.identifier) {
             shopInfoView.setInfo(shop: shop)
             centerMapOn(location: annotation.coordinate)
-            shopInfoView.pulseAnimation()
-            shopInfoView.isHidden = false
+            shopInfoView.slideInBottomAnimation()
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        shopInfoView.pulseAnimation()
-        shopInfoView.isHidden = true
+        shopInfoView.slideOutBottomAnimation()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
