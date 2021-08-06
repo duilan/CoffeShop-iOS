@@ -53,4 +53,21 @@ extension UIView {
         })
     }
     
+    func slideInBottomAnimation() {
+        self.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+        self.layer.opacity = 1
+        UIView.animate(withDuration: 0.4, animations: {
+            self.transform = .identity
+        })
+    }
+    
+    func slideOutBottomAnimation() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: self.frame.height)
+            self.layer.opacity = 0
+        }) { _ in
+            self.transform = .identity
+        }
+    }
+    
 }
