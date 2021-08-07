@@ -60,8 +60,6 @@ extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productSelected = productModel.products[indexPath.row]
         let productDetailVC = ProductDetailVC(productSelected)
-        
-        productDetailVC.modalPresentationStyle = .overFullScreen
         DispatchQueue.main.async {
             self.navigationController?.present(productDetailVC, animated: true)
         }
