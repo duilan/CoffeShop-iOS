@@ -12,12 +12,12 @@ import CoreLocation
 class ShopsVC: UIViewController {
     
     // MARK: -  Properties
-    let mapView = MKMapView()
-    let locationManager = CLLocationManager()
-    let regionInMeters: Double = 10000
-    let shopModel = ShopModel()
-    let shopInfoView = CSShopInfoView()
-    let myLocationButton = UIButton()
+    private let mapView = MKMapView()
+    private let locationManager = CLLocationManager()
+    private let regionInMeters: Double = 3000
+    private let shopModel = ShopModel()
+    private let shopInfoView = CSShopInfoView()
+    private let myLocationButton = UIButton()
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
@@ -49,30 +49,6 @@ class ShopsVC: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
-    private func setupMapView(){
-        view.addSubview(mapView)
-        mapView.delegate = self
-        mapView.isRotateEnabled = false
-        mapView.showsCompass = false
-        mapView.register(ShopAnnotationView.self, forAnnotationViewWithReuseIdentifier: ShopAnnotationView.annotationID)
-        mapView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
-    }
-    
-    private func setupMyLocationButton() {
-        view.addSubview(myLocationButton)        
-        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
-        myLocationButton.backgroundColor = CustomColors.backgroundColor
-        myLocationButton.tintColor = UIColor(red: 0.297, green: 0.679, blue: 0.452, alpha: 1)
-        myLocationButton.clipsToBounds = true
-        myLocationButton.layer.cornerRadius = 25
-        let icon = UIImage(systemName: "location",
-                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .black))
-        myLocationButton.setImage(icon, for: .normal)
-        
-        myLocationButton.addTarget(self, action: #selector(centerMapViewOnUserLocation), for: .touchUpInside)
-        myLocationButton.anchor(top: mapView.topAnchor, left: nil, right: mapView.trailingAnchor, bottom: nil, paddingTop: 30, paddingLeft: 0, paddingRight: 15, paddingBottom: 0, width: 50, height: 50)
-    }
-    
     private func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
@@ -84,7 +60,7 @@ class ShopsVC: UIViewController {
     
     private func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
     }
     
     private func checkLocationAuthorization() {
@@ -114,20 +90,8 @@ class ShopsVC: UIViewController {
         }
     }
     
-    private func setupShopInfoView() {
-        view.addSubview(shopInfoView)
-        shopInfoView.layer.opacity = 0
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToProductList))
-        shopInfoView.addGestureRecognizer(tapGesture)
-        shopInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        shopInfoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        shopInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        shopInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-    }
-    
     @objc private func goToProductList() {
-        #warning("THIS IS TEMPORAL just simulate a jump to ProductListVC of a store in map")
+        #warning("it needs to send a store id to the productListVC")
         navigationController?.pushViewController(ProductListVC(), animated: true)
     }
     
@@ -149,6 +113,44 @@ class ShopsVC: UIViewController {
             return annotation
         }
         mapView.addAnnotations(annotations)
+    }
+    
+    // MARK: -  Setup Views and Components
+    private func setupMapView(){
+        view.addSubview(mapView)
+        mapView.delegate = self
+        mapView.isRotateEnabled = false
+        mapView.showsCompass = false
+        mapView.pointOfInterestFilter = MKPointOfInterestFilter(including: [])
+        mapView.register(ShopAnnotationView.self, forAnnotationViewWithReuseIdentifier: ShopAnnotationView.annotationID)
+        mapView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
+    }
+    
+    private func setupMyLocationButton() {
+        view.addSubview(myLocationButton)
+        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        myLocationButton.backgroundColor = CustomColors.backgroundColor
+        myLocationButton.tintColor = UIColor(red: 0.297, green: 0.679, blue: 0.452, alpha: 1)
+        myLocationButton.clipsToBounds = true
+        myLocationButton.layer.cornerRadius = 25
+        let icon = UIImage(systemName: "location",
+                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .black))
+        myLocationButton.setImage(icon, for: .normal)
+        
+        myLocationButton.addTarget(self, action: #selector(centerMapViewOnUserLocation), for: .touchUpInside)
+        myLocationButton.anchor(top: mapView.safeAreaLayoutGuide.topAnchor, left: nil, right: mapView.trailingAnchor, bottom: nil, paddingTop: 15, paddingLeft: 0, paddingRight: 15, paddingBottom: 0, width: 50, height: 50)
+    }
+    
+    private func setupShopInfoView() {
+        view.addSubview(shopInfoView)
+        shopInfoView.layer.opacity = 0
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToProductList))
+        shopInfoView.addGestureRecognizer(tapGesture)
+        shopInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        shopInfoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        shopInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        shopInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }
     
 }
