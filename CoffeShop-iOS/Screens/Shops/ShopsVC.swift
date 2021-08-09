@@ -17,12 +17,14 @@ class ShopsVC: UIViewController {
     let regionInMeters: Double = 10000
     let shopModel = ShopModel()
     let shopInfoView = CSShopInfoView()
+    let myLocationButton = UIButton()
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupMapView()
+        setupMyLocationButton()
         checkLocationServices()
         showCoffeShopsOnMap()
         setupShopInfoView()
@@ -54,6 +56,21 @@ class ShopsVC: UIViewController {
         mapView.showsCompass = false
         mapView.register(ShopAnnotationView.self, forAnnotationViewWithReuseIdentifier: ShopAnnotationView.annotationID)
         mapView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
+    }
+    
+    private func setupMyLocationButton() {
+        view.addSubview(myLocationButton)        
+        myLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        myLocationButton.backgroundColor = CustomColors.backgroundColor
+        myLocationButton.tintColor = UIColor(red: 0.297, green: 0.679, blue: 0.452, alpha: 1)
+        myLocationButton.clipsToBounds = true
+        myLocationButton.layer.cornerRadius = 25
+        let icon = UIImage(systemName: "location",
+                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .black))
+        myLocationButton.setImage(icon, for: .normal)
+        
+        myLocationButton.addTarget(self, action: #selector(centerMapViewOnUserLocation), for: .touchUpInside)
+        myLocationButton.anchor(top: mapView.topAnchor, left: nil, right: mapView.trailingAnchor, bottom: nil, paddingTop: 30, paddingLeft: 0, paddingRight: 15, paddingBottom: 0, width: 50, height: 50)
     }
     
     private func checkLocationServices() {
@@ -90,10 +107,11 @@ class ShopsVC: UIViewController {
         }
     }
     
-    private func centerMapViewOnUserLocation() {
+    @objc private func centerMapViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
+            myLocationButton.pulseAnimation()
             centerMapOn(location: location, zoom: regionInMeters)
-        }        
+        }
     }
     
     private func setupShopInfoView() {
@@ -107,7 +125,7 @@ class ShopsVC: UIViewController {
         shopInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         shopInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }
-       
+    
     @objc private func goToProductList() {
         #warning("THIS IS TEMPORAL just simulate a jump to ProductListVC of a store in map")
         navigationController?.pushViewController(ProductListVC(), animated: true)
@@ -145,6 +163,7 @@ extension ShopsVC: MKMapViewDelegate {
             shopInfoView.setInfo(shop: shop)
             centerMapOn(location: annotation.coordinate)
             shopInfoView.slideInBottomAnimation()
+            view.pulseAnimation()
         }
     }
     
