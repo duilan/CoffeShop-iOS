@@ -18,16 +18,17 @@ class ShopsVC: UIViewController {
     private let shopModel = ShopModel()
     private let shopInfoView = CSShopInfoView()
     private let myLocationButton = UIButton()
+    private var shopSelected: Shop?
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupMapView()
+        setupShopInfoView()
         setupMyLocationButton()
         checkLocationServices()
         showCoffeShopsOnMap()
-        setupShopInfoView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,13 +43,6 @@ class ShopsVC: UIViewController {
     }
     
     // MARK: -  Private Methods
-    private func setup() {
-        title = "Shops"
-        view.backgroundColor = CustomColors.backgroundColor
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.largeTitleDisplayMode = .never
-    }
-    
     private func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
@@ -65,16 +59,10 @@ class ShopsVC: UIViewController {
     
     private func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
-        
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            break
-        case .denied:
-            break
-        case .authorizedAlways:
-            //mapView.showsUserLocation = true
-            break
+        case .notDetermined: locationManager.requestWhenInUseAuthorization()
+        case .restricted: break
+        case .denied: break
+        case .authorizedAlways: break
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
             centerMapViewOnUserLocation()
@@ -91,8 +79,9 @@ class ShopsVC: UIViewController {
     }
     
     @objc private func goToProductList() {
-        #warning("it needs to send a store id to the productListVC")
-        navigationController?.pushViewController(ProductListVC(), animated: true)
+        guard let shopSelected = shopSelected else { return }
+        navigationItem.title = shopSelected.name
+        navigationController?.pushViewController(ProductListVC(shop: shopSelected), animated: true)
     }
     
     private func centerMapOn(location: CLLocationCoordinate2D , zoom: Double? = nil ) {
@@ -116,6 +105,14 @@ class ShopsVC: UIViewController {
     }
     
     // MARK: -  Setup Views and Components
+    
+    private func setup() {
+        title = "Shops"
+        view.backgroundColor = CustomColors.backgroundColor
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
     private func setupMapView(){
         view.addSubview(mapView)
         mapView.delegate = self
@@ -162,6 +159,7 @@ extension ShopsVC: MKMapViewDelegate {
         guard let  annotation = view.annotation as? ShopAnnotationPoint else { return }
         
         if let shop = shopModel.getShopBy(id: annotation.identifier) {
+            shopSelected = shop
             shopInfoView.setInfo(shop: shop)
             centerMapOn(location: annotation.coordinate)
             shopInfoView.slideInBottomAnimation()

@@ -12,12 +12,22 @@ class ProductListVC: UIViewController {
     // MARK: -  Properties
     private let tableView = UITableView()
     private var productModel = ProductModel()
+    private let shopSelected: Shop
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupTableView()
+    }
+    
+    init(shop: Shop) {
+        self.shopSelected = shop
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: -  Methods
@@ -60,6 +70,7 @@ extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productSelected = productModel.products[indexPath.row]
         let productDetailVC = ProductDetailVC(productSelected)
+        productDetailVC.modalPresentationStyle = .overFullScreen
         DispatchQueue.main.async {
             self.navigationController?.present(productDetailVC, animated: true)
         }
