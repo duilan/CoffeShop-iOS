@@ -118,7 +118,7 @@ class ShopsVC: UIViewController {
         mapView.delegate = self
         mapView.isRotateEnabled = false
         mapView.showsCompass = false
-        mapView.pointOfInterestFilter = MKPointOfInterestFilter(including: [])
+        mapView.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
         mapView.register(ShopAnnotationView.self, forAnnotationViewWithReuseIdentifier: ShopAnnotationView.annotationID)
         mapView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
