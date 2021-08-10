@@ -8,6 +8,8 @@ target 'CoffeShop-iOS' do
   # Firebase
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  ## for codable extensions
+  pod 'FirebaseFirestoreSwift', '8.5.0-beta'
   # Kingfisher
   pod 'Kingfisher', '~> 6.0'
 
