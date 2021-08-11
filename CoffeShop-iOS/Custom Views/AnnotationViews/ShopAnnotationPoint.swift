@@ -15,6 +15,9 @@ class ShopAnnotationPoint : MKPointAnnotation {
     func configure(with shop: Shop) {
         identifier = shop.id
         title = shop.name
-        coordinate = CLLocationCoordinate2D(latitude: shop.latitude, longitude: shop.longitude)
+        let latitude: CLLocationDegrees = shop.location.latitude
+        let longitude: CLLocationDegrees = shop.location.longitude
+        print(latitude,longitude)
+        coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }

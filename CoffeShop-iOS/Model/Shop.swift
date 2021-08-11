@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-struct Shop {
-    let id: String
+struct Shop: Codable {
+    @DocumentID var id: String?    
     let name: String
     let address: String
-    let latitude: Double
-    let longitude: Double
+    let location: GeoPoint
 }
