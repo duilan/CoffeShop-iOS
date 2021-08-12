@@ -181,10 +181,16 @@ extension ShopsVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation.isKind(of: MKUserLocation.self) { return nil }
-        
-        let shopView = mapView.dequeueReusableAnnotationView(withIdentifier: ShopAnnotationView.annotationID, for: annotation)
-        return shopView
+        switch annotation {
+        case is ShopAnnotationPoint:
+            let shopView = mapView.dequeueReusableAnnotationView(withIdentifier: ShopAnnotationView.annotationID, for: annotation)
+            return shopView
+        case is MKUserLocation:
+            // custom or default userlocation view
+            return nil
+        default:
+            return nil
+        }
     }
 }
 
