@@ -19,6 +19,7 @@ class ShopsVC: UIViewController {
     private let shopInfoView = CSShopInfoView()
     private let myLocationButton = UIButton()
     private var shopSelected: Shop?
+    private var coffeShops = [Shop]()
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class ShopsVC: UIViewController {
         setupShopInfoView()
         setupMyLocationButton()
         checkLocationServices()
-        showCoffeShopsOnMap()
+        loadCoffeShops()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,13 +95,21 @@ class ShopsVC: UIViewController {
         
     }
     
-    private func showCoffeShopsOnMap() {
-        let coffeShops = shopModel.shops
+    private func loadCoffeShops() {
+        shopModel.getShops { [weak self] (result) in
+            self?.coffeShops = result
+            self?.addShopAnnotationsOnMap()
+        }
+    }
+    
+    private func addShopAnnotationsOnMap() {
+        let coffeShops = self.coffeShops
         let annotations = coffeShops.map { shop -> ShopAnnotationPoint in
             let annotation = ShopAnnotationPoint()
             annotation.configure(with: shop)
             return annotation
         }
+        mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotations(annotations)
     }
     
@@ -158,7 +167,7 @@ extension ShopsVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let  annotation = view.annotation as? ShopAnnotationPoint else { return }
         
-        if let shop = shopModel.getShopBy(id: annotation.identifier) {
+        if let shop = annotation.shopDetail {
             shopSelected = shop
             shopInfoView.setInfo(shop: shop)
             centerMapOn(location: annotation.coordinate)
