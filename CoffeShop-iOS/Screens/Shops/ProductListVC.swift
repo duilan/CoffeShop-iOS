@@ -12,6 +12,7 @@ class ProductListVC: UIViewController {
     // MARK: -  Properties
     private let tableView = UITableView()
     private var productModel = ProductModel()
+    private var products: [Product] = []
     private let shopSelected: Shop
     
     // MARK: -  Lifecycle
@@ -19,6 +20,11 @@ class ProductListVC: UIViewController {
         super.viewDidLoad()
         setup()
         setupTableView()
+        productModel.getProducts { [weak self] (products) in
+            guard let self = self else { return}
+            self.products = products
+            self.tableView.reloadData()
+        }
     }
     
     init(shop: Shop) {
@@ -53,7 +59,7 @@ class ProductListVC: UIViewController {
 extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productModel.products.count
+        return products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,13 +68,13 @@ extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
             return ProductCell(style: .default, reuseIdentifier: ProductCell.cellID)
         }
         
-        let product = productModel.products[indexPath.row]
+        let product = products[indexPath.row]
         cell.configure(with: product)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productSelected = productModel.products[indexPath.row]
+        let productSelected = products[indexPath.row]
         let productDetailVC = ProductDetailVC(productSelected)
         productDetailVC.modalPresentationStyle = .overFullScreen
         DispatchQueue.main.async {

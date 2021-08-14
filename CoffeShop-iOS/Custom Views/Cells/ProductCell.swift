@@ -44,7 +44,7 @@ class ProductCell: UITableViewCell {
         descProductLabel.text = product.description
         priceProductLabel.text = product.priceFormatted()
         //Image download using Kingfisher
-        let url = URL(string: product.image_url)
+        let url = URL(string: product.image)
         imageProductView.kf.indicatorType = .activity
         imageProductView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
     }

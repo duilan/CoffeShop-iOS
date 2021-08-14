@@ -14,10 +14,10 @@ class ProductDetailVC: UIViewController {
     
     private var product: Product!
     private var quantity: Int = 1
-    private var priceBaseProduct: Float = 0.0
-    private var subtotal: Float = 0.0
+    private var priceBaseProduct: Double = 0.0
+    private var subtotal: Double = 0.0
     
-    private var total: Float = 0.0 {
+    private var total: Double = 0.0 {
         didSet {
             let textAmount = String(format: "$%.02f", total)
             addToCartButton.setTitleAmount(textAmount)
@@ -114,7 +114,7 @@ class ProductDetailVC: UIViewController {
     }
     
     @objc private func addToCartButtonTapped() {
-        let selecciones = product.posibleCustomizations.getOptionsSelected()
+        let selecciones = product.getCustomizationsOptionsSelected()
         print(selecciones)
         print("subtotal\(subtotal),quantity\(quantity),total\(total)")
     }
@@ -157,7 +157,7 @@ extension ProductDetailVC: UITableViewDataSource {
         if section == 0 {
             return 1
         }
-        return product.posibleCustomizations.customizations.count        
+        return product.customizations.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -176,33 +176,32 @@ extension ProductDetailVC: UITableViewDataSource {
             return CustomizeProductCell(style: .default, reuseIdentifier: CustomizeProductCell.cellID)
         }
         
-        let customization = product.posibleCustomizations.customizations[indexPath.row]
+        let customization = product.customizations[indexPath.row]
         cell.configure(with: customization, identifier: indexPath.row)
         cell.delegate = self
         return cell as UITableViewCell
     }
     
-    func totalPriceCustomizationsSelected() -> Float {
-        var totalCustomizationsSelected: Float = 0
-        let customizations = product.posibleCustomizations.customizations
-        for customization in customizations {
-            if let Optionselected = customization.optionSelected {
-                let priceCustomizationSelected = customization.options[Optionselected].price
-                totalCustomizationsSelected += priceCustomizationSelected
-            }
+    func totalPriceCustomizationsSelected() -> Double {
+        var totalCustomizationsSelected: Double = 0
+        for customization in product.customizations {
+            let Optionselected = customization.optionSelected
+            let priceCustomizationSelected = customization.options[Optionselected].price
+            totalCustomizationsSelected += priceCustomizationSelected
+            
         }
         return totalCustomizationsSelected
     }
     
     func calculateTotalPrice() {
         subtotal = priceBaseProduct + totalPriceCustomizationsSelected()
-        total = subtotal * Float(quantity)
+        total = subtotal * Double(quantity)
     }
 }
 
 extension ProductDetailVC: CustomizeProductCellProtocol {
-    func customizationSelected(type: CustomizationType, cellIndexPath: Int, IndexSelectection: Int) {
-        product.posibleCustomizations.customizations[cellIndexPath].optionSelected = IndexSelectection
+    func customizationSelected(type: String, cellIndexPath: Int, IndexSelectection: Int) {
+        product.customizations[cellIndexPath].optionSelected = IndexSelectection
         calculateTotalPrice()
     }
 }

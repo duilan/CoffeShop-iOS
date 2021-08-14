@@ -58,9 +58,9 @@ class ProductTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with product: Product ) {        
+    func configure(with product: Product ) {
         // Image product
-        let urlImage = URL(string: product.image_detail_url)
+        let urlImage = URL(string: product.imageDetail)
         ImageProductView.kf.indicatorType = .activity
         ImageProductView.kf.setImage(with: urlImage) { [weak self] result in
             guard let self = self else { return }

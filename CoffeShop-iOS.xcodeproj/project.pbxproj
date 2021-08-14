@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A0E510326A3D4EA0026077B /* CustomizeProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */; };
-		3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */; };
 		3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */; };
 		3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */; };
 		3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F8C267467020074E5C4 /* UIHelper.swift */; };
@@ -57,7 +56,6 @@
 /* Begin PBXFileReference section */
 		097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.release.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeProductCell.swift; sourceTree = "<group>"; };
-		3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomizations.swift; sourceTree = "<group>"; };
 		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
 		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
 		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 				3A3B70142697AD6D00493D94 /* ProductModel.swift */,
 				3AF0B89226BA13D00095479E /* Shop.swift */,
 				3AF0B89526BA15E80095479E /* ShopModel.swift */,
-				3A0E510A26A3D8CC0026077B /* ProductCustomizations.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,7 +459,6 @@
 				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
 				3AF0B89626BA15E80095479E /* ShopModel.swift in Sources */,
 				3AA9F89626BBAA5600FE767F /* ShopAnnotationPoint.swift in Sources */,
-				3A0E510B26A3D8CC0026077B /* ProductCustomizations.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
 				3AA835BB2686D44E00046DFE /* ProductListVC.swift in Sources */,

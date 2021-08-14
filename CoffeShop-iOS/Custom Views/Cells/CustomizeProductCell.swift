@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CustomizeProductCellProtocol: class {
-    func customizationSelected(type: CustomizationType, cellIndexPath: Int, IndexSelectection: Int)
+    func customizationSelected(type: String, cellIndexPath: Int, IndexSelectection: Int)
 }
 
 class CustomizeProductCell: UITableViewCell {
@@ -36,7 +36,7 @@ class CustomizeProductCell: UITableViewCell {
     
     func configure(with customization: Customization, identifier: Int ) {
         self.customization = customization
-        titleLabel.text = customization.type.rawValue
+        titleLabel.text = customization.type
         segmentControl.tag = identifier
         
         let  options = customization.options
@@ -45,9 +45,7 @@ class CustomizeProductCell: UITableViewCell {
             segmentControl.insertSegment(with: UIImage(named: option.id), at: i, animated: false)
         }
         
-        if let selected = customization.optionSelected {
-            segmentControl.selectedSegmentIndex = selected
-        }
+        segmentControl.selectedSegmentIndex = customization.optionSelected
         
     }
     
@@ -72,10 +70,9 @@ class CustomizeProductCell: UITableViewCell {
     }
     
     private func updateAdditionalPriceLabel() {
-        if let optionSelected = customization.optionSelected {
-            let option = customization.options[optionSelected]
-            additionalPriceLabel.text = option.price > 0 ? option.priceFormatted() : ""
-        }
+        let optionSelected = customization.optionSelected
+        let option = customization.options[optionSelected]
+        additionalPriceLabel.text = option.price > 0 ? option.priceFormatted() : ""
     }
     
     @objc func tapped(_ sender: UISegmentedControl) {
