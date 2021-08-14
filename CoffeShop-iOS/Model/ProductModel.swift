@@ -26,18 +26,32 @@ class ProductModel {
                 return try? queryDocumentSnapshot.data(as: Product.self)
             }
             
-            if products.count > 0 {
-                self.products = products
-                completion(products)
+            self.products = products
+            completion(products)
+        }
+    }
+    
+    private func createDataToFirebase() {
+        #warning("cambiar esto a una clase para cargar distintos datos de prueba en firebase")
+        let batch = firestoreDB.batch()
+        
+        productsTest.enumerated().forEach { (index,product) in
+            do {
+                let refNewDocument = firestoreDB.collection("products").document()
+                try batch.setData(from: product, forDocument: refNewDocument)
+            }
+            catch let err { print("error setting data on batch \(err)") }
+        }
+        // commit
+        batch.commit() { err in
+            if let err = err {
+                print("Error writing batch data on firebase \(err)")
             } else {
-                #warning("cambiar esto por una funcion que cree unos productos de prueba en firebase")
-                self.products = self.productsTest
-                completion(self.productsTest)
+                print("Products write on firebase succeeded.")
             }
         }
     }
     
-    #warning("cambiar esto por una funcion que cree unos productos de prueba en firebase")
     let productsTest: [Product] = [
         Product(name: "Expresso Americano", price: 12.50, image: "https://firebasestorage.googleapis.com/v0/b/coffe-shop-14d3f.appspot.com/o/Drinks%2FAmericano%403x.png?alt=media&token=417cc630-0a23-4ec7-ad6b-71c16b78c864", imageDetail: "https://firebasestorage.googleapis.com/v0/b/coffe-shop-14d3f.appspot.com/o/ProductDetail%2FAmericanoProductDetail.png?alt=media&token=6681f02e-d60d-4e1b-9444-894a7417eef9", description: "El café americano se prepara diluyendo un espresso con agua caliente", isAvailable: true, customizations: [
             Customization(type: "size", options: [
@@ -106,7 +120,7 @@ class ProductModel {
             Customization(type: "Whipped cream", options: [
                 Option(id: "nowhippedcream", desc: "no whippedcream", price: 0),
                 Option(id: "whippedcream", desc: "whipped cream ", price: 0)
-            ], optionSelected: 0)
+            ], optionSelected: 1)
         ])
     ]
 }
