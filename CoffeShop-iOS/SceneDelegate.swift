@@ -29,6 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window?.makeKeyAndVisible()
         
+        //#warning("UNCOMMENT THIS CODE TO LOAD EXAMPLE DATA TO FIREBASE FIRST TIME, LATE COMMENT AGAIN")
+        // UNCOMMENT THIS CODE TO LOAD EXAMPLE DATA TO FIREBASE FIRST TIME, LATE COMMENT AGAIN
+        //FirebaseDataSeeder.shared.run()
     }
     
     private func createOnboardingVC() -> UINavigationController {

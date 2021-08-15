@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0C10AB26C885C60027F4E3 /* FirebaseDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C10AA26C885C60027F4E3 /* FirebaseDataSeeder.swift */; };
+		3A0C10AE26C8A3190027F4E3 /* DataSeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C10AD26C8A3190027F4E3 /* DataSeeds.swift */; };
 		3A0E510326A3D4EA0026077B /* CustomizeProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */; };
 		3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */; };
 		3A1A5F842673D4E10074E5C4 /* CSImageSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.release.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3A0C10AA26C885C60027F4E3 /* FirebaseDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataSeeder.swift; sourceTree = "<group>"; };
+		3A0C10AD26C8A3190027F4E3 /* DataSeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSeeds.swift; sourceTree = "<group>"; };
 		3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeProductCell.swift; sourceTree = "<group>"; };
 		3A1A5F7E2673D3750074E5C4 /* CSImageSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSlider.swift; sourceTree = "<group>"; };
 		3A1A5F832673D4E10074E5C4 /* CSImageSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSImageSliderCell.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				3A4B6D0926796314005C921E /* Custom Views */,
 				3A4B6D1126796541005C921E /* Screens */,
 				3A96597A2686A61A00F87FAA /* Model */,
+				3A5ECFC526C8AAF1002B4C54 /* DataSeeder */,
 				3A4B6D0A2679634B005C921E /* Extensions */,
 				3A4B6D07267962E3005C921E /* Util */,
 				3A30271D266AE83C00C465CE /* Assets.xcassets */,
@@ -299,6 +304,15 @@
 				3A45F4BA267AEA8200A7940A /* CSTextField.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		3A5ECFC526C8AAF1002B4C54 /* DataSeeder */ = {
+			isa = PBXGroup;
+			children = (
+				3A0C10AA26C885C60027F4E3 /* FirebaseDataSeeder.swift */,
+				3A0C10AD26C8A3190027F4E3 /* DataSeeds.swift */,
+			);
+			path = DataSeeder;
 			sourceTree = "<group>";
 		};
 		3A65955D26B8DA390029ED81 /* AnnotationViews */ = {
@@ -458,6 +472,7 @@
 				3A1A5F7F2673D3750074E5C4 /* CSImageSlider.swift in Sources */,
 				3A7269132685569700C8F3C7 /* UIViewController+Ext.swift in Sources */,
 				3AF0B89626BA15E80095479E /* ShopModel.swift in Sources */,
+				3A0C10AE26C8A3190027F4E3 /* DataSeeds.swift in Sources */,
 				3AA9F89626BBAA5600FE767F /* ShopAnnotationPoint.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
@@ -466,6 +481,7 @@
 				3A1D33F026806313007D3BF6 /* LoginVC.swift in Sources */,
 				3AB05BAE266DFC70006FD017 /* UIButton+Ext.swift in Sources */,
 				3A5D506426A6026800751DB8 /* SectionTitleTableView.swift in Sources */,
+				3A0C10AB26C885C60027F4E3 /* FirebaseDataSeeder.swift in Sources */,
 				3A0E510326A3D4EA0026077B /* CustomizeProductCell.swift in Sources */,
 				3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */,
 				3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */,
