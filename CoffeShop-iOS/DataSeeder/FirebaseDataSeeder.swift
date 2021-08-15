@@ -27,27 +27,25 @@ class FirebaseDataSeeder {
     }
     
     private func seed<T: Codable>( data: [T], inCollection collection: CollectionReferenceForFirebase ) {
-        let batch = db.batch()
-        print("Seeding ")
         
+        let batch = db.batch()
+        // setting each data document in batch
         data.enumerated().forEach { (index,product) in
             let referenceNewDocument = db.collection(collection.rawValue).document("\(T.self)-\(index)")
-            print("here we go")
+            
             do {
                 try batch.setData(from: product, forDocument: referenceNewDocument)
-                print("setting data")
             }
             catch let err {
                 print("error setting data on batch in FirebaseDataSeeder \(err)")
-                
             }
         }
         // Commit batch data
         batch.commit() { err in
             if let err = err {
-                print("Error writing batch data on firebase \(err)")
+                print("Error writing batch \(collection) dataseeds on firebase \(err)")
             } else {
-                print("Products write on firebase succeeded.")
+                print("\(collection) write on firebase succeeded.")
             }
         }
     }
