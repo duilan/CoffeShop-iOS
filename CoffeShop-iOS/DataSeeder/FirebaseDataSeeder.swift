@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 enum CollectionReferenceForFirebase: String {
     case products
     case shops
+    case menus
 }
 
 class FirebaseDataSeeder {
@@ -22,16 +23,24 @@ class FirebaseDataSeeder {
     private init() {}
     
     func run() {
-        seed(data: DataSeeds.productsData, inCollection: .products)
-        seed(data: DataSeeds.shopsData, inCollection: .shops)
+        seed(data: DataSeeds.productsData, inCollection: .products, prefixIndex: "product")
+        seed(data: DataSeeds.shopsData, inCollection: .shops, prefixIndex: "shop")
     }
     
-    private func seed<T: Codable>( data: [T], inCollection collection: CollectionReferenceForFirebase ) {
+    private func seed<T: Codable>( data: [T], inCollection collection: CollectionReferenceForFirebase, prefixIndex: String? = nil ) {
         
         let batch = db.batch()
         // setting each data document in batch
         data.enumerated().forEach { (index,product) in
-            let referenceNewDocument = db.collection(collection.rawValue).document("\(T.self)-\(index)")
+            
+            let referenceNewDocument: DocumentReference
+            //
+            if let prefixIndex = prefixIndex {
+                let  DocumentID = "\(prefixIndex)-\(index)"
+                referenceNewDocument = db.collection(collection.rawValue).document(DocumentID)
+            } else {
+                referenceNewDocument = db.collection(collection.rawValue).document()
+            }
             
             do {
                 try batch.setData(from: product, forDocument: referenceNewDocument)

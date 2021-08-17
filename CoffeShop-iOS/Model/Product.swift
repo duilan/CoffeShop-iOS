@@ -9,6 +9,7 @@ import FirebaseFirestoreSwift
 
 struct Product: Codable {
     @DocumentID var id: String?
+    let idProduct: String
     let name: String
     let price: Double
     let image, imageDetail, description: String
