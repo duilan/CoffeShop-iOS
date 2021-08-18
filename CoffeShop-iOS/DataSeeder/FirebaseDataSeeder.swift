@@ -12,7 +12,6 @@ import FirebaseFirestoreSwift
 enum CollectionReferenceForFirebase: String {
     case products
     case shops
-    case menus
 }
 
 class FirebaseDataSeeder {
@@ -23,30 +22,30 @@ class FirebaseDataSeeder {
     private init() {}
     
     func run() {
-        seed(data: DataSeeds.productsData, inCollection: .products, prefixIndex: "product")
-        seed(data: DataSeeds.shopsData, inCollection: .shops, prefixIndex: "shop")
+        seed(data: DataSeeds.productsData, inCollection: .products)
+        seed(data: DataSeeds.shopsData, inCollection: .shops)
     }
     
-    private func seed<T: Codable>( data: [T], inCollection collection: CollectionReferenceForFirebase, prefixIndex: String? = nil ) {
+    private func seed<T: Codable & Identifiable >( data: [T], inCollection collection: CollectionReferenceForFirebase, prefixIndex: String? = nil ) {
         
         let batch = db.batch()
         // setting each data document in batch
-        data.enumerated().forEach { (index,product) in
+        data.enumerated().forEach { (index,item) in
             
             let referenceNewDocument: DocumentReference
-            //
-            if let prefixIndex = prefixIndex {
-                let  DocumentID = "\(prefixIndex)-\(index)"
-                referenceNewDocument = db.collection(collection.rawValue).document(DocumentID)
+            
+            //check if item has an ID to use it as documentID, otherwise it autogen
+            if let ids = item.id as? String  {
+                let docID = "\(prefixIndex ?? "")\(ids)"
+                referenceNewDocument = db.collection(collection.rawValue).document(docID)
             } else {
                 referenceNewDocument = db.collection(collection.rawValue).document()
             }
             
             do {
-                try batch.setData(from: product, forDocument: referenceNewDocument)
-            }
-            catch let err {
-                print("error setting data on batch in FirebaseDataSeeder \(err)")
+                try batch.setData(from: item, forDocument: referenceNewDocument)
+            } catch {
+                print("error setting data on batch in FirebaseDataSeeder \(error)")
             }
         }
         // Commit batch data

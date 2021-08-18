@@ -30,4 +30,23 @@ class ProductModel {
             completion(products)
         }
     }
+    
+    func getProductsMenu(of shop: Shop , completion: @escaping ([Product]) -> Void) {
+        
+        var products = [Product]()
+        firestoreDB.collection("products").whereField(FieldPath.documentID(), in: shop.menu).getDocuments { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            
+            products = documents.compactMap { queryDocumentSnapshot -> Product? in
+                return try? queryDocumentSnapshot.data(as: Product.self)
+            }
+            
+            self.products = products
+            completion(products)
+        }
+    }
+    
 }

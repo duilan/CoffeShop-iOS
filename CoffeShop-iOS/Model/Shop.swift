@@ -9,10 +9,10 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Shop: Codable {
+struct Shop: Codable, Identifiable {
     @DocumentID var id: String?
-    let idShop: String
     let name: String
     let address: String
     let location: GeoPoint
+    let menu: [String]
 }

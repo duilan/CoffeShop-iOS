@@ -7,9 +7,8 @@
 
 import FirebaseFirestoreSwift
 
-struct Product: Codable {
+struct Product: Codable, Identifiable {
     @DocumentID var id: String?
-    let idProduct: String
     let name: String
     let price: Double
     let image, imageDetail, description: String

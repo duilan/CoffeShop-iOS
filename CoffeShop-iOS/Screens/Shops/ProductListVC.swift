@@ -20,7 +20,7 @@ class ProductListVC: UIViewController {
         super.viewDidLoad()
         setup()
         setupTableView()
-        productModel.getProducts { [weak self] (products) in
+        productModel.getProductsMenu(of: shopSelected) { [weak self] (products) in
             guard let self = self else { return}
             self.products = products
             self.tableView.reloadData()
