@@ -154,7 +154,7 @@ class ShopsVC: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(goToProductList))
         shopInfoView.addGestureRecognizer(tapGesture)
         shopInfoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        shopInfoView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        shopInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 120).isActive = true
         shopInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         shopInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }

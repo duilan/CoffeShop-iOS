@@ -12,6 +12,8 @@ class CSShopInfoView: UIView {
     // MARK: -  Properties
     private let titleLabel = CSTitleLabel(fontSize: 20, fontWeight: .semibold, textAlignment: .left)
     private let addressLabel = CSBodyLabel(fontSize: 15, fontWeight: .regular, textAlignment: .left)
+    private let distanceLabel = CSBodyLabel(fontSize: 12, fontWeight: .semibold, textAlignment: .left)
+    private let distanceIconView = UIImageView()
     
     // MARK: -  Init
     override init(frame: CGRect) {
@@ -19,6 +21,7 @@ class CSShopInfoView: UIView {
         setup()
         setupBlurBackground()
         setupTitleLabel()
+        setupDistanceIconAndLabel()
         setupAddressLabel()
     }
     
@@ -31,6 +34,7 @@ class CSShopInfoView: UIView {
         DispatchQueue.main.async {
             self.titleLabel.text = shop.name
             self.addressLabel.text = shop.address
+            self.distanceLabel.text = "1.4 km"
         }
     }
     
@@ -56,13 +60,25 @@ class CSShopInfoView: UIView {
         titleLabel.anchor(top: topAnchor, left: leadingAnchor, right: trailingAnchor, bottom: nil, paddingTop: 15, paddingLeft: 20, paddingRight: 20, paddingBottom: 0, width: 0, height: 28)
     }
     
+    
+    private func setupDistanceIconAndLabel() {
+        addSubview(distanceIconView)
+        distanceIconView.image = UIImage(named: AssetManager.distanceBetweenIcon)
+        distanceIconView.anchor(top: titleLabel.bottomAnchor, left: leadingAnchor, right: nil, bottom: nil, paddingTop: 0, paddingLeft: 20, paddingRight: 0, paddingBottom: 0, width: 16, height: 15)
+        
+        addSubview(distanceLabel)
+        distanceLabel.textColor = CustomColors.textPrimaryColor
+        distanceLabel.anchor(top: titleLabel.bottomAnchor, left: distanceIconView.trailingAnchor, right: trailingAnchor, bottom: nil, paddingTop: 0, paddingLeft: 5, paddingRight: 20, paddingBottom: 0, width: 0, height: 15)
+    }
+    
     private func setupAddressLabel() {
         let stack = UIStackView(arrangedSubviews: [addressLabel])
         addSubview(stack)
         stack.axis = .horizontal
         stack.distribution = .fill
         stack.alignment = .top
-        stack.anchor(top: titleLabel.bottomAnchor, left: leadingAnchor, right: trailingAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 20, paddingRight: 20, paddingBottom: 15, width: 0, height: 0)
+        addressLabel.numberOfLines = 3
+        stack.anchor(top: distanceLabel.bottomAnchor, left: leadingAnchor, right: trailingAnchor, bottom: bottomAnchor, paddingTop: 5, paddingLeft: 20, paddingRight: 20, paddingBottom: 15, width: 0, height: 0)
     }
     
 }
