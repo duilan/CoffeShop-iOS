@@ -113,9 +113,18 @@ class ShopsVC: UIViewController {
         mapView.addAnnotations(annotations)
     }
     
+    private func distanceInKmFromUserLocation(to shop: Shop) -> Double {
+        var distance: Double = 0.0
+        if let userLocation = locationManager.location {
+            let shopLocation = CLLocation(latitude: shop.location.latitude, longitude: shop.location.longitude)
+            distance = userLocation.distance(from: shopLocation) / 1000 // 1000 to transform meters to km
+        }
+        return distance
+    }
+    
     private func showAlertToActivateLocationSettings() {
         presetCSAlertVC(title: "Activar ubicación", message: "Activa la localizacion en configuracion de tu dispositivo.\nUsamos tu ubicacion para mostrarte los resutaurantes cercanos.", buttonTitle: "OK")
-    }    
+    }
     // MARK: -  Setup Views and Components
     
     private func setup() {
@@ -171,8 +180,9 @@ extension ShopsVC: MKMapViewDelegate {
         guard let  annotation = view.annotation as? ShopAnnotationPoint else { return }
         
         if let shop = annotation.shopDetail {
+            let distanceInKm = distanceInKmFromUserLocation(to: shop)
             shopSelected = shop
-            shopInfoView.setInfo(shop: shop)
+            shopInfoView.setInfo(shop: shop, distance: distanceInKm)
             centerMapOn(location: annotation.coordinate)
             shopInfoView.slideInBottomAnimation()
             view.pulseAnimation()

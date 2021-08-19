@@ -30,11 +30,12 @@ class CSShopInfoView: UIView {
     }
     
     // MARK: -  Public Methods
-    func setInfo(shop: Shop) {
+    func setInfo(shop: Shop, distance: Double) {
+        //set label values
         DispatchQueue.main.async {
             self.titleLabel.text = shop.name
             self.addressLabel.text = shop.address
-            self.distanceLabel.text = "1.4 km"
+            self.distanceLabel.text =  String(format: "%.01f km", distance)
         }
     }
     
