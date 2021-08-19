@@ -67,7 +67,7 @@ class CSAlertVC: UIViewController {
         titleLabel.textColor = CustomColors.titleColor
         //Constrains
         titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        titleLabel.anchor(top: containerView.topAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, bottom: nil, paddingTop: padding, paddingLeft: padding, paddingRight: padding, paddingBottom: 0, width: 0, height: 0)
+        titleLabel.anchor(top: containerView.topAnchor, left: containerView.leadingAnchor, right: containerView.trailingAnchor, bottom: nil, paddingTop: padding, paddingLeft: padding, paddingRight: padding, paddingBottom: 0, width: 0, height: 25)
     }
     
     private func setupMessageLabel() {
