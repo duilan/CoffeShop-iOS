@@ -49,7 +49,7 @@ class ShopsVC: UIViewController {
             setupLocationManager()
             checkLocationAuthorization()
         }else {
-            print("activa la localizacion")
+            showAlertToActivateLocationSettings()
         }
     }
     
@@ -62,7 +62,7 @@ class ShopsVC: UIViewController {
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
         case .restricted: break
-        case .denied: break
+        case .denied: showAlertToActivateLocationSettings()
         case .authorizedAlways: break
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
@@ -113,6 +113,9 @@ class ShopsVC: UIViewController {
         mapView.addAnnotations(annotations)
     }
     
+    private func showAlertToActivateLocationSettings() {
+        presetCSAlertVC(title: "Activar ubicación", message: "Activa la localizacion en configuracion de tu dispositivo.\nUsamos tu ubicacion para mostrarte los resutaurantes cercanos.", buttonTitle: "OK")
+    }    
     // MARK: -  Setup Views and Components
     
     private func setup() {
