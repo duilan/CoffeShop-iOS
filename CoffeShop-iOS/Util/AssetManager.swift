@@ -14,4 +14,6 @@ enum AssetManager {
     static let sliderBackground = "background-shape"
     static let backIndicator = "backIndicator"
     static let distanceBetweenIcon = "distancebetween-icon"
+    static let gooddaycoffe = "gooddaycoffe"
+    static let marketingNews = "marketing-news"
 }
