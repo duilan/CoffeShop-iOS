@@ -16,4 +16,6 @@ enum AssetManager {
     static let distanceBetweenIcon = "distancebetween-icon"
     static let gooddaycoffe = "gooddaycoffe"
     static let marketingNews = "marketing-news"
+    static let newsletter = "newsletter"
+    static let promotion = "promotion"
 }
