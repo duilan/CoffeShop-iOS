@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A06618F26D2051C00933AD6 /* NewsletterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06618E26D2051C00933AD6 /* NewsletterCell.swift */; };
 		3A0C10AB26C885C60027F4E3 /* FirebaseDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C10AA26C885C60027F4E3 /* FirebaseDataSeeder.swift */; };
 		3A0C10AE26C8A3190027F4E3 /* DataSeeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C10AD26C8A3190027F4E3 /* DataSeeds.swift */; };
 		3A0E510326A3D4EA0026077B /* CustomizeProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		097313AE185C779B1F37471C /* Pods-CoffeShop-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.release.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3A06618E26D2051C00933AD6 /* NewsletterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsletterCell.swift; sourceTree = "<group>"; };
 		3A0C10AA26C885C60027F4E3 /* FirebaseDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataSeeder.swift; sourceTree = "<group>"; };
 		3A0C10AD26C8A3190027F4E3 /* DataSeeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSeeds.swift; sourceTree = "<group>"; };
 		3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeProductCell.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				3AC5877B268AD137007F339A /* ProductCell.swift */,
 				3A92AEDA26D192580043AC2D /* AnnouncementCell.swift */,
+				3A06618E26D2051C00933AD6 /* NewsletterCell.swift */,
 				3A0E510226A3D4EA0026077B /* CustomizeProductCell.swift */,
 				3ADB705726AA202600ABD769 /* ProductQuantityCell.swift */,
 			);
@@ -511,6 +514,7 @@
 				3A96597C2686A68000F87FAA /* Product.swift in Sources */,
 				3A3C0F7826843182003B146A /* HomeVC.swift in Sources */,
 				3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */,
+				3A06618F26D2051C00933AD6 /* NewsletterCell.swift in Sources */,
 				3A3B70152697AD6D00493D94 /* ProductModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
