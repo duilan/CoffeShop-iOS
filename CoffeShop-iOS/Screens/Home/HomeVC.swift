@@ -35,6 +35,7 @@ class HomeVC: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(AnnouncementCell.self, forCellWithReuseIdentifier: AnnouncementCell.cellID)
         collectionView.register(NewsletterCell.self, forCellWithReuseIdentifier: NewsletterCell.cellID)
+        collectionView.register(SectionHeaderReusableView.self, forSupplementaryViewOfKind: "sectionTitle", withReuseIdentifier: SectionHeaderReusableView.reusableID)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
@@ -87,9 +88,13 @@ extension HomeVC {
         let groupSmall = NSCollectionLayoutGroup.horizontal(layoutSize: groupSmallSize, subitems: [itemSmall])
         
         let section = NSCollectionLayoutSection(group: groupSmall)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 40, trailing: 20)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 20
+        
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30.0)), elementKind: "sectionTitle", alignment: .topLeading)
+        ]
         
         return section
     }
@@ -139,6 +144,18 @@ extension HomeVC: UICollectionViewDataSource,UICollectionViewDelegate {
             cell.set(image: AssetManager.promotion)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderReusableView.reusableID, for: indexPath) as? SectionHeaderReusableView else {
+            return SectionHeaderReusableView()
+        }
+        
+        let titleSectionKind = "\(SectionLayotKind.allCases[indexPath.section])"
+        sectionHeader.set(title: titleSectionKind)
+        
+        return sectionHeader
     }
     
 }
