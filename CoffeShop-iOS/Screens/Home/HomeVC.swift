@@ -12,8 +12,8 @@ class HomeVC: UIViewController {
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<SectionLayotKind, Int>!
     
-    private enum SectionLayotKind {
-        case main, news
+    private enum SectionLayotKind: CaseIterable {
+        case main, news, promotions
     }
     
     // MARK: -  Lifecycle
@@ -29,41 +29,56 @@ class HomeVC: UIViewController {
     }
     
     private func setupCollectionView(){
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createSmallLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: generateLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .none
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(AnnouncementCell.self, forCellWithReuseIdentifier: AnnouncementCell.cellID)
         collectionView.register(NewsletterCell.self, forCellWithReuseIdentifier: NewsletterCell.cellID)
         collectionView.dataSource = self
+        collectionView.delegate = self
         view.addSubview(collectionView)
     }
     
 }
 
 extension HomeVC {
-    private func createLayout() -> UICollectionViewLayout {
-        let itemLargeSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+    
+    private func generateLayout()->UICollectionViewLayout {
+        
+        let layout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let sectionLayoutKind = SectionLayotKind.allCases[sectionIndex]
+            
+            switch sectionLayoutKind {
+            case .main:
+                return  self?.createLargeLayout()
+            case .news:
+                return self?.createSmallLayout()
+            case .promotions:
+                return self?.createSmallLayout()
+            }
+        }
+        return layout
+        
+    }
+    
+    private func createLargeLayout() -> NSCollectionLayoutSection {
+        
+        let itemLargeSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let itemLarge = NSCollectionLayoutItem(layoutSize: itemLargeSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.9))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [itemLarge])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        section.interGroupSpacing = 10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 40, trailing: 0)
+        section.orthogonalScrollingBehavior = .groupPaging
         
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        
-        return layout
+        return section
     }
     
-    private func configureDataSource() {
-        
-    }
-    
-    private func createSmallLayout() -> UICollectionViewLayout {
+    private func createSmallLayout() -> NSCollectionLayoutSection {
         
         let itemSmallSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let itemSmall = NSCollectionLayoutItem(layoutSize: itemSmallSize)
@@ -72,22 +87,27 @@ extension HomeVC {
         let groupSmall = NSCollectionLayoutGroup.horizontal(layoutSize: groupSmallSize, subitems: [itemSmall])
         
         let section = NSCollectionLayoutSection(group: groupSmall)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20)
+        section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 20
         
-        let layout = UICollectionViewCompositionalLayout(section: section)
-            
-        
-        return layout
+        return section
     }
-
+    
+    private func configureDataSource() {
+        
+    }
+    
 }
 
-extension HomeVC: UICollectionViewDataSource {
+extension HomeVC: UICollectionViewDataSource,UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 6
+        return SectionLayotKind.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,28 +115,30 @@ extension HomeVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCell.cellID, for: indexPath) as? AnnouncementCell else {
-//            return AnnouncementCell()
-//        }
         
-//        if indexPath.section == 0 {
-//            cell.set(image: AssetManager.gooddaycoffe)
-//        } else {
-//            cell.set(image: AssetManager.marketingNews)
-//        }
+        let sectionLayoutKind = SectionLayotKind.allCases[indexPath.section]
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
-            return NewsletterCell()
-        }
-        
-        if indexPath.section == 0 {
+        switch sectionLayoutKind {
+        case .main:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCell.cellID, for: indexPath) as? AnnouncementCell else {
+                return AnnouncementCell()
+            }
+            cell.set(image: AssetManager.gooddaycoffe)
+            return cell
+            
+        case .news:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
+                return NewsletterCell()
+            }
             cell.set(image: AssetManager.newsletter)
-        } else {
-            cell.set(image: AssetManager.marketingNews)
+            return cell
+        case .promotions:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
+                return NewsletterCell()
+            }
+            cell.set(image: AssetManager.promotion)
+            return cell
         }
-        
-        return cell
     }
-    
     
 }
