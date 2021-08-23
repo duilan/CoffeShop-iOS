@@ -29,10 +29,7 @@ class AnnouncementCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 25
-        imageView.layer.cornerCurve = .continuous        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         imageView.anchor(top: contentView.topAnchor, left: contentView.leadingAnchor, right: contentView.trailingAnchor, bottom: contentView.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
     
