@@ -15,18 +15,17 @@ class ShopModel {
     private var coffeShops = [Shop]()
     
     func getShops( completion: @escaping ([Shop]) -> Void) {
-        var shops = [Shop]()
         firestoreDB.collection("shops").addSnapshotListener { [weak self] (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
             
-            shops = documents.compactMap { queryDocumentSnapshot -> Shop? in
+            let shopsResult = documents.compactMap { queryDocumentSnapshot -> Shop? in
                 return try? queryDocumentSnapshot.data(as: Shop.self)
             }
-            self?.coffeShops = shops
-            completion(shops)
+            self?.coffeShops = shopsResult
+            completion(shopsResult)
         }
     }
     
