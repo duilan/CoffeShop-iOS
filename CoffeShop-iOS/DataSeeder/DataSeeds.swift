@@ -87,4 +87,18 @@ struct DataSeeds {
             ], optionSelected: 1)
         ])
     ]
+    
+    static let announcementsData: [Announcement] = [
+        Announcement( id: "AD1", title: "Titulo del anuncio", body: "cuerpo del anuncio", imageURL: "http://", category: "announcement", createAt: Timestamp()),
+        Announcement( id: "AD2", title: "Titulo del anuncio", body: "cuerpo del anuncio", imageURL: "http://", category: "announcement", createAt: Timestamp()),
+        Announcement( id: "N1", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
+        Announcement( id: "N2", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
+        Announcement( id: "N3", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
+        Announcement( id: "N4", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
+        Announcement( id: "P1", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
+        Announcement( id: "P2", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
+        Announcement( id: "P3", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
+        Announcement( id: "P4", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
+        
+    ]
 }

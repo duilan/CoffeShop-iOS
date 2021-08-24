@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 enum CollectionReferenceForFirebase: String {
     case products
     case shops
+    case announcements
 }
 
 class FirebaseDataSeeder {
@@ -24,6 +25,7 @@ class FirebaseDataSeeder {
     func run() {
         seed(data: DataSeeds.productsData, inCollection: .products)
         seed(data: DataSeeds.shopsData, inCollection: .shops)
+        seed(data: DataSeeds.announcementsData, inCollection: .announcements)
     }
     
     private func seed<T: Codable & Identifiable >( data: [T], inCollection collection: CollectionReferenceForFirebase, prefixIndex: String? = nil ) {
