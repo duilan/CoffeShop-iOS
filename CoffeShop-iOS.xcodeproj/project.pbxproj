@@ -18,6 +18,7 @@
 		3A1A5F8D267467020074E5C4 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A5F8C267467020074E5C4 /* UIHelper.swift */; };
 		3A1B0BA3268E765200C937E2 /* CSBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1B0BA2268E765200C937E2 /* CSBodyLabel.swift */; };
 		3A1D33F026806313007D3BF6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1D33EF26806313007D3BF6 /* LoginVC.swift */; };
+		3A20555226D74D52007B0211 /* AnnouncementDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20555126D74D52007B0211 /* AnnouncementDetailVC.swift */; };
 		3A299E552686E281002EA597 /* ShopsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A299E542686E281002EA597 /* ShopsVC.swift */; };
 		3A302715266AE83B00C465CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302714266AE83B00C465CE /* AppDelegate.swift */; };
 		3A302717266AE83B00C465CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A302716266AE83B00C465CE /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		3A1A5F8C267467020074E5C4 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		3A1B0BA2268E765200C937E2 /* CSBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSBodyLabel.swift; sourceTree = "<group>"; };
 		3A1D33EF26806313007D3BF6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		3A20555126D74D52007B0211 /* AnnouncementDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailVC.swift; sourceTree = "<group>"; };
 		3A299E542686E281002EA597 /* ShopsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsVC.swift; sourceTree = "<group>"; };
 		3A302711266AE83B00C465CE /* CoffeShop-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoffeShop-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A302714266AE83B00C465CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3C0F7726843182003B146A /* HomeVC.swift */,
+				3A20555126D74D52007B0211 /* AnnouncementDetailVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				3AD047422690E5980086ED41 /* ProductDetailVC.swift in Sources */,
 				3ABC193A267C624600796029 /* UITextView+Ext.swift in Sources */,
 				3A34D54526BA4EED00633098 /* CSShopInfoView.swift in Sources */,
+				3A20555226D74D52007B0211 /* AnnouncementDetailVC.swift in Sources */,
 				3A7700A526706C73006F4838 /* CSTitleLabel.swift in Sources */,
 				3A80ABA62683058400E379EA /* ProfileVC.swift in Sources */,
 				3A299E552686E281002EA597 /* ShopsVC.swift in Sources */,
