@@ -26,7 +26,7 @@ class HomeVC: UIViewController {
     
     private func setup() {
         view.backgroundColor = CustomColors.backgroundColor
-        title = "Welcome Adrian"
+        title = "Welcome back!"
     }
     
     private func setupCollectionView(){
