@@ -10,16 +10,16 @@ import FirebaseFirestore
 class AnnouncementModel {
     
     private let firestoreDB = Firestore.firestore()
-    var announcements = [Announcement]()
+    var announcements = [SectionAnnouncement]()
     
-    func getAnnouncements( completion: @escaping ([Announcement]) -> Void ) {
+    func getAllSectionAnnouncements( completion: @escaping ([SectionAnnouncement]) -> Void ) {
         // peticion a firebase
-        firestoreDB.collection("announcements").getDocuments { (querySnapshot, err) in
+        firestoreDB.collection("sectionAnnouncements").getDocuments { (querySnapshot, err) in
             // verificamos que existan documentos en la collection
             guard let documents = querySnapshot?.documents else { return }
             //trasformamos los documentos a obj
-            let announcementsResult = documents.compactMap { queryDocumentSnapshot -> Announcement? in
-                return try? queryDocumentSnapshot.data(as: Announcement.self)
+            let announcementsResult = documents.compactMap { queryDocumentSnapshot -> SectionAnnouncement? in
+                return try? queryDocumentSnapshot.data(as: SectionAnnouncement.self)
             }
             self.announcements = announcementsResult
             completion(announcementsResult)

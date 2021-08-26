@@ -10,17 +10,18 @@ import UIKit
 class HomeVC: UIViewController {
     
     private var collectionView: UICollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<SectionLayotKind, Int>!
-    
-    private enum SectionLayotKind: CaseIterable {
-        case main, news, promotions
-    }
+    private var dataSource: UICollectionViewDiffableDataSource<SectionAnnouncement, Announcement>!
+    private var announcementModel = AnnouncementModel()
+    private var sections: [SectionAnnouncement] = []
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupCollectionView()
+        setupDataSource()
+        setupSectionHeaderView()
+        updateAnnouncements()
     }
     
     private func setup() {
@@ -36,9 +37,56 @@ class HomeVC: UIViewController {
         collectionView.register(AnnouncementCell.self, forCellWithReuseIdentifier: AnnouncementCell.cellID)
         collectionView.register(NewsletterCell.self, forCellWithReuseIdentifier: NewsletterCell.cellID)
         collectionView.register(SectionHeaderReusableView.self, forSupplementaryViewOfKind: "sectionTitle", withReuseIdentifier: SectionHeaderReusableView.reusableID)
-        collectionView.dataSource = self
-        collectionView.delegate = self
         view.addSubview(collectionView)
+    }
+    
+    private func setupDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<SectionAnnouncement, Announcement>(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
+            let sectionType = self.sections[indexPath.section].type
+            
+            if sectionType ==  "header" {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCell.cellID, for: indexPath) as? AnnouncementCell else {
+                    return AnnouncementCell()
+                }
+                cell.set(image: item.imageURL)
+                return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
+                    return NewsletterCell()
+                }
+                cell.set(image: item.imageURL)
+                return cell
+            }
+        }
+    }
+    
+    private func setupSectionHeaderView() {
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderReusableView.reusableID, for: indexPath) as? SectionHeaderReusableView else {
+                return SectionHeaderReusableView()
+            }
+            
+            let sectionTitle = self.sections[indexPath.section].title
+            sectionHeader.set(title: sectionTitle)
+            return sectionHeader
+        }
+    }
+    
+    private func updateDataSourceSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionAnnouncement,Announcement>()
+        snapshot.appendSections(sections)
+        sections.forEach { (section) in
+            snapshot.appendItems(section.announcements, toSection: section)
+        }
+        dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+    }
+    
+    private func updateAnnouncements() {
+        announcementModel.getAllSectionAnnouncements { [weak self] (sections) in
+            self?.sections = sections
+            self?.updateDataSourceSnapshot()
+        }
     }
     
 }
@@ -47,24 +95,21 @@ extension HomeVC {
     
     private func generateLayout()->UICollectionViewLayout {
         
-        let layout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { [unowned self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let sectionLayoutKind = SectionLayotKind.allCases[sectionIndex]
+            let sectionType = self.sections[sectionIndex].type
             
-            switch sectionLayoutKind {
-            case .main:
-                return  self?.createLargeLayout()
-            case .news:
-                return self?.createSmallLayout()
-            case .promotions:
-                return self?.createSmallLayout()
+            if sectionType ==  "header" {
+                return  self.createHeaderLayout()
+            } else {
+                return  self.createNormalLayout()
             }
         }
         return layout
         
     }
     
-    private func createLargeLayout() -> NSCollectionLayoutSection {
+    private func createHeaderLayout() -> NSCollectionLayoutSection {
         
         let itemLargeSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let itemLarge = NSCollectionLayoutItem(layoutSize: itemLargeSize)
@@ -79,7 +124,7 @@ extension HomeVC {
         return section
     }
     
-    private func createSmallLayout() -> NSCollectionLayoutSection {
+    private func createNormalLayout() -> NSCollectionLayoutSection {
         
         let itemSmallSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let itemSmall = NSCollectionLayoutItem(layoutSize: itemSmallSize)
@@ -97,65 +142,6 @@ extension HomeVC {
         ]
         
         return section
-    }
-    
-    private func configureDataSource() {
-        
-    }
-    
-}
-
-extension HomeVC: UICollectionViewDataSource,UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return SectionLayotKind.allCases.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let sectionLayoutKind = SectionLayotKind.allCases[indexPath.section]
-        
-        switch sectionLayoutKind {
-        case .main:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCell.cellID, for: indexPath) as? AnnouncementCell else {
-                return AnnouncementCell()
-            }
-            cell.set(image: AssetManager.gooddaycoffe)
-            return cell
-            
-        case .news:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
-                return NewsletterCell()
-            }
-            cell.set(image: AssetManager.newsletter)
-            return cell
-        case .promotions:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
-                return NewsletterCell()
-            }
-            cell.set(image: AssetManager.promotion)
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderReusableView.reusableID, for: indexPath) as? SectionHeaderReusableView else {
-            return SectionHeaderReusableView()
-        }
-        
-        let titleSectionKind = "\(SectionLayotKind.allCases[indexPath.section])"
-        sectionHeader.set(title: titleSectionKind)
-        
-        return sectionHeader
     }
     
 }

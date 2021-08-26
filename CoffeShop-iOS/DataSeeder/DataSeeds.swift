@@ -88,17 +88,26 @@ struct DataSeeds {
         ])
     ]
     
-    static let announcementsData: [Announcement] = [
-        Announcement( id: "AD1", title: "Titulo del anuncio", body: "cuerpo del anuncio", imageURL: "http://", category: "announcement", createAt: Timestamp()),
-        Announcement( id: "AD2", title: "Titulo del anuncio", body: "cuerpo del anuncio", imageURL: "http://", category: "announcement", createAt: Timestamp()),
-        Announcement( id: "N1", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
-        Announcement( id: "N2", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
-        Announcement( id: "N3", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
-        Announcement( id: "N4", title: "Titulo de noticia", body: "cuerpo de noticia", imageURL: "http://", category: "newsletter", createAt: Timestamp()),
-        Announcement( id: "P1", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
-        Announcement( id: "P2", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
-        Announcement( id: "P3", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
-        Announcement( id: "P4", title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "http://", category: "promotion", createAt: Timestamp()),
+    static let announcementsData: [SectionAnnouncement] = [
+        SectionAnnouncement(id: "Main", title: "Principal", type: "header", announcements: [
+            Announcement(title: "Titulo del anuncio1", body: "cuerpo del anuncio1", imageURL: "gooddaycoffe", category: "announcement", createAt: Timestamp()),
+            Announcement(title: "Titulo del anuncio2", body: "cuerpo del anuncio2", imageURL: "gooddaycoffe", category: "announcement", createAt: Timestamp())
+        ]),
+        
+        SectionAnnouncement(id: "Newsletters", title: "Newsletters", type: "normal", announcements: [
+            Announcement(title: "Titulo de noticia3", body: "cuerpo de noticia3", imageURL: "newsletter", category: "newsletter", createAt: Timestamp()),
+            Announcement(title: "Titulo de noticia4", body: "cuerpo de noticia4", imageURL: "newsletter", category: "newsletter", createAt: Timestamp()),
+            Announcement(title: "Titulo de noticia5", body: "cuerpo de noticia5", imageURL: "newsletter", category: "newsletter", createAt: Timestamp()),
+            Announcement(title: "Titulo de noticia6", body: "cuerpo de noticia6", imageURL: "newsletter", category: "newsletter", createAt: Timestamp())
+        ]),
+        
+        SectionAnnouncement(id: "Promotions", title: "Promotions", type: "normal", announcements: [
+            Announcement(title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "promotion", category: "promotion", createAt: Timestamp()),
+            Announcement(title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "promotion", category: "promotion", createAt: Timestamp()),
+            Announcement(title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "promotion", category: "promotion", createAt: Timestamp()),
+            Announcement(title: "Titulo de promocion", body: "cuerpo de promocion", imageURL: "promotion", category: "promotion", createAt: Timestamp())
+            
+        ])
         
     ]
 }
