@@ -48,13 +48,13 @@ class HomeVC: UIViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AnnouncementCell.cellID, for: indexPath) as? AnnouncementCell else {
                     return AnnouncementCell()
                 }
-                cell.set(image: item.imageURL)
+                cell.set(imageName: item.imageURL)
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsletterCell.cellID, for: indexPath) as? NewsletterCell else {
                     return NewsletterCell()
                 }
-                cell.set(image: item.imageURL)
+                cell.set(imageName: item.imageURL)
                 return cell
             }
         }

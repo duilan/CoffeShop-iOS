@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsletterCell: UICollectionViewCell {
     
@@ -22,8 +23,15 @@ class NewsletterCell: UICollectionViewCell {
     }
     
     
-    func set(image: String?) {
-        imageView.image = UIImage(named: image ?? AssetManager.newsletter)
+    func set(imageName: String) {
+        imageView.image = UIImage(named: imageName) ?? UIImage(named: AssetManager.newsletter)
+    }
+    
+    func set(imageURL: String) {
+        //Image download using Kingfisher
+        let url = URL(string: imageURL)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
     }
     
     private func setupImageView() {
