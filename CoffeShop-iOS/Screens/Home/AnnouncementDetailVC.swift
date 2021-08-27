@@ -13,8 +13,8 @@ class AnnouncementDetailVC: UIViewController {
     private let contentView = UIView()
     private let headerImageView = UIImageView()
     private let titleLabel = CSTitleLabel(fontSize: 24, fontWeight: .black, textAlignment: .left)
-    private let bodyLabel =  CSBodyLabel(fontSize: 16, fontWeight: .regular, textAlignment: .left)
     private let bodyTextView = UITextView()
+    
     private let announcement: Announcement
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class AnnouncementDetailVC: UIViewController {
         setupContentView()
         setupHeaderImageView()
         setupTitleLabel()
-        setupTextView()
+        setupBodyTextView()
     }
     
     init(announcement: Announcement) {
@@ -78,33 +78,17 @@ class AnnouncementDetailVC: UIViewController {
         titleLabel.anchor(top: headerImageView.bottomAnchor, left: contentView.leadingAnchor, right: contentView.trailingAnchor, bottom: nil, paddingTop: 20, paddingLeft: 20, paddingRight: 20, paddingBottom: 0, width: 0, height: 0)
     }
     
-    private func setupTextView2() {
-        contentView.addSubview(bodyLabel)
-        bodyLabel.text = "goafmakmkfmakfmla"
-        bodyLabel.backgroundColor = .red
-        bodyLabel.translatesAutoresizingMaskIntoConstraints = false
-        bodyLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leadingAnchor, right: contentView.trailingAnchor, bottom: contentView.bottomAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20, paddingBottom: 0, width: 0, height: 0)
-        bodyLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
-    }
-    
-    private func setupTextView() {
+    private func setupBodyTextView() {
         contentView.addSubview(bodyTextView)
-        bodyTextView.text = """
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-        
-        "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.
-
-        Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-        1914 translation by H. Rackham.
-        """
+        bodyTextView.attributedText = announcement.body.htmlToAttributedString
+        bodyTextView.font = UIFont.systemFont(ofSize: 16)
         bodyTextView.textColor = .secondaryLabel
+        bodyTextView.backgroundColor = .clear
         bodyTextView.isEditable = false
         bodyTextView.isScrollEnabled = false
-        bodyTextView.backgroundColor = .clear
-        bodyTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        
         bodyTextView.translatesAutoresizingMaskIntoConstraints = false
-        bodyTextView.anchor(top: titleLabel.bottomAnchor, left: contentView.leadingAnchor, right: contentView.trailingAnchor, bottom: contentView.bottomAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20, paddingBottom: 0, width: 0, height: 0)
+        
+        bodyTextView.anchor(top: titleLabel.bottomAnchor, left: contentView.leadingAnchor, right: contentView.trailingAnchor, bottom: contentView.bottomAnchor, paddingTop: 10, paddingLeft: 20, paddingRight: 20, paddingBottom: 0, width: 0, height: 0)
         bodyTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
     }
     
