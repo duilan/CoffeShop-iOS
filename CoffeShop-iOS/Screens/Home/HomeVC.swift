@@ -37,6 +37,7 @@ class HomeVC: UIViewController {
         collectionView.register(AnnouncementCell.self, forCellWithReuseIdentifier: AnnouncementCell.cellID)
         collectionView.register(NewsletterCell.self, forCellWithReuseIdentifier: NewsletterCell.cellID)
         collectionView.register(SectionHeaderReusableView.self, forSupplementaryViewOfKind: "sectionTitle", withReuseIdentifier: SectionHeaderReusableView.reusableID)
+        collectionView.delegate = self
         view.addSubview(collectionView)
     }
     
@@ -142,6 +143,19 @@ extension HomeVC {
         ]
         
         return section
+    }
+    
+}
+
+// UICollectionViewDelegate
+extension HomeVC: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let announcementSelected = self.sections[indexPath.section].announcements[indexPath.row]
+        let announcementDetailVC = AnnouncementDetailVC(announcement: announcementSelected)
+        
+        self.navigationController?.pushViewController(announcementDetailVC, animated: true)
     }
     
 }
