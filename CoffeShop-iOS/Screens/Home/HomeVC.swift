@@ -79,9 +79,11 @@ class HomeVC: UIViewController {
     
     @objc private func showAllSection(_ sender: UIButton) {
         let sectionIndexSelected = sender.tag
-        let sectionData = self.sections[sectionIndexSelected]
-        // send data and show vc
-        print(sectionIndexSelected)
+        let sectionSelected = self.sections[sectionIndexSelected]
+        let listOfSectionVC = AnnouncementListOfSectionVC(section: sectionSelected)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(listOfSectionVC, animated: true)
+        }
     }
     
     private func updateDataSourceSnapshot() {
