@@ -70,8 +70,18 @@ class HomeVC: UIViewController {
             
             let sectionTitle = self.sections[indexPath.section].title
             sectionHeader.set(title: sectionTitle)
+            // set an identifier section
+            sectionHeader.showAllButton.tag = indexPath.section
+            sectionHeader.showAllButton.addTarget(self, action: #selector(self.showAllSection), for: .touchUpInside)
             return sectionHeader
         }
+    }
+    
+    @objc private func showAllSection(_ sender: UIButton) {
+        let sectionIndexSelected = sender.tag
+        let sectionData = self.sections[sectionIndexSelected]
+        // send data and show vc
+        print(sectionIndexSelected)
     }
     
     private func updateDataSourceSnapshot() {
@@ -134,7 +144,7 @@ extension HomeVC {
         let groupSmall = NSCollectionLayoutGroup.horizontal(layoutSize: groupSmallSize, subitems: [itemSmall])
         
         let section = NSCollectionLayoutSection(group: groupSmall)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 40, trailing: 20)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 40, trailing: 10)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 20
         
