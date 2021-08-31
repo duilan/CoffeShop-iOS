@@ -29,6 +29,11 @@ class HomeVC: UIViewController {
         title = "Welcome back!"
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     private func setupCollectionView(){
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: generateLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

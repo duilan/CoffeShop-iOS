@@ -8,7 +8,7 @@
 import UIKit
 
 class AnnouncementListOfSectionVC: UIViewController {
-
+    
     private let section: SectionAnnouncement
     
     override func viewDidLoad() {
@@ -28,8 +28,16 @@ class AnnouncementListOfSectionVC: UIViewController {
     private func setup() {
         title = section.title
         view.backgroundColor = CustomColors.backgroundColor
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
-    }        
-
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false        
+    }
+    
 }
