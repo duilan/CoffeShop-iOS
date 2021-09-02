@@ -40,7 +40,7 @@ class AnnouncementDetailVC: UIViewController {
     private func setup(){
         title = announcement.title
         view.backgroundColor = CustomColors.backgroundColor
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func setupScrollView() {
