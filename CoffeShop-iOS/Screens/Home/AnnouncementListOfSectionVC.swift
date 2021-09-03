@@ -43,6 +43,7 @@ class AnnouncementListOfSectionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode  = .always
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,21 +52,21 @@ class AnnouncementListOfSectionVC: UIViewController {
     }
     
     private func setupTableView() {
-        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.backgroundColor = CustomColors.backgroundColor
         tableView.delegate = self
+        tableView.rowHeight = 80
+        tableView.register(AnnouncementTableCell.self, forCellReuseIdentifier: AnnouncementTableCell.cellID)
     }
     
     private func setupTableViewDataSource() {
         dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, item) -> UITableViewCell? in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementTableCell.cellID, for: indexPath) as? AnnouncementTableCell  else {
+                return AnnouncementTableCell()
+            }
             
-            //CREAR UNA VIEW CELL CUSTOM
-            let cell = UITableViewCell()
-            cell.backgroundColor = CustomColors.backgroundColor
-            cell.textLabel?.text = "\(item.title)"
-            cell.imageView?.image = UIImage(named: item.imageURL)
-            cell.textLabel?.textColor = CustomColors.textPrimaryColor
+            cell.set(announcement: item)
             return cell
         })
     }
