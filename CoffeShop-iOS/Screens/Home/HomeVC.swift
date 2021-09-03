@@ -101,9 +101,12 @@ class HomeVC: UIViewController {
     }
     
     private func updateAnnouncements() {
+        showLoadingView()
         announcementModel.getAllSectionAnnouncements { [weak self] (sections) in
-            self?.sections = sections
-            self?.updateDataSourceSnapshot()
+            guard let self = self else { return }
+            self.sections = sections
+            self.updateDataSourceSnapshot()
+            self.dismissLoadingView()
         }
     }
     
