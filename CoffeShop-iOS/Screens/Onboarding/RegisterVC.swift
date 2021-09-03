@@ -83,14 +83,17 @@ class RegisterVC: UIViewController {
         }
         
         // Firebase crear usuario
+        showLoadingView()
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let self = self else { return }
+            self.dismissLoadingView()
             guard let user = authResult?.user, error == nil else {
                 print("Error:\(error!.localizedDescription)")
-                self?.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
+                self.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
                 return
             }            
             // Guardar nombre de usuario en firestore database
-            self?.db.collection("users").document(email).setData(["name":name,"createdAt": Date()])
+            self.db.collection("users").document(email).setData(["name":name,"createdAt": Date()])
             
             //crea perfil
             let changeRequest = user.createProfileChangeRequest()

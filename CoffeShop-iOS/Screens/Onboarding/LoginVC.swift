@@ -54,12 +54,15 @@ class LoginVC: UIViewController {
             return
         }
         
+        showLoadingView()
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (authResult, error) in
+            guard let self = self else { return }
+            self.dismissLoadingView()
             guard let _ = authResult?.user, error == nil else {
                 print("Error:\(error!.localizedDescription)")
-                self?.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
+                self.presetCSAlertVC(title: "Info", message: error!.localizedDescription, buttonTitle: "OK")
                 return
-            }            
+            }
         }
         
     }

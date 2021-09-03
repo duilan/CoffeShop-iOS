@@ -96,9 +96,12 @@ class ShopsVC: UIViewController {
     }
     
     private func loadCoffeShops() {
+        showLoadingView()
         shopModel.getShops { [weak self] (result) in
-            self?.coffeShops = result
-            self?.addShopAnnotationsOnMap()
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            self.coffeShops = result
+            self.addShopAnnotationsOnMap()
         }
     }
     
