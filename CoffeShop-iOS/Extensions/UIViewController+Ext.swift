@@ -20,30 +20,34 @@ extension UIViewController {
     }
     
     func showLoadingView() {
-        containerLoadingView = UIView(frame: self.view.bounds)
-        view.addSubview(containerLoadingView)
-        
-        containerLoadingView.backgroundColor = CustomColors.backgroundColor
-        containerLoadingView.alpha = 0
-        
-        UIView.animate(withDuration: 0.25) {
-            containerLoadingView.alpha = 0.8
+        if containerLoadingView == nil {
+            containerLoadingView = UIView(frame: self.view.bounds)
+            view.addSubview(containerLoadingView)
+            
+            containerLoadingView.backgroundColor = CustomColors.backgroundColor
+            containerLoadingView.alpha = 0
+            
+            UIView.animate(withDuration: 0.25) {
+                containerLoadingView.alpha = 0.8
+            }
+            
+            let activityIndicator = UIActivityIndicatorView(style: .large)
+            containerLoadingView.addSubview(activityIndicator)
+            
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            
+            activityIndicator.startAnimating()
         }
-        
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        containerLoadingView.addSubview(activityIndicator)
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        activityIndicator.startAnimating()
     }
     
     func dismissLoadingView() {
-        DispatchQueue.main.async {
-            containerLoadingView.removeFromSuperview()
-            containerLoadingView = nil
+        if containerLoadingView != nil {
+            DispatchQueue.main.async {
+                containerLoadingView.removeFromSuperview()
+                containerLoadingView = nil
+            }
         }
     }
 }
