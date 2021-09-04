@@ -20,6 +20,7 @@ class ProductListVC: UIViewController {
         super.viewDidLoad()
         setup()
         setupTableView()
+        setupCartBarButton()
         showLoadingView()
         productModel.getProductsMenu(of: shopSelected) { [weak self] (products) in
             guard let self = self else { return }
@@ -54,6 +55,16 @@ class ProductListVC: UIViewController {
         tableView.rowHeight = 140
         tableView.backgroundColor = CustomColors.backgroundColor
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.cellID)
+    }
+    
+    private func setupCartBarButton() {
+        let cartBarButton = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartBarButtonTapped))
+        navigationItem.rightBarButtonItem = cartBarButton
+    }
+    
+    @objc private func cartBarButtonTapped() {
+        #warning("navigate to CartVC")
+        print("show CartVC")
     }
 }
 
