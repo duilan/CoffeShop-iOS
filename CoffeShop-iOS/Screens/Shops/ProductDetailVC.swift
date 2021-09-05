@@ -114,9 +114,10 @@ class ProductDetailVC: UIViewController {
     }
     
     @objc private func addToCartButtonTapped() {
-        let selecciones = product.getCustomizationsOptionsSelected()
-        print(selecciones)
-        print("subtotal\(subtotal),quantity\(quantity),total\(total)")
+        let cartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
+        print(cartProduct)
+        #warning("GUARDAR EN FIREBASE el Producto del carrito")
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
