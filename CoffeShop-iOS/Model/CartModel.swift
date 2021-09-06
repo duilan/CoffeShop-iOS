@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseFirestoreSwift
 
 class CartModel {
     
@@ -18,8 +19,22 @@ class CartModel {
         do {
             try docReference.document(productID).setData(from: cartProduct)
         } catch let error {
-            print("Error writing city to Firestore: \(error)")
+            print("Error writing cartProduct to Firestore: \(error)")
         }
-    }        
+    }
+    
+    func getCartProductsOf(userID: String, completion: @escaping ([CartProduct]) -> Void ) {
+        
+        let docReference = firestoreDB.collection("users").document(userID).collection("cart")
+        
+        docReference.getDocuments { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else { return }
+            
+            let products = documents.compactMap { queryDocumentSnapshot -> CartProduct? in
+                return try? queryDocumentSnapshot.data(as: CartProduct.self)
+            }
+            completion(products)
+        }
+    }
     
 }
