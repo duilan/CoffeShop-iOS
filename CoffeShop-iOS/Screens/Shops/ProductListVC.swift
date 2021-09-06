@@ -63,8 +63,10 @@ class ProductListVC: UIViewController {
     }
     
     @objc private func cartBarButtonTapped() {
-        #warning("navigate to CartVC")
-        print("show CartVC")
+        let cartVC = CartVC()
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(cartVC, animated: true)
+        }
     }
 }
 
