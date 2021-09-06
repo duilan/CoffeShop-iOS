@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProductDetailVC: UIViewController {
     
     private let addToCartButton = CSButtonAddToCart()
     private let headerForView = ProductTableHeaderView()
+    private let firebaseAuth = Auth.auth()
+    private let cartModel = CartModel()
     
     private var product: Product!
     private var quantity: Int = 1
@@ -114,9 +117,13 @@ class ProductDetailVC: UIViewController {
     }
     
     @objc private func addToCartButtonTapped() {
-        let cartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
-        print(cartProduct)
-        #warning("GUARDAR EN FIREBASE el Producto del carrito")
+        
+        guard let user = firebaseAuth.currentUser else { return }
+        guard let userID = user.email else { return }
+        
+        let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
+        cartModel.add(cartProduct: newCartProduct, userID: userID)
+        
         self.dismiss(animated: true, completion: nil)
     }
     
