@@ -8,11 +8,6 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct Cart: Codable {
-    let userID: String
-    let cartProducts: [CartProduct]
-}
-
 struct CartProduct: Codable, Identifiable, Hashable  {
     @DocumentID var id: String?
     let product: Product

@@ -80,16 +80,10 @@ class ProductDetailVC: UIViewController {
     
     private func resizeTableHeaderView(){
         guard let headerView = tableView.tableHeaderView else { return }
-        //print("tamaño actual: \(headerView.frame.size.height)")
         let headerContentHeight = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         if headerView.frame.size.height != headerContentHeight {
-            //print("el tamaño del header y del conteniedo son diferentes, hay que igualarlos para qe se visualize correctamente el contenido")
-            //print("se remplazara  \(headerView.frame.size.height) por \(headerContentHeight)")
             headerView.frame.size.height = headerContentHeight
             tableView.tableHeaderView = headerView
-            //print("tamaño final:  \(headerView.frame.size.height)")
-        } else {
-            //print("el tamaño del header y del contenido son iguales, todo se visualiza bien")
         }
     }
     
@@ -118,8 +112,7 @@ class ProductDetailVC: UIViewController {
     
     @objc private func addToCartButtonTapped() {
         
-        guard let user = firebaseAuth.currentUser else { return }
-        guard let userID = user.email else { return }
+        guard let userID = firebaseAuth.currentUser?.email else { return }
         
         let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
         cartModel.add(cartProduct: newCartProduct, userID: userID)
