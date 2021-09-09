@@ -79,8 +79,8 @@ class CartVC: UIViewController {
 extension CartVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let productSelected = dataSource.itemIdentifier(for: indexPath) else { return }
-        let productDetailVC = ProductDetailVC(productSelected.product)
-        productDetailVC.modalPresentationStyle = .overFullScreen
+        let productDetailVC = ProductDetailVC(productSelected)
+        productDetailVC.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
             self.navigationController?.present(productDetailVC, animated: true)
         }
