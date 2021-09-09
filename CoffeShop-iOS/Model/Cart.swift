@@ -15,10 +15,11 @@ struct CartProduct: Codable, Identifiable, Hashable  {
     let total: Double
     
     static func == (lhs: CartProduct, rhs: CartProduct) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.quantity == rhs.quantity
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(quantity)
     }
 }

@@ -17,7 +17,11 @@ class CartModel {
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         let productID = cartProduct.product.id!
         do {
-            try docReference.document(productID).setData(from: cartProduct)
+            if let idCartProduct = cartProduct.id {                
+                try docReference.document(idCartProduct).setData(from: cartProduct)
+            } else {
+                try docReference.document().setData(from: cartProduct)
+            }
         } catch let error {
             print("Error writing cartProduct to Firestore: \(error)")
         }
