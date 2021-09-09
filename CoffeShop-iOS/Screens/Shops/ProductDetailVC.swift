@@ -14,6 +14,7 @@ class ProductDetailVC: UIViewController {
     private let headerForView = ProductTableHeaderView()
     private let firebaseAuth = Auth.auth()
     private let cartModel = CartModel()
+    private var cartProduct: CartProduct?
     
     private var product: Product!
     private var quantity: Int = 1
@@ -55,6 +56,15 @@ class ProductDetailVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.product = product
         self.priceBaseProduct = product.price
+        calculateTotalPrice()
+    }
+    
+    init(_ cartProduct: CartProduct) {
+        super.init(nibName: nil, bundle: nil)
+        self.cartProduct = cartProduct
+        self.product = cartProduct.product
+        self.priceBaseProduct = cartProduct.product.price
+        self.quantity = cartProduct.quantity
         calculateTotalPrice()
     }
     
@@ -114,9 +124,14 @@ class ProductDetailVC: UIViewController {
         
         guard let userID = firebaseAuth.currentUser?.email else { return }
         
-        let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
-        cartModel.add(cartProduct: newCartProduct, userID: userID)
-        
+        if let cartProduct = self.cartProduct {
+            let newCartProduct = CartProduct(id: cartProduct.id, product: self.product, quantity: self.quantity, total: self.total)
+            cartModel.add(cartProduct: newCartProduct , userID: userID)
+        } else {
+            let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
+            cartModel.add(cartProduct: newCartProduct, userID: userID)
+        }
+                    
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -170,6 +185,7 @@ extension ProductDetailVC: UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductQuantityCell.cellID, for: indexPath) as! ProductQuantityCell
             cell.delegate = self
+            cell.quantity = self.quantity
             return cell
         }
         
