@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class CartVC: UIViewController {
     
-    private var tableView: UITableView!
+    private var tableView: UITableView = UITableView(frame: .zero, style: .grouped)
     private var dataSource: UITableViewDiffableDataSource<Section, CartProduct>!
     private var cartProducts: [CartProduct] = []
     private let cartModel = CartModel()
@@ -34,10 +34,12 @@ class CartVC: UIViewController {
     }
     
     private func setupTableView() {
-        tableView = UITableView(frame: .zero, style: .plain)
         view.addSubview(tableView)
         tableView.backgroundColor = CustomColors.backgroundColor
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = 140
+        tableView.estimatedRowHeight = 140
+        tableView.delegate = self
+        //tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.cellID)
         tableView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
@@ -49,7 +51,7 @@ class CartVC: UIViewController {
             guard let self = self else { return }
             self.dismissLoadingView()
             self.cartProducts = products
-            self.createSnapshopt()
+            self.createSnapshopt(with: products)
         }
     }
     
@@ -57,20 +59,20 @@ class CartVC: UIViewController {
         dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, IndexPath, item) -> UITableViewCell? in
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CartProductCell.cellID, for: IndexPath) as? CartProductCell else {
-                return CartProductCell()
-            }
+                return CartProductCell(style: .default, reuseIdentifier: CartProductCell.cellID)
+            }                        
             cell.configure(with: item)
             return cell
         })
     }
     
-    private func createSnapshopt() {
+    private func createSnapshopt(with products: [CartProduct]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section,CartProduct>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(cartProducts)
+        snapshot.appendItems(products)
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
-    
 }
+
