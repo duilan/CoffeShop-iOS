@@ -45,9 +45,9 @@ class CartVC: UIViewController {
     }
     
     private func loadUserCartProducts() {
-        guard let userEmail = firebaseAuth.currentUser?.email else { return }
         showLoadingView()
-        cartModel.getCartProductsOf(userID: userEmail) { [weak self](products) in
+        guard let userEmail = firebaseAuth.currentUser?.email else { return }
+        cartModel.getCartProductsOf(userID: userEmail) { [weak self] (products) in
             guard let self = self else { return }
             self.dismissLoadingView()
             self.cartProducts = products

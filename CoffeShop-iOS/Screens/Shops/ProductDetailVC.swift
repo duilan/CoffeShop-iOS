@@ -65,6 +65,7 @@ class ProductDetailVC: UIViewController {
         self.product = cartProduct.product
         self.priceBaseProduct = cartProduct.product.price
         self.quantity = cartProduct.quantity
+        self.addToCartButton.setTitle("Save changes", for: .normal)
         calculateTotalPrice()
     }
     
@@ -131,7 +132,7 @@ class ProductDetailVC: UIViewController {
             let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
             cartModel.add(cartProduct: newCartProduct, userID: userID)
         }
-                    
+        
         self.dismiss(animated: true, completion: nil)
     }
     

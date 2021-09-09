@@ -17,7 +17,7 @@ class CartModel {
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         let productID = cartProduct.product.id!
         do {
-            if let idCartProduct = cartProduct.id {                
+            if let idCartProduct = cartProduct.id {
                 try docReference.document(idCartProduct).setData(from: cartProduct)
             } else {
                 try docReference.document().setData(from: cartProduct)
@@ -31,7 +31,7 @@ class CartModel {
         
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         
-        docReference.getDocuments { (querySnapshot, error) in
+        docReference.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else { return }
             
             let products = documents.compactMap { queryDocumentSnapshot -> CartProduct? in
