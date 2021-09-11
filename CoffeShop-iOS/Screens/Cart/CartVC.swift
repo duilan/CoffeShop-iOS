@@ -51,6 +51,11 @@ class CartVC: UIViewController {
             guard let self = self else { return }
             self.dismissLoadingView()
             self.createSnapshopt(with: products)
+            if products.isEmpty {
+            DispatchQueue.main.async {
+                self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
+                }
+            }
         }
     }
     
