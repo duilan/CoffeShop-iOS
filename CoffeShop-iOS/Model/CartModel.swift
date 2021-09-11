@@ -15,7 +15,7 @@ class CartModel {
     func add(cartProduct: CartProduct,userID: String) {
         
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
-        let productID = cartProduct.product.id!
+        
         do {
             if let idCartProduct = cartProduct.id {
                 try docReference.document(idCartProduct).setData(from: cartProduct)
@@ -39,6 +39,14 @@ class CartModel {
             }
             completion(products)
         }
+    }
+    
+    func deleteCartProduct(cartProduct: CartProduct, userID: String){
+        
+        guard let idCartProduct = cartProduct.id else { return }
+        
+        let docReference = firestoreDB.collection("users").document(userID).collection("cart")
+        docReference.document(idCartProduct).delete()
     }
     
 }
