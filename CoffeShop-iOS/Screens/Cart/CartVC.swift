@@ -8,17 +8,17 @@
 import UIKit
 import FirebaseAuth
 
+enum CartSection: CaseIterable {
+    case listProducts
+}
+
 class CartVC: UIViewController {
     
     private var tableView: UITableView = UITableView(frame: .zero, style: .grouped)
-    private var dataSource: UITableViewDiffableDataSource<Section, CartProduct>!
+    private var dataSource: CartDataSource!
     private var cartProducts: [CartProduct] = []
     private let cartModel = CartModel()
     private let firebaseAuth = Auth.auth()
-    
-    enum Section {
-        case main
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,7 @@ class CartVC: UIViewController {
     private func setup() {
         view.backgroundColor = CustomColors.backgroundColor
         title = "My Order"
+        navigationItem.rightBarButtonItem = editButtonItem
     }
     
     private func setupTableView() {
@@ -39,7 +40,6 @@ class CartVC: UIViewController {
         tableView.rowHeight = 140
         tableView.estimatedRowHeight = 140
         tableView.delegate = self
-        //tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.cellID)
         tableView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
@@ -50,29 +50,35 @@ class CartVC: UIViewController {
         cartModel.getCartProductsOf(userID: userEmail) { [weak self] (products) in
             guard let self = self else { return }
             self.dismissLoadingView()
-            self.cartProducts = products
             self.createSnapshopt(with: products)
         }
     }
     
     private func setupTableViewDataSource() {
-        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, IndexPath, item) -> UITableViewCell? in
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CartProductCell.cellID, for: IndexPath) as? CartProductCell else {
-                return CartProductCell(style: .default, reuseIdentifier: CartProductCell.cellID)
-            }                        
-            cell.configure(with: item)
-            return cell
-        })
+        dataSource = CartDataSource(tableView: self.tableView)
+        // setup swipe delete action od datasource class
+        dataSource.deleteClosure = { [weak self] cartProduct in
+            self?.deleteCartProduct(cartProduct: cartProduct)
+        }
     }
     
     private func createSnapshopt(with products: [CartProduct]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section,CartProduct>()
-        snapshot.appendSections([.main])
+        var snapshot = NSDiffableDataSourceSnapshot<CartSection,CartProduct>()
+        snapshot.appendSections([.listProducts])
         snapshot.appendItems(products)
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+    }
+    private func deleteCartProduct(cartProduct: CartProduct) {
+        guard let userEmail = firebaseAuth.currentUser?.email else { return }
+        cartModel.deleteCartProduct(cartProduct: cartProduct, userID: userEmail)
+        //        this isnt necessary bcs we create new snapshot when  listenerfirebase changes
+        //        var snapshot = self.dataSource.snapshot()
+        //        snapshot.deleteItems([cartProduct])
+        //        DispatchQueue.main.async {
+        //            self.dataSource.apply(snapshot)
+        //        }
     }
 }
 
@@ -85,4 +91,45 @@ extension CartVC: UITableViewDelegate {
             self.navigationController?.present(productDetailVC, animated: true)
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tableView.isEditing {
+            return .delete
+        }
+        return .none
+    }
+}
+
+class CartDataSource: UITableViewDiffableDataSource<CartSection,CartProduct> {
+    
+    var deleteClosure: ((CartProduct) -> Void)?
+    
+    init(tableView: UITableView) {
+        super.init(tableView: tableView) { (tableView, indexPath, item) -> UITableViewCell? in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CartProductCell.cellID, for: indexPath) as? CartProductCell else {
+                return CartProductCell(style: .default, reuseIdentifier: CartProductCell.cellID)
+            }
+            cell.configure(with: item)
+            return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+        
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        if let product = self.itemIdentifier(for: indexPath) {
+            tableView.isEditing = true
+            deleteClosure?(product)
+        }
+    }
+    
 }
