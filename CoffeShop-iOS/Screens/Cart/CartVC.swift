@@ -31,7 +31,16 @@ class CartVC: UIViewController {
     private func setup() {
         view.backgroundColor = CustomColors.backgroundColor
         title = "My Order"
-        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
+    func setupEditBarButton() {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = editButtonItem
+        }
+    }
+    
+    func removeBarEditButtonItem() {
+        navigationItem.rightBarButtonItem = nil
     }
     
     private func setupTableView() {
@@ -50,10 +59,12 @@ class CartVC: UIViewController {
         cartModel.getCartProductsOf(userID: userEmail) { [weak self] (products) in
             guard let self = self else { return }
             self.dismissLoadingView()
+            self.setupEditBarButton()
             self.createSnapshopt(with: products)
             if products.isEmpty {
-            DispatchQueue.main.async {
-                self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
+                self.removeBarEditButtonItem()
+                DispatchQueue.main.async {
+                    self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
                 }
             }
         }
@@ -77,13 +88,7 @@ class CartVC: UIViewController {
     }
     private func deleteCartProduct(cartProduct: CartProduct) {
         guard let userEmail = firebaseAuth.currentUser?.email else { return }
-        cartModel.deleteCartProduct(cartProduct: cartProduct, userID: userEmail)
-        //        this isnt necessary bcs we create new snapshot when  listenerfirebase changes
-        //        var snapshot = self.dataSource.snapshot()
-        //        snapshot.deleteItems([cartProduct])
-        //        DispatchQueue.main.async {
-        //            self.dataSource.apply(snapshot)
-        //        }
+        cartModel.deleteCartProduct(cartProduct: cartProduct, userID: userEmail)        
     }
 }
 
@@ -127,7 +132,7 @@ class CartDataSource: UITableViewDiffableDataSource<CartSection,CartProduct> {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-        
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         

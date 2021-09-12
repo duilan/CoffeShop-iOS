@@ -20,7 +20,6 @@ class ProductListVC: UIViewController {
         super.viewDidLoad()
         setup()
         setupTableView()
-        setupCartBarButton()
         showLoadingView()
         productModel.getProductsMenu(of: shopSelected) { [weak self] (products) in
             guard let self = self else { return }
@@ -28,6 +27,11 @@ class ProductListVC: UIViewController {
             self.products = products
             self.tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupCartBarButton()
     }
     
     init(shop: Shop) {
