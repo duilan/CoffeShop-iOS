@@ -13,6 +13,8 @@ class CartProductCell: UITableViewCell {
     private let imageProductView = UIImageView(frame: .zero)
     private let nameProductLabel = CSTitleLabel(fontSize: 17, fontWeight: .bold, textAlignment: .left)
     private let quantityProductLabel = CSTitleLabel(fontSize: 14, fontWeight: .semibold, textAlignment: .center)
+    private let subtotalProductLabel = CSTitleLabel(fontSize: 14, fontWeight: .bold, textAlignment: .left)
+    private let customizationsProductLabel = CSBodyLabel(fontSize: 14, fontWeight: .regular, textAlignment: .left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -20,6 +22,8 @@ class CartProductCell: UITableViewCell {
         setupImageProductView()
         setupNameProductLabel()
         setupQuantityProductLabel()
+        setupSubtotalProductLabel()
+        setupCustomizationsProductLabel()
     }
     
     required init?(coder: NSCoder) {
@@ -34,6 +38,17 @@ class CartProductCell: UITableViewCell {
         imageProductView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
         
         quantityProductLabel.text = "×\(cartProduct.quantity)"
+        subtotalProductLabel.text = "Subtotal: $\(cartProduct.total)"
+        //Formateo de las customizationes ✓ ✗
+        var textCustomization = ""
+        for customization in cartProduct.product.customizations {
+            let typeCustomization = customization.type
+            let descCustomization = customization.options[customization.optionSelected]
+            let icon = descCustomization.desc.hasPrefix("no") ? "✗" : "✓"
+            textCustomization += "\(icon) \(typeCustomization): \(descCustomization.desc)\n"
+        }
+        
+        self.customizationsProductLabel.text = textCustomization
     }
     
     private func setup() {
@@ -74,7 +89,20 @@ class CartProductCell: UITableViewCell {
         nameProductLabel.textColor = CustomColors.textPrimaryColor
         nameProductLabel.numberOfLines = 2
         // Constraints
-        nameProductLabel.anchor(top: imageProductView.topAnchor, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: nil, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 36 )
+        nameProductLabel.anchor(top: imageProductView.topAnchor, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: nil, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 20 )
+    }
+    
+    private func setupSubtotalProductLabel() {
+        contentView.addSubview(subtotalProductLabel)        
+        subtotalProductLabel.numberOfLines = 1
+        subtotalProductLabel.anchor(top: nil, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: imageProductView.bottomAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 20)
+    }
+    
+    private func setupCustomizationsProductLabel() {
+        contentView.addSubview(customizationsProductLabel)
+        customizationsProductLabel.numberOfLines = 0
+        customizationsProductLabel.anchor(top: nameProductLabel.bottomAnchor, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: subtotalProductLabel.topAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 0)
+        
     }
     
 }
