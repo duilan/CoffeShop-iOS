@@ -13,17 +13,15 @@ class CartProductCell: UITableViewCell {
     private let imageProductView = UIImageView(frame: .zero)
     private let nameProductLabel = CSTitleLabel(fontSize: 17, fontWeight: .bold, textAlignment: .left)
     private let quantityProductLabel = CSTitleLabel(fontSize: 14, fontWeight: .semibold, textAlignment: .center)
-    private let subtotalProductLabel = CSTitleLabel(fontSize: 14, fontWeight: .bold, textAlignment: .left)
+    private let totalProductLabel = CSTitleLabel(fontSize: 14, fontWeight: .bold, textAlignment: .right)
     private let customizationsProductLabel = CSBodyLabel(fontSize: 14, fontWeight: .regular, textAlignment: .left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
         setupImageProductView()
-        setupNameProductLabel()
         setupQuantityProductLabel()
-        setupSubtotalProductLabel()
-        setupCustomizationsProductLabel()
+        setupInfoStackView()
     }
     
     required init?(coder: NSCoder) {
@@ -31,24 +29,24 @@ class CartProductCell: UITableViewCell {
     }
     
     func configure(with cartProduct: CartProduct) {
+        //name
         nameProductLabel.text = cartProduct.product.name
-        
+        // image
         let url = URL(string: cartProduct.product.image)
         imageProductView.kf.indicatorType = .activity
         imageProductView.kf.setImage(with: url, options: [.transition(.fade(0.2))])
-        
+        //quantity & total
         quantityProductLabel.text = "×\(cartProduct.quantity)"
-        subtotalProductLabel.text = "Subtotal: $\(cartProduct.total)"
-        //Formateo de las customizationes ✓ ✗
+        totalProductLabel.text = cartProduct.totalFormatted()
+        //Customizations description ✓ ✗
         var textCustomization = ""
         for customization in cartProduct.product.customizations {
             let typeCustomization = customization.type
-            let descCustomization = customization.options[customization.optionSelected]
-            let icon = descCustomization.desc.hasPrefix("no") ? "✗" : "✓"
-            textCustomization += "\(icon) \(typeCustomization): \(descCustomization.desc)\n"
+            let customization = customization.options[customization.optionSelected]
+            let icon = customization.desc == "No" ? "✗" : "✓"
+            textCustomization += "\(icon) \(typeCustomization): \(customization.desc)\n"
         }
-        
-        self.customizationsProductLabel.text = textCustomization
+        self.customizationsProductLabel.text = textCustomization.trimmingCharacters(in: .newlines)
     }
     
     private func setup() {
@@ -67,7 +65,7 @@ class CartProductCell: UITableViewCell {
         imageProductView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         imageProductView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         imageProductView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        imageProductView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        imageProductView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 19).isActive = true
     }
     
     private func setupQuantityProductLabel() {
@@ -84,25 +82,26 @@ class CartProductCell: UITableViewCell {
         quantityProductLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
     }
     
-    private func setupNameProductLabel() {
-        contentView.addSubview(nameProductLabel)
+    private func setupInfoStackView() {
+        let infoStackView = UIStackView(arrangedSubviews: [nameProductLabel,customizationsProductLabel,totalProductLabel])
+        contentView.addSubview(infoStackView)
+        
         nameProductLabel.textColor = CustomColors.textPrimaryColor
         nameProductLabel.numberOfLines = 2
-        // Constraints
-        nameProductLabel.anchor(top: imageProductView.topAnchor, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: nil, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 20 )
-    }
-    
-    private func setupSubtotalProductLabel() {
-        contentView.addSubview(subtotalProductLabel)        
-        subtotalProductLabel.numberOfLines = 1
-        subtotalProductLabel.anchor(top: nil, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: imageProductView.bottomAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 20)
-    }
-    
-    private func setupCustomizationsProductLabel() {
-        contentView.addSubview(customizationsProductLabel)
         customizationsProductLabel.numberOfLines = 0
-        customizationsProductLabel.anchor(top: nameProductLabel.bottomAnchor, left: imageProductView.trailingAnchor, right: contentView.trailingAnchor, bottom: subtotalProductLabel.topAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16, paddingBottom: 0, width: 0, height: 0)
+        totalProductLabel.numberOfLines = 1
         
+        infoStackView.axis = .vertical
+        infoStackView.distribution = .fillProportionally
+        infoStackView.alignment = .fill
+        infoStackView.spacing = 0
+        
+        infoStackView.translatesAutoresizingMaskIntoConstraints = false
+        infoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        infoStackView.leadingAnchor.constraint(equalTo: imageProductView.trailingAnchor, constant: 16).isActive = true
+        infoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        infoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        infoStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 105).isActive = true
     }
     
 }

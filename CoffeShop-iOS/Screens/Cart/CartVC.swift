@@ -46,7 +46,7 @@ class CartVC: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.backgroundColor = CustomColors.backgroundColor
-        tableView.rowHeight = 140
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 140
         tableView.delegate = self
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.cellID)

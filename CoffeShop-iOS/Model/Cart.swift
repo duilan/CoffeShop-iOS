@@ -22,4 +22,8 @@ struct CartProduct: Codable, Identifiable, Hashable  {
         hasher.combine(id)
         hasher.combine(quantity)
     }
+    
+    func totalFormatted() -> String {
+        return String(format: "$%.02f", total)
+    }
 }
