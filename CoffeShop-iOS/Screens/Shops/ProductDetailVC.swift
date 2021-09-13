@@ -126,11 +126,13 @@ class ProductDetailVC: UIViewController {
         guard let userID = firebaseAuth.currentUser?.email else { return }
         
         if let cartProduct = self.cartProduct {
-            let newCartProduct = CartProduct(id: cartProduct.id, product: self.product, quantity: self.quantity, total: self.total)
+            // si es un producto que ta existe en el carrito se modifica respecto a su ID
+            let newCartProduct = CartProduct(id: cartProduct.id, product: self.product, quantity: self.quantity, total: self.total, customizationsOptions: self.product.getCustomizationsOptionsSelected())
             cartModel.add(cartProduct: newCartProduct , userID: userID)
         } else {
-            let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total)
-            cartModel.add(cartProduct: newCartProduct, userID: userID)
+            // si es un producto que se añadira al carrito se generara un id nuevo
+            let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total, customizationsOptions: self.product.getCustomizationsOptionsSelected())
+            cartModel.add(cartProduct: newCartProduct, userID: userID)            
         }
         
         self.dismiss(animated: true, completion: nil)

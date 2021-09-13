@@ -42,7 +42,7 @@ struct Customization: Codable {
 }
 
 // MARK: - Option
-struct Option: Codable {
+struct Option: Codable, Hashable {
     let id, desc: String
     let price: Double
     

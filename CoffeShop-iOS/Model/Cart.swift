@@ -13,14 +13,17 @@ struct CartProduct: Codable, Identifiable, Hashable  {
     let product: Product
     let quantity: Int
     let total: Double
+    var customizationsOptions: [Option]
     
     static func == (lhs: CartProduct, rhs: CartProduct) -> Bool {
-        lhs.id == rhs.id && lhs.quantity == rhs.quantity
+        lhs.id == rhs.id &&
+        lhs.quantity == rhs.quantity &&
+        lhs.total == rhs.total &&
+        lhs.customizationsOptions == rhs.customizationsOptions
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(quantity)
     }
     
     func totalFormatted() -> String {
