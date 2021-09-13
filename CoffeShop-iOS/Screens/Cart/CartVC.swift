@@ -72,6 +72,7 @@ class CartVC: UIViewController {
     
     private func setupTableViewDataSource() {
         dataSource = CartDataSource(tableView: self.tableView)
+        dataSource.defaultRowAnimation = .top
         // setup swipe delete action od datasource class
         dataSource.deleteClosure = { [weak self] cartProduct in
             self?.deleteCartProduct(cartProduct: cartProduct)
