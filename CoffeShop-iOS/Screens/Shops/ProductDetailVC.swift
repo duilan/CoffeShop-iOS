@@ -127,10 +127,10 @@ class ProductDetailVC: UIViewController {
         
         if let cartProduct = self.cartProduct {
             // si es un producto que ta existe en el carrito se modifica respecto a su ID
-            let newCartProduct = CartProduct(id: cartProduct.id, product: self.product, quantity: self.quantity, total: self.total, customizationsOptions: self.product.getCustomizationsOptionsSelected())
+            let newCartProduct = CartProduct(id: cartProduct.id, product: self.product, quantity: self.quantity, total: self.total, customizationsOptions: self.product.getCustomizationsOptionsSelected(), createAt: cartProduct.createAt)
             cartModel.add(cartProduct: newCartProduct , userID: userID)
         } else {
-            // si es un producto que se añadira al carrito se generara un id nuevo
+            // si es un producto nuevo que se añadira al carrito se generara un id nuevo
             let newCartProduct = CartProduct(product: self.product, quantity: self.quantity, total: self.total, customizationsOptions: self.product.getCustomizationsOptionsSelected())
             cartModel.add(cartProduct: newCartProduct, userID: userID)            
         }

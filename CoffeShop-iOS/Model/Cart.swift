@@ -14,6 +14,7 @@ struct CartProduct: Codable, Identifiable, Hashable  {
     let quantity: Int
     let total: Double
     var customizationsOptions: [Option]
+    var createAt: Timestamp = Timestamp()
     
     static func == (lhs: CartProduct, rhs: CartProduct) -> Bool {
         lhs.id == rhs.id &&

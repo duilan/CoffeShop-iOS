@@ -31,7 +31,7 @@ class CartModel {
         
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         
-        docReference.addSnapshotListener { (querySnapshot, error) in
+        docReference.order(by: "createAt",descending: false).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else { return }
             
             let products = documents.compactMap { queryDocumentSnapshot -> CartProduct? in
