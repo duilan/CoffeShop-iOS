@@ -13,9 +13,10 @@ class ShopModel {
     
     private let firestoreDB = Firestore.firestore()
     private var coffeShops = [Shop]()
+    private var listenerShops: ListenerRegistration!
     
     func getShops( completion: @escaping ([Shop]) -> Void) {
-        firestoreDB.collection("shops").addSnapshotListener { [weak self] (querySnapshot, err) in
+        listenerShops = firestoreDB.collection("shops").addSnapshotListener { [weak self] (querySnapshot, err) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -33,5 +34,15 @@ class ShopModel {
     func getShopBy(id: String) -> Shop? {
         let shop = coffeShops.first(where: {$0.id == id})
         return shop
+    }
+    
+    private func removeListeners() {
+        if listenerShops != nil {
+            listenerShops.remove()
+        }
+    }
+    
+    deinit {
+        removeListeners()
     }
 }

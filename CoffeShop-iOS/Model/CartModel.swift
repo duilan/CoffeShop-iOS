@@ -11,6 +11,7 @@ import FirebaseFirestoreSwift
 class CartModel {
     
     private let firestoreDB = Firestore.firestore()
+    private var listenerGetCartProducts: ListenerRegistration!
     
     func add(cartProduct: CartProduct,userID: String) {
         
@@ -31,7 +32,7 @@ class CartModel {
         
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         
-        docReference.order(by: "createAt",descending: false).addSnapshotListener { (querySnapshot, error) in
+        listenerGetCartProducts = docReference.order(by: "createAt",descending: false).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else { return }
             
             let products = documents.compactMap { queryDocumentSnapshot -> CartProduct? in
@@ -47,6 +48,16 @@ class CartModel {
         
         let docReference = firestoreDB.collection("users").document(userID).collection("cart")
         docReference.document(idCartProduct).delete()
+    }
+    
+    func removeListeners() {
+        if listenerGetCartProducts != nil {
+            listenerGetCartProducts.remove()
+        }
+    }
+    
+    deinit {
+        removeListeners()
     }
     
 }
