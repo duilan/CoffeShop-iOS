@@ -19,12 +19,14 @@ class CartVC: UIViewController {
     private var cartProducts: [CartProduct] = []
     private let cartModel = CartModel()
     private let firebaseAuth = Auth.auth()
+    private let orderButton = CSButtonOrderNow()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupTableView()
         setupTableViewDataSource()
+        setupOrderButton()
         loadUserCartProducts()
     }
     
@@ -50,7 +52,7 @@ class CartVC: UIViewController {
         tableView.estimatedRowHeight = 140
         tableView.delegate = self
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.cellID)
-        tableView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
+        tableView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom:50, width: 0, height: 0)
     }
     
     private func loadUserCartProducts() {
@@ -59,15 +61,23 @@ class CartVC: UIViewController {
         cartModel.getCartProductsOf(userID: userEmail) { [weak self] (products) in
             guard let self = self else { return }
             self.dismissLoadingView()
-            self.setupEditBarButton()
             self.createSnapshopt(with: products)
             if products.isEmpty {
                 self.removeBarEditButtonItem()
                 DispatchQueue.main.async {
+                    self.orderButton.isHidden = true
                     self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
                 }
+            } else {
+                self.orderButton.isHidden = false
+                self.setupEditBarButton()
             }
         }
+    }
+    private func setupOrderButton() {
+        view.addSubview(orderButton)
+        orderButton.isHidden = true        
+        orderButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 50)
     }
     
     private func setupTableViewDataSource() {
