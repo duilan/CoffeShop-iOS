@@ -67,6 +67,7 @@
 		3AFFBA05266C3FB000832381 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA04266C3FB000832381 /* OnboardingVC.swift */; };
 		3AFFBA0A266C5A6C00832381 /* CSButtonOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */; };
 		55160487507BDAD75AE8C8C5 /* Pods_CoffeShop_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */; };
+		8BF9A2ED26FABF400055706C /* CSButtonOrderNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF9A2EC26FABF400055706C /* CSButtonOrderNow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +134,7 @@
 		3AFFBA04266C3FB000832381 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		3AFFBA09266C5A6C00832381 /* CSButtonOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOutline.swift; sourceTree = "<group>"; };
 		539A9F158E82C933E5B82D21 /* Pods_CoffeShop_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeShop_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BF9A2EC26FABF400055706C /* CSButtonOrderNow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSButtonOrderNow.swift; sourceTree = "<group>"; };
 		C4EC69D18FC6B54C62EE0CC4 /* Pods-CoffeShop-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeShop-iOS.debug.xcconfig"; path = "Target Support Files/Pods-CoffeShop-iOS/Pods-CoffeShop-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,6 +312,7 @@
 				3A813C8726856A3D005F552F /* CSButtonPlain.swift */,
 				3A9ADBE6266CA62B009B74AE /* CSButtonFilled.swift */,
 				3A8FAF8A26ABC92C00193793 /* CSButtonAddToCart.swift */,
+				8BF9A2EC26FABF400055706C /* CSButtonOrderNow.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				3AC05CE626DB44A6003C8A9C /* AnnouncementListOfSectionVC.swift in Sources */,
 				3A0C10AE26C8A3190027F4E3 /* DataSeeds.swift in Sources */,
 				3AA9F89626BBAA5600FE767F /* ShopAnnotationPoint.swift in Sources */,
+				8BF9A2ED26FABF400055706C /* CSButtonOrderNow.swift in Sources */,
 				3A45F4BB267AEA8200A7940A /* CSTextField.swift in Sources */,
 				3A9ADBE7266CA62B009B74AE /* CSButtonFilled.swift in Sources */,
 				3A2AB08626E5B0E50033CE6E /* CartVC.swift in Sources */,
