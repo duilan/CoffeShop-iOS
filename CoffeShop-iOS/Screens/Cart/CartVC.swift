@@ -119,10 +119,7 @@ extension CartVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if tableView.isEditing {
-            return .delete
-        }
-        return .none
+        return .delete
     }
 }
 
