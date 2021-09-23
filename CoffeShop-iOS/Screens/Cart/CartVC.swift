@@ -62,6 +62,7 @@ class CartVC: UIViewController {
             guard let self = self else { return }
             self.dismissLoadingView()
             self.createSnapshopt(with: products)
+            self.cartProducts = products
             if products.isEmpty {
                 self.removeBarEditButtonItem()
                 DispatchQueue.main.async {
@@ -69,15 +70,27 @@ class CartVC: UIViewController {
                     self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
                 }
             } else {
-                self.orderButton.isHidden = false
-                self.setupEditBarButton()
+                DispatchQueue.main.async {
+                    self.orderButton.isHidden = false
+                    self.orderButton.setTotal(self.calculateTotal())
+                    self.setupEditBarButton()
+                }
             }
         }
     }
     private func setupOrderButton() {
         view.addSubview(orderButton)
-        orderButton.isHidden = true        
+        orderButton.isHidden = true
         orderButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 50)
+    }
+    
+    @objc private func calculateTotal() -> Double {
+        print(cartProducts)
+        var totalOrder: Double = 0.0
+        for product in cartProducts {
+            totalOrder += product.total
+        }
+        return totalOrder
     }
     
     private func setupTableViewDataSource() {
