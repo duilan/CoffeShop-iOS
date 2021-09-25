@@ -31,7 +31,7 @@ extension UIViewController {
                 containerLoadingView.alpha = 0.8
             }
             
-            let activityIndicator = UIActivityIndicatorView(style: .large)
+            let activityIndicator = UIActivityIndicatorView()
             containerLoadingView.addSubview(activityIndicator)
             
             activityIndicator.translatesAutoresizingMaskIntoConstraints = false
