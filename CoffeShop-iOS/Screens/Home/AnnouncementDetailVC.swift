@@ -60,6 +60,8 @@ class AnnouncementDetailVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: imageContainer.bottomAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        //view.bounds.height - 200(min image height)
+        contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: view.bounds.height - 200 ).isActive = true
     }
     
     private func setupHeaderImageView() {
