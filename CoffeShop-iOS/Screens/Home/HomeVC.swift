@@ -21,6 +21,7 @@ class HomeVC: UIViewController {
         setupCollectionView()
         setupDataSource()
         setupSectionHeaderView()
+        setupRefreshControl()
         updateAnnouncements()
     }
     
@@ -44,6 +45,12 @@ class HomeVC: UIViewController {
         collectionView.register(SectionHeaderReusableView.self, forSupplementaryViewOfKind: "sectionTitle", withReuseIdentifier: SectionHeaderReusableView.reusableID)
         collectionView.delegate = self
         view.addSubview(collectionView)
+    }
+    
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(updateAnnouncements), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
     
     private func setupDataSource() {
@@ -100,13 +107,16 @@ class HomeVC: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
     }
     
-    private func updateAnnouncements() {
+    @objc private func updateAnnouncements() {
         showLoadingView()
         announcementModel.getAllSectionAnnouncements { [weak self] (sections) in
             guard let self = self else { return }
             self.dismissLoadingView()
             self.sections = sections
             self.updateDataSourceSnapshot()
+            DispatchQueue.main.async {
+                self.collectionView.refreshControl?.endRefreshing()
+            }
         }
     }
     
