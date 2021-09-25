@@ -84,8 +84,7 @@ class CartVC: UIViewController {
         orderButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 50)
     }
     
-    @objc private func calculateTotal() -> Double {
-        print(cartProducts)
+    @objc private func calculateTotal() -> Double {        
         var totalOrder: Double = 0.0
         for product in cartProducts {
             totalOrder += product.total
