@@ -94,7 +94,7 @@ class CartProductCell: UITableViewCell {
         infoStackView.axis = .vertical
         infoStackView.distribution = .fillProportionally
         infoStackView.alignment = .fill
-        infoStackView.spacing = 0
+        infoStackView.spacing = 5
         
         infoStackView.translatesAutoresizingMaskIntoConstraints = false
         infoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
