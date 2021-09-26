@@ -20,6 +20,7 @@ class CartVC: UIViewController {
     private let cartModel = CartModel()
     private let firebaseAuth = Auth.auth()
     private let orderButton = CSButtonOrderNow()
+    private let totalFooterView = CartTotalTableFooterView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +52,10 @@ class CartVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 140
         tableView.delegate = self
+        totalFooterView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 120)
+        tableView.tableFooterView = totalFooterView
+        tableView.tableFooterView?.isHidden = true
+        
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.cellID)
         tableView.anchor(top: view.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom:50, width: 0, height: 0)
     }
@@ -66,6 +71,7 @@ class CartVC: UIViewController {
             if products.isEmpty {
                 self.removeBarEditButtonItem()
                 DispatchQueue.main.async {
+                    self.tableView.tableFooterView?.isHidden = true
                     self.orderButton.isHidden = true
                     self.showEmptyStateView(message: "Your shopping cart is empty!\nAdd some products\n☕️👈", imageName: AssetManager.cart, in: self.view)
                 }
@@ -85,11 +91,14 @@ class CartVC: UIViewController {
     }
     
     @objc private func calculateTotal() -> Double {        
-        var totalOrder: Double = 0.0
+        var subtotal: Double = 0.0
         for product in cartProducts {
-            totalOrder += product.total
+            subtotal += product.total
         }
-        return totalOrder
+        totalFooterView.isHidden = false
+        totalFooterView.configure(with: subtotal)
+        subtotal = subtotal * 1.16
+        return subtotal
     }
     
     private func setupTableViewDataSource() {
