@@ -13,13 +13,16 @@ class ProductListVC: UIViewController {
     private let tableView = UITableView()
     private var productModel = ProductModel()
     private var products: [Product] = []
+    private var filteredProducts: [Product] = []
     private let shopSelected: Shop
+    private var isSearching = false
     
     // MARK: -  Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupTableView()
+        setupSearchController()
         showLoadingView()
         productModel.getProductsMenu(of: shopSelected) { [weak self] (products) in
             guard let self = self else { return }
@@ -61,6 +64,15 @@ class ProductListVC: UIViewController {
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.cellID)
     }
     
+    func setupSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search coffe..."
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     private func setupCartBarButton() {
         let cartBarButton = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartBarButtonTapped))
         navigationItem.rightBarButtonItem = cartBarButton
@@ -72,12 +84,21 @@ class ProductListVC: UIViewController {
             self.navigationController?.pushViewController(cartVC, animated: true)
         }
     }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredProducts = products.filter{ $0.name.lowercased().contains(searchText.lowercased()) }
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
 }
 
 // MARK: -  UITableViewDelegate, UITableViewDataSource
 extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching {
+            return filteredProducts.count
+        }
+        
         return products.count
     }
     
@@ -86,18 +107,42 @@ extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.cellID, for: indexPath) as? ProductCell else {
             return ProductCell(style: .default, reuseIdentifier: ProductCell.cellID)
         }
+        let product: Product
+        if isSearching {
+            product = filteredProducts[indexPath.row]
+        } else {
+            product = products[indexPath.row]
+        }
         
-        let product = products[indexPath.row]
         cell.configure(with: product)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productSelected = products[indexPath.row]
+        let productSelected: Product
+        if isSearching {
+            productSelected = filteredProducts[indexPath.row]
+        } else {
+            productSelected = products[indexPath.row]
+        }
         let productDetailVC = ProductDetailVC(productSelected)
         productDetailVC.modalPresentationStyle = .fullScreen
         DispatchQueue.main.async {
             self.navigationController?.present(productDetailVC, animated: true)
         }
     }
+}
+
+extension ProductListVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filterText  = searchController.searchBar.text, !filterText.isEmpty else {
+            isSearching = false
+            filteredProducts.removeAll()
+            DispatchQueue.main.async { self.tableView.reloadData() }
+            return
+        }
+        isSearching = true
+        filterContentForSearchText(filterText)
+    }
+    
 }
