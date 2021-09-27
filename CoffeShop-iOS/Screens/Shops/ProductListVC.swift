@@ -56,15 +56,16 @@ class ProductListVC: UIViewController {
     
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 140
         tableView.backgroundColor = CustomColors.backgroundColor
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.cellID)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 0)
     }
     
-    func setupSearchController() {
+    private func setupSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search coffe..."
@@ -85,7 +86,7 @@ class ProductListVC: UIViewController {
         }
     }
     
-    func filterContentForSearchText(_ searchText: String) {
+    private func filterContentForSearchText(_ searchText: String) {
         filteredProducts = products.filter{ $0.name.lowercased().contains(searchText.lowercased()) }
         DispatchQueue.main.async { self.tableView.reloadData() }
     }
@@ -133,6 +134,7 @@ extension ProductListVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: -  SearchController - UISearchResultsUpdating
 extension ProductListVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filterText  = searchController.searchBar.text, !filterText.isEmpty else {
