@@ -84,13 +84,19 @@ class CartVC: UIViewController {
             }
         }
     }
+    
     private func setupOrderButton() {
         view.addSubview(orderButton)
         orderButton.isHidden = true
+        orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         orderButton.anchor(top: nil, left: view.leadingAnchor, right: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, paddingBottom: 0, width: 0, height: 50)
     }
     
-    @objc private func calculateTotal() -> Double {        
+    @objc private func orderButtonTapped() {
+        presetCSAlertVC(title: "Processing order", message: "We are processing your order 😋☕️", buttonTitle: "Cancel")
+    }
+    
+    private func calculateTotal() -> Double {        
         var subtotal: Double = 0.0
         for product in cartProducts {
             subtotal += product.total
