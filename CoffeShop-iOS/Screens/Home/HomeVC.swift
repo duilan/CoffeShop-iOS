@@ -26,8 +26,8 @@ class HomeVC: UIViewController {
     }
     
     private func setup() {
-        view.backgroundColor = CustomColors.backgroundColor
-        title = "Welcome back!"
+        view.backgroundColor = CustomColors.backgroundColor        
+        navigationItem.title = "Welcome back!"
     }
     
     override func viewDidAppear(_ animated: Bool) {
