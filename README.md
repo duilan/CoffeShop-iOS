@@ -1,4 +1,4 @@
-# CoffeShop-iOS by @Duilan
+# CoffeShop-iOS
 
 ## Preview video
 
@@ -17,3 +17,5 @@
  
 - Color Sets for Light/Dark Mode
  > - Implemented using XCode color set at Assets
+
+###### Repo https://github.com/duilan/CoffeShop-iOS/
