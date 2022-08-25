@@ -46,7 +46,7 @@ class CustomizeProductCell: UITableViewCell {
         }
         
         segmentControl.selectedSegmentIndex = customization.optionSelected
-        
+        updateAdditionalPriceLabel()
     }
     
     private func setupTitleLabel() {
